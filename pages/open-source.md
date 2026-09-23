@@ -32,12 +32,6 @@ permalink: /open-source/
                         <p class="card-text">{{ repo.description }}</p>
                     </div>
                     <div class="card-text">
-                        <span class="meta-info" title="{{ repo.stargazers_count }} stars">
-                            <span class="octicon octicon-star"></span> {{ repo.stargazers_count }}
-                        </span>
-                        <span class="meta-info" title="{{ repo.forks_count }} forks">
-                            <span class="octicon octicon-git-branch"></span> {{ repo.forks_count }}
-                        </span>
                         <span class="meta-info" title="Last updated: {{ repo.updated_at }}">
                             <span class="octicon octicon-clock"></span>
                             <time datetime="{{ repo.updated_at }}">{{ repo.updated_at | date: '%Y-%m-%d' }}</time>
