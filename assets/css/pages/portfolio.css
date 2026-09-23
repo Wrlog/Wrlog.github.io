@@ -1,26 +1,19 @@
-/* Portfolio page.
+/* Portfolio page. Shared tokens and components live in globals/tokens.css.
  *
- * Deliberately quiet: one accent colour, a plain surface, no animation and no
- * decorative glyphs. The content is a research record, and it should read like
- * one. Structure comes from spacing and hierarchy rather than from colour.
+ * Colour segments the page: each section owns a hue, carried by its heading
+ * bar, its card borders and its chips, so you can tell at a glance whether
+ * you are in research, software, publications or awards. Backgrounds stay
+ * light and text stays near-black; the colour is in the structure, not
+ * behind the words.
  */
 
 .portfolio-section {
-    --accent: #3d5a9e;
-    --accent-soft: #eef2fa;
-    --ink: #1a1c21;
-    --ink-2: #454951;
-    --ink-3: #6b7078;
-    --rule: #e3e5e9;
-    --surface: #ffffff;
-    --surface-sunken: #f7f8fa;
-
     background: var(--surface);
     padding: 0 0 80px;
 }
 
 .portfolio-section .markdown-body {
-    max-width: 780px;
+    max-width: 800px;
     color: var(--ink-2);
     font-size: 16px;
     line-height: 1.7;
@@ -29,15 +22,28 @@
 /* --- page header --- */
 
 .page-intro {
-    padding: 56px 0 28px;
-    border-bottom: 1px solid var(--rule);
-    margin-bottom: 8px;
+    padding: 44px 26px 30px;
+    margin: 32px 0 10px;
+    border-radius: 14px;
+    background:
+        linear-gradient(180deg, var(--blue-bg) 0%, rgba(237, 243, 252, 0) 100%),
+        var(--surface);
+    border: 1px solid var(--rule);
+}
+
+.eyebrow {
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    color: var(--blue-ink);
+    margin: 0 0 10px;
 }
 
 .portfolio-section .page-intro h1 {
-    font-size: 2.1rem;
+    font-size: 2.05rem;
     line-height: 1.2;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.022em;
     color: var(--ink);
     margin: 0 0 12px;
     border: 0;
@@ -45,7 +51,7 @@
 }
 
 .page-lede {
-    font-size: 1.06rem;
+    font-size: 1.05rem;
     color: var(--ink-2);
     margin: 0;
     max-width: 62ch;
@@ -53,20 +59,7 @@
 
 /* --- sections --- */
 
-.section {
-    padding-top: 44px;
-}
-
-.portfolio-section .section-heading {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: 600;
-    color: var(--ink-3);
-    margin: 0 0 20px;
-    padding: 0 0 10px;
-    border-bottom: 1px solid var(--rule);
-}
+.section { padding-top: 46px; }
 
 .section-lede {
     margin: -8px 0 20px;
@@ -76,9 +69,9 @@
 
 .portfolio-section .sub-heading {
     font-size: 0.95rem;
-    font-weight: 600;
+    font-weight: 650;
     color: var(--ink);
-    margin: 34px 0 12px;
+    margin: 34px 0 14px;
     padding: 0;
     border: 0;
 }
@@ -86,22 +79,20 @@
 /* --- research entries --- */
 
 .entry {
-    padding: 0 0 34px;
-    margin-bottom: 34px;
-    border-bottom: 1px solid var(--rule);
-}
-
-.section .entry:last-child {
-    border-bottom: 0;
-    margin-bottom: 0;
-    padding-bottom: 8px;
+    position: relative;
+    padding: 22px 24px;
+    margin-bottom: 18px;
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--accent);
+    border-radius: 10px;
+    background: var(--surface);
 }
 
 .portfolio-section .entry-title {
-    font-size: 1.22rem;
+    font-size: 1.2rem;
     line-height: 1.35;
-    letter-spacing: -0.01em;
-    font-weight: 600;
+    letter-spacing: -0.012em;
+    font-weight: 650;
     color: var(--ink);
     margin: 0 0 6px;
     padding: 0;
@@ -111,171 +102,208 @@
 .entry-meta {
     font-size: 0.88rem;
     color: var(--ink-3);
-    margin: 0 0 16px;
+    margin: 0 0 14px;
 }
 
-.sep {
-    padding: 0 8px;
-    color: #b9bdc4;
+.entry-meta .org { color: var(--accent-ink); font-weight: 500; }
+
+/* Approach / Results side by side, each with its own hue. */
+
+.panels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 18px 0 4px;
 }
 
-.entry-detail {
-    margin: 20px 0 18px;
-    padding: 18px 22px;
-    background: var(--surface-sunken);
-    border-radius: 8px;
+.panel {
+    border-radius: 9px;
+    padding: 14px 16px 12px;
 }
 
-.portfolio-section .entry-detail h4 {
-    font-size: 0.74rem;
+.panel-approach { background: var(--blue-bg); }
+.panel-results  { background: var(--green-bg); }
+
+.portfolio-section .panel h4 {
+    font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 0.09em;
-    font-weight: 600;
-    color: var(--ink-3);
+    font-weight: 700;
     margin: 0 0 8px;
+    padding: 0;
+    border: 0;
 }
 
-.portfolio-section .entry-detail h4 + ul {
-    margin: 0 0 20px;
-}
+.panel-approach h4 { color: var(--blue-ink); }
+.panel-results h4  { color: var(--green-ink); }
 
-.portfolio-section .entry-detail ul:last-child {
-    margin-bottom: 0;
-}
-
-.portfolio-section .entry-detail ul {
-    padding-left: 18px;
+.portfolio-section .panel ul {
+    margin: 0;
+    padding-left: 17px;
     list-style: disc;
 }
 
-.portfolio-section .entry-detail li {
+.portfolio-section .panel li {
     margin-bottom: 6px;
     color: var(--ink-2);
+    font-size: 0.93rem;
+    line-height: 1.6;
 }
+
+.portfolio-section .panel li:last-child { margin-bottom: 0; }
 
 .entry-note {
     font-size: 0.92rem;
     color: var(--ink-3);
-    margin: 14px 0 0;
-    padding-left: 13px;
-    border-left: 2px solid var(--rule);
-}
-
-/* --- tool chips --- */
-
-.tools {
     margin: 16px 0 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
 }
 
-.tool {
+/* --- badges --- */
+
+.badge {
     display: inline-block;
-    font-size: 0.78rem;
-    line-height: 1.5;
-    color: var(--accent);
-    background: var(--accent-soft);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     border-radius: 4px;
-    padding: 3px 9px;
-    white-space: nowrap;
+    padding: 2px 8px;
+    margin-right: 8px;
+    vertical-align: 1px;
 }
+
+.badge-amber  { color: var(--amber-ink);  background: var(--amber-bg); }
+.badge-violet { color: var(--violet-ink); background: var(--violet-bg); }
 
 /* --- software cards --- */
 
 .cards {
     display: grid;
-    gap: 16px;
+    gap: 14px;
 }
 
 .card {
     border: 1px solid var(--rule);
+    border-top: 3px solid var(--blue);
     border-radius: 10px;
     padding: 20px 22px;
     background: var(--surface);
 }
 
+.card-blue   { border-top-color: var(--blue); }
+.card-green  { border-top-color: var(--green); }
+.card-orange { border-top-color: var(--orange); }
+
 .portfolio-section .card-title {
-    font-size: 1.02rem;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: 650;
     margin: 0 0 8px;
     padding: 0;
     border: 0;
     font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 }
 
-.card p {
-    margin: 0 0 10px;
-    font-size: 0.95rem;
-}
-
-.card .tools {
-    margin-top: 12px;
-}
-
-.card-link {
-    margin: 12px 0 0 !important;
-    font-size: 0.9rem;
-}
+.card p { margin: 0 0 8px; font-size: 0.94rem; }
+.card-link { margin: 12px 0 0 !important; font-size: 0.9rem; font-weight: 500; }
 
 /* --- publications --- */
 
-.refs {
-    padding-left: 22px;
-    margin: 0;
-}
+.refs { padding-left: 0; margin: 0; list-style: none; counter-reset: ref; }
 
-.refs.plain {
-    list-style: none;
-    padding-left: 0;
-}
-
-.refs li {
+.refs > li {
+    position: relative;
+    padding-left: 38px;
     margin-bottom: 16px;
     font-size: 0.95rem;
-    line-height: 1.6;
+    line-height: 1.62;
 }
 
-.refs.plain li {
-    padding-left: 13px;
-    border-left: 2px solid var(--rule);
+.refs:not(.plain) > li::before {
+    counter-increment: ref;
+    content: counter(ref);
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--violet-bg);
+    color: var(--violet-ink);
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-align: center;
+    line-height: 24px;
 }
 
-.refs li::marker {
-    color: var(--ink-3);
+.refs.plain > li {
+    padding-left: 15px;
+    border-left: 2px solid var(--violet-bg);
 }
 
-.me {
-    font-weight: 600;
-    color: var(--ink);
-}
+.me { font-weight: 650; color: var(--ink); }
 
 /* --- awards --- */
 
-.awards {
-    margin: 0;
-    display: grid;
-    grid-template-columns: 110px 1fr;
-    row-gap: 10px;
+.awards { list-style: none; margin: 0; padding: 0; }
+
+.awards li {
+    display: flex;
+    gap: 16px;
+    align-items: baseline;
+    padding: 11px 14px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    background: var(--amber-bg);
 }
 
-.awards dt {
-    font-size: 0.88rem;
-    color: var(--ink-3);
+.awards .year {
+    flex: 0 0 82px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--amber-ink);
     font-variant-numeric: tabular-nums;
-    padding-top: 1px;
 }
 
-.awards dd {
-    margin: 0;
-    color: var(--ink-2);
-}
+.awards .what { color: var(--ink-2); font-size: 0.95rem; }
 
 /* --- contact --- */
 
-.contact-links {
-    font-size: 1rem;
+.contact-card {
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 22px 24px;
+    background: linear-gradient(180deg, var(--blue-bg) 0%, var(--surface) 100%);
 }
+
+.contact-card p:first-child { margin-top: 0; }
+
+.contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 16px 0 0 !important;
+}
+
+.portfolio-section .cbtn {
+    display: inline-block;
+    font-size: 0.92rem;
+    font-weight: 500;
+    padding: 8px 18px;
+    border-radius: 7px;
+    border: 1px solid var(--blue);
+    color: var(--blue-ink);
+    background: var(--surface);
+    text-decoration: none;
+}
+
+.portfolio-section .cbtn-primary {
+    background: var(--blue-ink);
+    border-color: var(--blue-ink);
+    color: #ffffff;
+}
+
+.portfolio-section .cbtn:hover { border-color: var(--blue-ink); }
+.portfolio-section .cbtn-primary:hover { background: #17509a; }
 
 .updated {
     margin-top: 48px;
@@ -288,25 +316,21 @@
 /* --- links --- */
 
 .portfolio-section .markdown-body a {
-    color: var(--accent);
+    color: var(--blue-ink);
     text-decoration: none;
-    border-bottom: 1px solid rgba(61, 90, 158, 0.25);
+    border-bottom: 1px solid rgba(29, 95, 174, 0.28);
 }
 
-.portfolio-section .markdown-body a:hover {
-    border-bottom-color: var(--accent);
-}
-
+.portfolio-section .markdown-body a:hover { border-bottom-color: var(--blue-ink); }
 .portfolio-section .card-title a,
-.portfolio-section .tools a {
-    border-bottom: 0;
-}
+.portfolio-section .cbtn { border-bottom: 0; }
 
 @media (max-width: 720px) {
-    .page-intro { padding-top: 36px; }
-    .portfolio-section .page-intro h1 { font-size: 1.7rem; }
+    .page-intro { padding: 30px 18px 22px; margin-top: 20px; }
+    .portfolio-section .page-intro h1 { font-size: 1.6rem; }
     .portfolio-section .markdown-body { font-size: 15px; }
-    .entry-detail { padding: 16px; }
-    .awards { grid-template-columns: 1fr; row-gap: 2px; }
-    .awards dd { margin-bottom: 12px; }
+    .panels { grid-template-columns: 1fr; }
+    .entry { padding: 18px 16px; }
+    .awards li { flex-direction: column; gap: 2px; }
+    .awards .year { flex: none; }
 }

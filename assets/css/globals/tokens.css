@@ -1,0 +1,201 @@
+/* Shared design tokens and small components for the About and Portfolio pages.
+ *
+ * The colour set is a colour-vision-safe categorical palette. Each hue has
+ * three roles: a mark colour for rules, dots and borders; a tint for panel
+ * backgrounds; and a darker ink for coloured text, because several of the
+ * mark colours do not carry enough contrast to be read as text on their own
+ * tint. Text always uses the ink variant.
+ *
+ * Colour here segments the page - it tells you which kind of thing you are
+ * looking at. It never carries information on its own: every coloured
+ * element is also labelled.
+ */
+
+:root {
+    /* neutrals */
+    --ink:        #16181d;
+    --ink-2:      #454951;
+    --ink-3:      #6b7078;
+    --rule:       #e4e6ea;
+    --rule-soft:  #eff1f4;
+    --surface:    #ffffff;
+    --sunken:     #f7f8fa;
+
+    /* marks */
+    --blue:       #2a78d6;
+    --green:      #1baf7a;
+    --orange:     #eb6834;
+    --violet:     #4a3aa7;
+    --amber:      #eda100;
+
+    /* tints */
+    --blue-bg:    #edf3fc;
+    --green-bg:   #e8f7f1;
+    --orange-bg:  #fdf1ec;
+    --violet-bg:  #efedf9;
+    --amber-bg:   #fdf5e4;
+
+    /* text-safe inks */
+    --blue-ink:   #1d5fae;
+    --green-ink:  #0d7a54;
+    --orange-ink: #b44a16;
+    --violet-ink: #4a3aa7;
+    --amber-ink:  #8a6200;
+}
+
+/* --- section heading: a coloured bar, a label, a rule --- */
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.78rem !important;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700 !important;
+    color: var(--ink-3) !important;
+    margin: 0 0 20px !important;
+    padding: 0 0 11px !important;
+    border-bottom: 1px solid var(--rule) !important;
+}
+
+.section-heading::before {
+    content: "";
+    width: 18px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--accent, var(--blue));
+    flex: 0 0 auto;
+}
+
+/* Each section declares its own hue; everything inside inherits it. */
+.accent-blue   { --accent: var(--blue);   --accent-bg: var(--blue-bg);   --accent-ink: var(--blue-ink); }
+.accent-green  { --accent: var(--green);  --accent-bg: var(--green-bg);  --accent-ink: var(--green-ink); }
+.accent-orange { --accent: var(--orange); --accent-bg: var(--orange-bg); --accent-ink: var(--orange-ink); }
+.accent-violet { --accent: var(--violet); --accent-bg: var(--violet-bg); --accent-ink: var(--violet-ink); }
+.accent-amber  { --accent: var(--amber);  --accent-bg: var(--amber-bg);  --accent-ink: var(--amber-ink); }
+
+/* --- chips --- */
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 14px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.chip {
+    display: inline-block;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    border-radius: 5px;
+    padding: 2px 9px;
+    white-space: nowrap;
+    color: var(--accent-ink, var(--blue-ink));
+    background: var(--accent-bg, var(--blue-bg));
+}
+
+.chip-blue   { color: var(--blue-ink);   background: var(--blue-bg); }
+.chip-green  { color: var(--green-ink);  background: var(--green-bg); }
+.chip-orange { color: var(--orange-ink); background: var(--orange-bg); }
+.chip-violet { color: var(--violet-ink); background: var(--violet-bg); }
+.chip-amber  { color: var(--amber-ink);  background: var(--amber-bg); }
+
+/* --- summary tiles --- */
+
+.tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
+    gap: 10px;
+    margin: 26px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tile {
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--tile-accent, var(--blue));
+    border-radius: 8px;
+    padding: 12px 14px;
+    background: var(--surface);
+}
+
+.tile .n {
+    display: block;
+    font-size: 1.55rem;
+    line-height: 1.15;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+}
+
+.tile .l {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink-3);
+    margin-top: 2px;
+}
+
+.tile-blue   { --tile-accent: var(--blue); }
+.tile-green  { --tile-accent: var(--green); }
+.tile-orange { --tile-accent: var(--orange); }
+.tile-violet { --tile-accent: var(--violet); }
+.tile-amber  { --tile-accent: var(--amber); }
+
+/* --- timeline --- */
+
+.timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 22px;
+    border-left: 2px solid var(--rule);
+}
+
+.timeline > li {
+    position: relative;
+    padding: 0 0 26px 0;
+}
+
+.timeline > li:last-child { padding-bottom: 4px; }
+
+.timeline > li::before {
+    content: "";
+    position: absolute;
+    left: -29px;
+    top: 7px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 3px solid var(--accent, var(--blue));
+}
+
+.tl-title {
+    font-size: 1.02rem !important;
+    font-weight: 650 !important;
+    color: var(--ink) !important;
+    margin: 0 0 2px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    line-height: 1.4;
+}
+
+.tl-org {
+    font-size: 0.92rem;
+    color: var(--accent-ink, var(--blue-ink));
+    margin: 0 0 2px;
+    font-weight: 500;
+}
+
+.tl-when {
+    font-size: 0.84rem;
+    color: var(--ink-3);
+    margin: 0 0 10px;
+    font-variant-numeric: tabular-nums;
+}
+
+.sep { padding: 0 8px; color: #b9bdc4; }
