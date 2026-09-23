@@ -1,6 +1,6 @@
 # Wen Rui Tan — Personal Website
 
-Source for [wrlog.github.io/Wr.github.io](https://wrlog.github.io/Wr.github.io), the
+Source for [wrlog.github.io](https://wrlog.github.io), the
 personal site and portfolio of Wen Rui Tan — PhD candidate, pharmacometrician and
 data scientist. It covers population PK/PD modelling, model-informed precision
 dosing, and machine learning applied to pharmacometric problems.
@@ -19,21 +19,21 @@ bundle install
 bundle exec jekyll serve
 ```
 
-The site is then available at <http://localhost:4000/Wr.github.io/>.
+The site is then available at <http://localhost:4000/>.
 
 ## Repository layout
 
 | Path | Contents |
 | --- | --- |
-| `_posts/` | Blog posts, named `YYYY-MM-DD-title.md` |
-| `pages/` | Standalone pages (About, Portfolio, Archives, Categories, 404) |
+| `_posts/` | Notes, named `YYYY-MM-DD-title.md` |
+| `pages/` | Standalone pages (About, Portfolio, Notes, Archive, 404) |
 | `_layouts/`, `_includes/` | Jekyll templates and partials |
 | `assets/` | CSS, JavaScript and third-party vendor files |
 | `images/` | Images used by posts and pages |
 | `docs/` | Authoring notes: post template and YAML front matter rules |
 | `_config.yml` | Site configuration (title, navigation, plugins, analytics) |
 
-## Writing a post
+## Writing a note
 
 Copy [`docs/post-template.md`](docs/post-template.md) into `_posts/` as
 `YYYY-MM-DD-title.md` and fill in the front matter. Quote any `title`,

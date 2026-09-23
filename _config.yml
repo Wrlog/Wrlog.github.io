@@ -2,7 +2,7 @@
 #   Main Configs   #
 # ---------------- #
 baseurl:
-url: https://wrlog.github.io/Wr.github.io
+url: https://wrlog.github.io
 lang: en
 date_format: "ordinal"
 title: Wen Rui Tan
@@ -24,7 +24,7 @@ location: Cincinnati, OH, United States
 email: Wen.Tan@cchmc.org
 linkedin: wenrui97
 twitter: 
-website: https://wrlog.github.io/Wr.github.io
+website: https://wrlog.github.io
 
 # ---------------- #
 #    Navigation    #
@@ -78,7 +78,7 @@ exclude:
     - Gemfile.lock
     - docs/
 
-repository: Wrlog/Wr.github.io
+repository: Wrlog/Wrlog.github.io
 
 # ---------------- #
 #      Comments    #
