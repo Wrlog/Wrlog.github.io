@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "【Genomic】Basic Transcription Note"
-categories: Genomic
+title: "Basic Transcription Note"
+categories: Genomics
 description: "Fundamental concepts of transcription, transcription factors, chromatin structure, and regulatory sequences in gene expression"
 keywords: "Transcription factor, RNA polymerase, DNA, chromatin, nucleosome, cis-regulatory, trans-regulatory, genomic"
 date: 2022-07-09

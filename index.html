@@ -103,7 +103,7 @@ comments: false
                                 {% for cat in post.categories %}
                                 <span class="meta-info">
                                     <span class="octicon octicon-file-directory"></span>
-                                    <a href="{{ site.url }}/notes/#{{ cat }}" title="{{ cat }}">{{ cat }}</a>
+                                    <a href="{{ site.url }}/notes/#{{ cat | slugify }}" title="{{ cat }}">{{ cat }}</a>
                                 </span>
                                 {% endfor %}
                             </p>

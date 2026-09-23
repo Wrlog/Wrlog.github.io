@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【Pharmacometrics】Monte Carlo Simulation for Model-Informed Dose Optimization"
+title: "Monte Carlo Simulation for Model-Informed Dose Optimization"
 categories: Pharmacometrics
 description: "Implementing Monte Carlo simulations to evaluate dosing regimens and determine optimal strategies for pediatric patients"
 keywords: "Monte Carlo Simulation, Dose Optimization, Pharmacokinetics, NONMEM, R"

@@ -74,6 +74,8 @@ plugins:
 # Repository files that should not be published as pages on the live site.
 exclude:
     - README.md
+    - vendor/
+    - .bundle/
     - Gemfile
     - Gemfile.lock
     - docs/

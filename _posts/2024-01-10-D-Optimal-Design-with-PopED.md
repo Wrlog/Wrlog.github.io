@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【PopED】D-Optimal Design Optimization for Pediatric Clinical Trials"
+title: "D-Optimal Design Optimization for Pediatric Clinical Trials"
 categories: Pharmacometrics
 description: "Using PopED to determine optimal sampling timepoints that maximize information gain while minimizing patient burden"
 keywords: "PopED, Optimal Design, Clinical Trial Design, Sampling Times, D-optimal"

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【Statistics】Maximum Likelihood Estimation (MLE) vs. Maximum A Posteriori (MAP)"
+title: "Maximum Likelihood Estimation (MLE) vs. Maximum A Posteriori (MAP)"
 categories: Statistics
 description: "Understanding the core differences between MLE, MAP, and Bayesian inference."
 keywords: "Maximum likelihood estimation, MAP, Bayesian, Probability vs Statistics"

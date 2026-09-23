@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "【Pharmacokinetic】Pharmacokinetic Notes for Special Populations"
-categories: Pharmacokinetic
+title: "Pharmacokinetic Notes for Special Populations"
+categories: Pharmacokinetics
 description: "Notes on pharmacokinetics in renal impairment, hepatic impairment, pregnancy and paediatrics, and when dose adjustment is actually warranted"
 keywords: "Pharmacokinetic, Clinical, Renal Impairment, Hepatic Impairment, Pregnancy, Pediatrics"
 date: 2022-07-04
@@ -91,11 +91,11 @@ by weight alone fails hardest in exactly the youngest patients.
 
 Organ sizes relative to body weight also change with age:
 
-<img width="404" alt="Relative organ size by age" src="https://user-images.githubusercontent.com/69442517/200745422-b798a7fe-de95-4d56-877c-15d0789d2b37.png">
+<img width="404" alt="Relative organ size by age" src="{{ site.url }}/images/posts/pharmacokinetic/relative-organ-size-by-age.png">
 
 As does enzyme expression and metabolic rate:
 
-<img width="517" alt="Enzyme expression and metabolic rate by age" src="https://user-images.githubusercontent.com/69442517/200745707-63df9d23-a03a-45c8-beec-dc2df9f42082.png">
+<img width="517" alt="Enzyme expression and metabolic rate by age" src="{{ site.url }}/images/posts/pharmacokinetic/enzyme-expression-by-age.png">
 
 ## The practical point
 

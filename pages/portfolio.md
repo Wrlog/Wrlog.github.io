@@ -87,17 +87,46 @@ This research project focuses on optimizing prophylactic dosing regimens for pip
 
 ---
 
+## Software & Code
+
+Public repositories at [github.com/Wrlog](https://github.com/Wrlog).
+
+### [dosing-simulator](https://github.com/Wrlog/dosing-simulator)
+
+An interactive R-Shiny application that simulates intravenous dosing regimens
+for a simulated population, built on a generic two-compartment model with
+first-order elimination, allometric scaling on weight, a power function on renal
+function, and log-normal between-subject (optionally between-occasion)
+variability on clearance and central volume. The user sets the weight and renal
+function ranges, the dose, infusion duration and simulation length, and two
+concentration targets; the app returns concentration-time profiles with 50% and
+90% prediction intervals, target attainment, time above the lower target over
+the final dosing interval, and trough statistics. It carries no patient data and
+is for research and teaching, not clinical decision-making.
+
+*R, Shiny*
+
+### [ml-portfolio](https://github.com/Wrlog/ml-portfolio)
+
+Four self-contained machine learning projects — fraud detection, demand
+forecasting, semantic similarity and an implicit-feedback recommender — each
+covering the full path from data preparation through model evaluation.
+
+*Python*
+
+---
+
 ## Publications
 
 ### Peer-Reviewed Publications
 
 - **Tan WR**, Irie K, McIntire C, Luna Torres J, Jones R, Gibson A, Mizuno T, Tang Girdwood S. "Model-informed dose optimization for prophylactic piperacillin-tazobactam in perioperative pediatric critically ill patients." *Antimicrobial Agents and Chemotherapy.* 2025;69(3):e01227-24. [doi:10.1128/aac.01227-24](https://doi.org/10.1128/aac.01227-24)
 
-- Morales Junior R, Mizuno T, **Tan WR**, Irie K, Tang Girdwood S. "From PICU to NICU: extrapolating meropenem exposure from pediatric to neonatal intensive care patients." *Journal of Clinical Pharmacology.* 2026;66(1):e70097.
+- Morales Junior R, Mizuno T, **Tan WR**, Irie K, Tang Girdwood S. "From PICU to NICU: extrapolating meropenem exposure from pediatric to neonatal intensive care patients." *The Journal of Clinical Pharmacology.* 2026;66(1):e70097. [doi:10.1002/jcph.70097](https://doi.org/10.1002/jcph.70097)
 
-- Yang Z, **Tan WR**, Li Q, et al. "Population pharmacokinetic study of the effect of polymorphisms in the ABCB1 and CES1 genes on the pharmacokinetics of dabigatran." *Frontiers in Pharmacology.* 2024;15:1454612.
+- Yang Z, **Tan WR**, Li Q, et al. "Population pharmacokinetic study of the effect of polymorphisms in the ABCB1 and CES1 genes on the pharmacokinetics of dabigatran." *Frontiers in Pharmacology.* 2024;15:1454612. [doi:10.3389/fphar.2024.1454612](https://doi.org/10.3389/fphar.2024.1454612)
 
-- **Tan WR**, Sheikh Ghadzi SM, Hyder Ali IA, Harun SN. "Systematic review of population pharmacokinetic models of isoniazid in children and adults with tuberculosis." *Malaysian Journal of Pharmacy.* 2022;8(2):1-15.
+- **Tan WR**, Sheikh Ghadzi SM, Hyder Ali IA, Harun SN. "Systematic review of population pharmacokinetic models of isoniazid in children and adults with tuberculosis." *Malaysian Journal of Pharmacy.* 2022;8(2):1-15. [doi:10.52494/djiq7058](https://doi.org/10.52494/djiq7058)
 
 ### Conference Presentations & Abstracts
 
@@ -120,6 +149,7 @@ This research project focuses on optimizing prophylactic dosing regimens for pip
 Interested in collaborating on pharmacometric research or learning more about my work? Feel free to reach out!
 
 - **Email**: [Wen.Tan@cchmc.org](mailto:Wen.Tan@cchmc.org)
+- **LinkedIn**: [wenrui97](https://www.linkedin.com/in/wenrui97/)
 - **GitHub**: [@Wrlog](https://github.com/Wrlog)
 
 ---
