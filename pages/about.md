@@ -35,7 +35,7 @@ permalink: /about/
     <h3 class="tl-title">PhD, Pharmacology and Systems Physiology</h3>
     <p class="tl-org">University of Cincinnati College of Medicine, Cincinnati, OH</p>
     <p class="tl-when">Expected May 2027</p>
-    <p>Dissertation: <em>Advancing model-informed precision dosing via hybrid
+    <p>Dissertation: <em>Advancing model-informed precision dosing via
     mechanistic and data-driven algorithms — an infliximab case study.</em>
     Population PK/PD, ensemble machine learning, neural ODEs and deep
     reinforcement learning applied to dosing in pediatric Crohn's disease.

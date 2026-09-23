@@ -28,7 +28,7 @@ permalink: /portfolio/
 
 <div class="thesis">
   <p class="thesis-label">PhD dissertation · expected 2027</p>
-  <h3 class="thesis-title">Advancing model-informed precision dosing via hybrid
+  <h3 class="thesis-title">Advancing model-informed precision dosing via
   mechanistic and data-driven algorithms: an infliximab case study</h3>
   <p class="thesis-org">University of Cincinnati College of Medicine ·
   Department of Pharmacology, Physiology and Neurobiology<br>
@@ -76,11 +76,12 @@ permalink: /portfolio/
       </ul>
     </div>
     <div class="panel panel-results">
-      <h4>Results</h4>
+      <h4>What it gives you</h4>
       <ul>
-        <li>Identified the covariates that drive infliximab exposure and response in children.</li>
-        <li>Established exposure–response relationships that inform dose selection.</li>
-        <li>Measurable gains in predictive performance from combining the two modeling approaches.</li>
+        <li>A quantitative account of how much infliximab exposure and response vary between children, and how much of that variability the model can explain rather than leave unexplained.</li>
+        <li>Explaining that variability is what makes individual prediction possible: once between-subject variability is attributed to measurable characteristics and to the patient's own monitoring data, the remaining uncertainty is small enough for a model-based dose to mean something.</li>
+        <li>A profile of who reaches and holds biochemical remission, from induction-phase data — which is the question a clinician has at the point where the dose can still be changed.</li>
+        <li>Together these are the pieces model-informed precision dosing needs: a model that explains variability, an exposure target tied to a clinical endpoint, and a way to tell early who is on track.</li>
       </ul>
     </div>
   </div>
@@ -182,6 +183,49 @@ permalink: /portfolio/
   Results repository:
   <a href="https://github.com/Wrlog/mipd-ensemble-rl">Wrlog/mipd-ensemble-rl</a>
   — access on request until the work is published.</p>
+</article>
+
+<article class="entry">
+  <h3 class="entry-title">Untargeted metabolomics of inflammatory bowel disease</h3>
+  <p class="entry-meta"><span class="org">Enveda Therapeutics</span><span class="sep">·</span>July – September 2026<span class="sep">·</span>feeds a supplementary dissertation chapter</p>
+
+  <p>Plasma metabolomics on an adult IBD cohort that had already been profiled
+  by genomics, transcriptomics and proteomics — but not metabolomics. Two
+  questions: can the metabolome separate ulcerative colitis from Crohn's
+  disease, and active disease from remission, and could it predict treatment
+  response <em>before</em> the first dose, which is the question the dosing work
+  elsewhere in the dissertation has to assume away.</p>
+
+  <div class="panels">
+    <div class="panel panel-approach">
+      <h4>Approach</h4>
+      <ul>
+        <li>A reproducible notebook sequence per delivery: load and hash the exports, filter and normalize, QC and missingness, PCA, differential analysis, candidate review.</li>
+        <li>Annotation and prevalence filters chosen against their alternatives and reported with the cost of the choice, rather than asserted.</li>
+        <li>Patient-intercept mixed models for repeated visits, with ordinary least squares and a run-order-adjusted model as sensitivity comparisons, and Benjamini–Hochberg control within each contrast.</li>
+        <li>Non-detects treated as missing rather than imputed, plus a separate presence/absence test, because a model of detected intensity cannot see a feature that is simply absent in one group.</li>
+        <li>Cross-batch comparability and low-signal exclusion run as diagnostics that report and stop when they do not apply.</li>
+      </ul>
+    </div>
+    <div class="panel panel-results">
+      <h4>What came of it</h4>
+      <ul>
+        <li>A feasibility assessment rather than a classifier: in this cohort only a handful of patients have a plasma sample preceding a documented treatment start, because medication is recorded without start dates.</li>
+        <li>That result sets the design and size a study would need to answer the pre-treatment question properly, which is what the supplementary chapter reports.</li>
+      </ul>
+    </div>
+  </div>
+
+  <ul class="chips">
+    <li class="chip chip-green">Python</li>
+    <li class="chip chip-orange">Mixed-effects models</li>
+    <li class="chip chip-orange">PCA</li>
+    <li class="chip chip-orange">FDR control</li>
+    <li class="chip chip-violet">Untargeted metabolomics</li>
+  </ul>
+
+  <p class="entry-note">Analysis code and data belong to Enveda Therapeutics
+  and are not public.</p>
 </article>
 </section>
 
@@ -286,10 +330,6 @@ permalink: /portfolio/
   <li>
     <span class="year">2025</span>
     <span class="what">Top ten abstract nomination, IATDMCT Congress</span>
-  </li>
-  <li>
-    <span class="year">2023–2026</span>
-    <span class="what">Computational Professional Development Award, University of Cincinnati</span>
   </li>
   <li>
     <span class="year">2022–2026</span>
