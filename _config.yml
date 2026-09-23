@@ -5,9 +5,9 @@ baseurl:
 url: https://wrlog.github.io/Wr.github.io/
 date_format: "ordinal"
 title: Wen Rui Tan
-subtitle: "PhD Candidate | Clinical Pharmacologist | Pharmacometrician"
-description: "Personal website and portfolio of Wen Rui Tan - PhD candidate, clinical pharmacologist, and pharmacometrician. Explore my research, publications, blog posts, and professional journey in pharmacokinetics and pharmacodynamics."
-keywords: Wen Rui Tan, PhD, Clinical Pharmacologist, Pharmacometrician, PK/PD, Pharmacokinetics, Pharmacodynamics, Research, NONMEM
+subtitle: "PhD Candidate | Pharmacometrician | Data Scientist"
+description: "Personal website and portfolio of Wen Rui Tan - PhD candidate, pharmacometrician and data scientist. Population PK/PD modelling, model-informed precision dosing, and machine learning applied to pharmacometric problems."
+keywords: Wen Rui Tan, PhD, Pharmacometrician, Data Scientist, PK/PD, Pharmacokinetics, Pharmacodynamics, Population Modeling, Machine Learning, NONMEM
 timezone: America/New_York
 encoding: "utf-8"
 side_bar_repo_limit: 0
@@ -75,9 +75,20 @@ collections:
         output: true
         permalink: /wiki/:path/
 
+# Files that are part of the repository but should not become pages on the
+# live site. Without these, YAML_RULES.md, the Google Analytics test harness
+# and an empty Read_me.md inside images/ were all published and reachable.
 exclude:
     - template.md
-        
+    - YAML_RULES.md
+    - README.md
+    - Gemfile
+    - Gemfile.lock
+    - test-ga.html
+    - ga-test-commands.js
+    - images/posts/pharmacokinetic/Read_me.md
+    - images/posts/pharmacodynamic/Read_Me
+
 repository: Wrlog/Wr.github.io
 
 # ---------------- #

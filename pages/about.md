@@ -1,8 +1,8 @@
 ---
 layout: about
 title: About
-description: Learn more about Wen Rui Tan - PhD candidate, clinical pharmacologist, and pharmacometrician
-keywords: About, Wen Rui Tan, Clinical Pharmacologist, Pharmacometrician, Biography
+description: Learn more about Wen Rui Tan - PhD candidate, pharmacometrician and data scientist
+keywords: About, Wen Rui Tan, Pharmacometrician, Data Scientist, Biography
 comments: true
 menu: About
 permalink: /about/
