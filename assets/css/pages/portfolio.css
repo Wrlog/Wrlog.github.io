@@ -437,3 +437,6 @@
 }
 
 .portfolio-section .service dd:last-child { margin-bottom: 0; }
+
+/* A card whose link is the point of the card. */
+.card .card-link a { font-weight: 600; }

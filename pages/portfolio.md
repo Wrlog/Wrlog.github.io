@@ -241,11 +241,16 @@ permalink: /portfolio/
     allometric scaling on weight, a power function on renal function, and log-normal
     between-subject variability on clearance and central volume. Returns
     concentration-time profiles with prediction intervals, target attainment, time
-    above target and trough statistics. No patient data; for research and teaching.</p>
+    above target and trough statistics. No patient data; for research and
+    teaching. It runs entirely in the browser — the PK solver is a closed-form
+    solution of the two-compartment model, so there is no server to keep
+    alive.</p>
     <ul class="chips">
       <li class="chip chip-green">R</li>
       <li class="chip chip-green">Shiny</li>
+      <li class="chip chip-green">WebAssembly</li>
     </ul>
+    <p class="card-link"><a href="https://wrlog.github.io/dosing-simulator/">Run the simulator in your browser →</a></p>
   </article>
 
   <article class="card card-blue">
