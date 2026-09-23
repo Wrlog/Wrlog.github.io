@@ -33,8 +33,10 @@ permalink: /about/
     <h3 class="tl-title">PhD, Pharmacology and Systems Physiology</h3>
     <p class="tl-org">University of Cincinnati College of Medicine, Cincinnati, OH</p>
     <p class="tl-when">Expected May 2027</p>
-    <p>Pharmacometrics, model-informed precision dosing, and pediatric clinical
-    pharmacology.</p>
+    <p>Dissertation: <em>Advancing model-informed precision dosing via hybrid
+    mechanistic and data-driven algorithms — an infliximab case study.</em>
+    Population PK/PD, ensemble machine learning, neural ODEs and deep
+    reinforcement learning applied to dosing in pediatric Crohn's disease.</p>
   </li>
   <li>
     <h3 class="tl-title">Bachelor of Pharmacy (Hons)</h3>
@@ -104,11 +106,26 @@ permalink: /about/
     <h3>Pharmacometrics</h3>
     <ul class="chips">
       <li class="chip chip-blue">NONMEM</li>
-      <li class="chip chip-blue">Pirana</li>
       <li class="chip chip-blue">mrgsolve</li>
       <li class="chip chip-blue">PopED</li>
-      <li class="chip chip-blue">Compartmental analysis</li>
+      <li class="chip chip-blue">Pirana</li>
     </ul>
+    <p class="sg-note">Population PK/PD, exposure–response, indirect response
+    models, optimal design, Monte Carlo simulation for dose selection.</p>
+  </div>
+
+  <div class="skill-group sg-orange">
+    <h3>Machine learning</h3>
+    <ul class="chips">
+      <li class="chip chip-orange">Gradient boosting</li>
+      <li class="chip chip-orange">Random forest</li>
+      <li class="chip chip-orange">Neural ODEs</li>
+      <li class="chip chip-orange">Variational autoencoders</li>
+      <li class="chip chip-orange">Deep Q-networks</li>
+    </ul>
+    <p class="sg-note">Applied to remission prediction and dosing policy in the
+    dissertation, always benchmarked against the mechanistic model rather than
+    reported on their own.</p>
   </div>
 
   <div class="skill-group sg-green">
@@ -117,19 +134,11 @@ permalink: /about/
       <li class="chip chip-green">R</li>
       <li class="chip chip-green">Python</li>
       <li class="chip chip-green">C++</li>
-      <li class="chip chip-green">R-Shiny</li>
       <li class="chip chip-green">Git</li>
     </ul>
-  </div>
-
-  <div class="skill-group sg-orange">
-    <h3>Data science and AI</h3>
-    <ul class="chips">
-      <li class="chip chip-orange">Boosting</li>
-      <li class="chip chip-orange">Bagging</li>
-      <li class="chip chip-orange">Variational autoencoders</li>
-      <li class="chip chip-orange">Neural ODEs</li>
-    </ul>
+    <p class="sg-note">Shiny dashboards, reproducible analysis pipelines and
+    self-contained HTML reporting — see the
+    <a href="{{ site.url }}/portfolio/">portfolio</a>.</p>
   </div>
 
   <div class="skill-group sg-violet">
@@ -140,6 +149,8 @@ permalink: /about/
       <li class="chip chip-violet">Immunology</li>
       <li class="chip chip-violet">Rare disease</li>
     </ul>
+    <p class="sg-note">Biologics and antibiotics in critically ill and
+    chronically treated children; therapeutic drug monitoring.</p>
   </div>
 </div>
 </section>

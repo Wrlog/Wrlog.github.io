@@ -16,15 +16,44 @@ permalink: /portfolio/
   research I work on, the software I have published, and the papers it produced.</p>
 
   <ul class="tiles">
-    <li class="tile tile-blue"><span class="n">2</span><span class="l">Research programs</span></li>
+    <li class="tile tile-blue"><span class="n">3</span><span class="l">Research programs</span></li>
     <li class="tile tile-violet"><span class="n">4</span><span class="l">Publications</span></li>
-    <li class="tile tile-green"><span class="n">3</span><span class="l">Open-source tools</span></li>
+    <li class="tile tile-green"><span class="n">3</span><span class="l">Public repositories</span></li>
     <li class="tile tile-amber"><span class="n">3</span><span class="l">Awards</span></li>
   </ul>
 </header>
 
 <section class="section accent-blue">
-<h2 class="section-heading">Research</h2>
+<h2 class="section-heading">Doctoral research</h2>
+
+<div class="thesis">
+  <p class="thesis-label">PhD dissertation · expected 2027</p>
+  <h3 class="thesis-title">Advancing model-informed precision dosing via hybrid
+  mechanistic and data-driven algorithms: an infliximab case study</h3>
+  <p class="thesis-org">University of Cincinnati College of Medicine ·
+  Department of Pharmacology, Physiology and Neurobiology</p>
+  <p>Children on infliximab for Crohn's disease are monitored sparsely and
+  irregularly — a few trough concentrations and biomarkers, at whatever
+  intervals the clinic managed. The dissertation asks how far that routine
+  therapeutic drug monitoring can be pushed toward choosing a better next dose,
+  and where a mechanistic model, a learned model, or the combination of the two
+  does the work.</p>
+  <p>It builds a population PK/PD model of infliximab exposure and response,
+  then tests data-driven methods against it: ensemble machine learning and
+  neural ODEs for predicting biochemical remission, and deep reinforcement
+  learning for the dosing policy itself. Two supplementary chapters extend it
+  to adult observational cohorts.</p>
+  <ul class="chips">
+    <li class="chip chip-blue">Population PK/PD</li>
+    <li class="chip chip-blue">Model-informed precision dosing</li>
+    <li class="chip chip-orange">Ensemble ML</li>
+    <li class="chip chip-orange">Neural ODEs</li>
+    <li class="chip chip-orange">Deep reinforcement learning</li>
+  </ul>
+  <p class="thesis-note">Results are not public before the defence.</p>
+</div>
+
+<h2 class="section-heading" style="margin-top:38px">Projects</h2>
 
 <article class="entry">
   <h3 class="entry-title">PK/PD modeling and machine learning for infliximab in pediatric Crohn's disease</h3>
@@ -109,6 +138,50 @@ permalink: /portfolio/
   (<a href="https://doi.org/10.1128/aac.01227-24">doi:10.1128/aac.01227-24</a>).
   Presented at ACOP 2024 and ASCPT 2024.</p>
 </article>
+
+<article class="entry">
+  <h3 class="entry-title">Ensemble learning and deep reinforcement learning for infliximab dose selection</h3>
+  <p class="entry-meta"><span class="org">Cincinnati Children's Hospital Medical Center</span><span class="sep">·</span>Dissertation work, ongoing</p>
+
+  <p>The data-driven half of the dissertation. A mechanistic population PK/PD
+  model gives the reference; the question is what machine learning adds on top
+  of it when the only inputs are the sparse, irregular measurements routine care
+  produces.</p>
+
+  <div class="panels">
+    <div class="panel panel-approach">
+      <h4>Approach</h4>
+      <ul>
+        <li>Ensemble models — gradient boosting and bagging — predicting biochemical remission from treatment-course features.</li>
+        <li>Neural ODEs for the biomarker trajectory, which handle irregular sampling in continuous time rather than forcing it onto a grid.</li>
+        <li>A deep Q-network learning a dosing policy against a reward defined on target attainment and remission.</li>
+        <li>The learned policy compared with standard dosing and with maximum a posteriori Bayesian dosing to a concentration target, so the comparison is against a real alternative rather than a straw man.</li>
+      </ul>
+    </div>
+    <div class="panel panel-results">
+      <h4>Status</h4>
+      <ul>
+        <li>Analyses are being finalised for the dissertation; results are held back until the defence.</li>
+        <li>Aggregate result tables and figures are collected in a private repository, opened as the work is published.</li>
+      </ul>
+    </div>
+  </div>
+
+  <ul class="chips">
+    <li class="chip chip-orange">XGBoost</li>
+    <li class="chip chip-orange">Random forest</li>
+    <li class="chip chip-orange">Neural ODEs</li>
+    <li class="chip chip-orange">Deep Q-networks</li>
+    <li class="chip chip-green">Python</li>
+    <li class="chip chip-green">PyTorch</li>
+    <li class="chip chip-blue">NONMEM</li>
+  </ul>
+
+  <p class="entry-note"><span class="badge badge-grey">Private</span>
+  Results repository:
+  <a href="https://github.com/Wrlog/mipd-ensemble-rl">Wrlog/mipd-ensemble-rl</a>
+  — access on request until the work is published.</p>
+</article>
 </section>
 
 <section class="section accent-green">
@@ -190,7 +263,7 @@ permalink: /portfolio/
 
 <ul class="awards">
   <li><span class="year">2025</span><span class="what">Top ten abstract nomination, IATDMCT Congress</span></li>
-  <li><span class="year">2023–2025</span><span class="what">Computational Professional Development Award, University of Cincinnati</span></li>
+  <li><span class="year">2023–2026</span><span class="what">Computational Professional Development Award, University of Cincinnati</span></li>
   <li><span class="year">2023</span><span class="what">First prize, junior category, Graduate Student Research Forum, University of Cincinnati</span></li>
 </ul>
 </section>
