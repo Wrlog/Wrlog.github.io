@@ -67,7 +67,7 @@ cleared by both routes may barely move at all. The effects also change across
 trimesters, which means a single "pregnancy dose" may be wrong for part of the
 pregnancy.
 
-![PK changes in pregnancy](https://github.com/Wrlog/Wr.github.io/blob/master/images/posts/pharmacokinetic/PK%20in%20pregnancy.png?raw=true)
+![PK changes in pregnancy]({{ site.url }}/images/posts/pharmacokinetic/pk-in-pregnancy.png)
 
 ## Paediatrics
 
