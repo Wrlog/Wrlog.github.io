@@ -7,8 +7,8 @@ lang: en
 date_format: "ordinal"
 title: Wen Rui Tan
 subtitle: "PhD Candidate | Pharmacometrician | Data Scientist"
-description: "Personal website and portfolio of Wen Rui Tan - PhD candidate, pharmacometrician and data scientist. Population PK/PD modelling, model-informed precision dosing, and machine learning applied to pharmacometric problems."
-keywords: Wen Rui Tan, PhD, Pharmacometrician, Data Scientist, PK/PD, Pharmacokinetics, Pharmacodynamics, Population Modeling, Machine Learning, NONMEM
+description: "Personal website and portfolio of Wen Rui Tan - PhD candidate, pharmacometrician and data scientist. Population PK/PD modelling, model-informed precision dosing, and omics and wearable data in clinical pharmacology."
+keywords: Wen Rui Tan, PhD, Pharmacometrician, Data Scientist, PK/PD, Pharmacokinetics, Pharmacodynamics, Population Modeling, Metabolomics, Wearables, NONMEM
 timezone: America/New_York
 encoding: "utf-8"
 side_bar_repo_limit: 4

@@ -12,8 +12,9 @@ permalink: /about/
   <p class="eyebrow">About</p>
   <h1>Wen Rui Tan</h1>
   <p class="page-lede">PhD candidate in pharmacology, working on population PK/PD
-  modeling and model-informed precision dosing for children — and on where
-  machine learning genuinely adds to that, rather than replacing it.</p>
+  modeling and model-informed precision dosing for children — and on what
+  untargeted metabolomics and wearable sensor data add to the picture of a
+  patient that concentrations alone give.</p>
   <p class="id-line">
     <span class="id-item">Cincinnati, OH, United States</span>
     <span class="sep">·</span>
@@ -208,6 +209,19 @@ permalink: /about/
     <h3>Clinical trial design</h3>
     <p>Optimal design methods that choose sampling schemes to maximize
     information while keeping patient burden low.</p>
+  </div>
+  <div class="interest">
+    <h3>Omics in clinical pharmacology</h3>
+    <p>Untargeted metabolomics as a readout of disease state and treatment
+    response, and what a feature table has to survive — filtering, non-detects,
+    batch structure, repeated visits — before an association list is worth
+    acting on.</p>
+  </div>
+  <div class="interest">
+    <h3>Wearable and sensor data</h3>
+    <p>Turning continuous sleep, cardiovascular and activity streams into
+    exposures that can be joined to sparse biological sampling, and separating
+    genuine within-person signal from diurnal structure and non-wear.</p>
   </div>
   <div class="interest">
     <h3>Machine learning in pharmacometrics</h3>

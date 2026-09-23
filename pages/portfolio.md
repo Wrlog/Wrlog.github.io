@@ -10,13 +10,14 @@ permalink: /portfolio/
 
 <header class="page-intro">
   <p class="eyebrow">Portfolio</p>
-  <h1>Pharmacometrics, modeling and machine learning</h1>
-  <p class="page-lede">Population PK/PD modeling, model-informed precision dosing
-  and machine learning, applied to pediatric clinical pharmacology. Below: the
-  research I work on, the software I have published, and the papers it produced.</p>
+  <h1>Pharmacometrics, omics and sensor data</h1>
+  <p class="page-lede">Population PK/PD modeling and model-informed precision
+  dosing in pediatric clinical pharmacology, alongside untargeted metabolomics
+  and wearable sensor data. Below: the research I work on, the software I have
+  published, and the papers it produced.</p>
 
   <ul class="tiles">
-    <li class="tile tile-blue"><span class="n">5</span><span class="l">Research projects</span></li>
+    <li class="tile tile-blue"><span class="n">6</span><span class="l">Research projects</span></li>
     <li class="tile tile-violet"><span class="n">6</span><span class="l">Publications</span></li>
     <li class="tile tile-green"><span class="n">4</span><span class="l">Public repositories</span></li>
     <li class="tile tile-amber"><span class="n">6</span><span class="l">Conference abstracts</span></li>
@@ -186,6 +187,49 @@ permalink: /portfolio/
 </article>
 
 <article class="entry">
+  <h3 class="entry-title">Metabolite–wearable associations in healthy volunteers</h3>
+  <p class="entry-meta"><span class="org">Enveda Therapeutics</span><span class="sep">·</span>July – September 2026</p>
+
+  <p>Healthy volunteers wearing sleep, cardiovascular and activity trackers,
+  sampled for untargeted plasma metabolomics. The question is what the
+  continuous sensor record explains about the metabolome — and, running the
+  other way, how much of a metabolite's apparent association with behaviour is
+  just the time of day the blood was drawn.</p>
+
+  <div class="panels">
+    <div class="panel panel-approach">
+      <h4>Approach</h4>
+      <ul>
+        <li>Sensor streams aggregated into one pre-specified exposure per sample — window, summary and reference fixed before outcomes were looked at, with the alternatives reported as sensitivity analyses rather than searched over.</li>
+        <li>Wear-time rules declared in advance, with the participant-days each rule removed reported alongside the result.</li>
+        <li>Linear mixed-effects models with a participant intercept, splitting within-person from between-person variation so the coefficient of interest is a change from a participant's own baseline.</li>
+        <li>Harmonic terms on sampling clock time, since both the metabolome and every wearable metric vary within the day and collection time is otherwise a confounder that looks like an effect.</li>
+        <li>Benjamini–Hochberg control within each wearable metric, with discoveries collapsed to compounds before they are counted.</li>
+      </ul>
+    </div>
+    <div class="panel panel-results">
+      <h4>How it is built</h4>
+      <ul>
+        <li>A Python pipeline from raw device exports and metabolomics deliveries through to the association tables, with the filtering counts carried into the output rather than left in a notebook.</li>
+        <li>A dashboard putting the diurnal profiles, QC and association results in front of the study team, so the analysis is read rather than described.</li>
+      </ul>
+    </div>
+  </div>
+
+  <ul class="chips">
+    <li class="chip chip-green">Python</li>
+    <li class="chip chip-orange">Mixed-effects models</li>
+    <li class="chip chip-orange">FDR control</li>
+    <li class="chip chip-violet">Untargeted metabolomics</li>
+    <li class="chip chip-violet">Wearable sensor data</li>
+  </ul>
+
+  <p class="entry-note">Analysis code and data belong to Enveda Therapeutics
+  and are not public. Background on the methods:
+  <a href="{{ site.url }}/2026/09/21/Wearable-Data-and-Molecular-Phenotypes/">wearable data and molecular phenotypes</a>.</p>
+</article>
+
+<article class="entry">
   <h3 class="entry-title">Untargeted metabolomics of inflammatory bowel disease</h3>
   <p class="entry-meta"><span class="org">Enveda Therapeutics</span><span class="sep">·</span>July – September 2026<span class="sep">·</span>feeds a supplementary dissertation chapter</p>
 
@@ -225,7 +269,8 @@ permalink: /portfolio/
   </ul>
 
   <p class="entry-note">Analysis code and data belong to Enveda Therapeutics
-  and are not public.</p>
+  and are not public. Background on the methods:
+  <a href="{{ site.url }}/2026/09/14/Untargeted-Metabolomics-Feature-Tables/">untargeted metabolomics, from feature table to association list</a>.</p>
 </article>
 
 <article class="entry">
