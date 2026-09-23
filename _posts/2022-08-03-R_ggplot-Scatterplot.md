@@ -129,5 +129,5 @@ ggsave("college_analysis.png", final_plot, width = 16, height = 12, dpi = 300, b
 
 Plot
 
-![](https://github.com/Wrlog/Wr.github.io/blob/master/images/posts/R/scatterplot.png?raw=true)
+![Scatterplot produced with ggplot2]({{ site.url }}/images/posts/R/scatterplot.png)
 
