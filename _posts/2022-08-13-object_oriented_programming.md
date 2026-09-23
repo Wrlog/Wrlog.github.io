@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【Python】Object Oriented Programming"
+title: "Object Oriented Programming"
 categories: Programming
 description: "Classes, inheritance, encapsulation and polymorphism in Python"
 keywords: "Python, Object Oriented Programming"

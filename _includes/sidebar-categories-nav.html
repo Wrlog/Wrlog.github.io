@@ -1,11 +1,11 @@
 
 <h3>Topics</h3>
-<div id="blog-categories">
+<div id="topic-list">
   <ul class="list-group">
     {% assign sorted_categories = site.categories | sort %}
     {% for category in sorted_categories %}
     <li class="list-group-item">
-    <a href="#{{ category[0] }}">{{ category | first }}</a>
+    <a href="#{{ category[0] | slugify }}">{{ category | first }}</a>
     <span class="badge">{{ category[1].size }}</span>
     </li>
     {% endfor %}
@@ -15,7 +15,7 @@
 <script type="text/javascript">
 
   $(document).ready(function(){
-    $("#blog-categories li").css('text-transform','capitalize')
+    $("#topic-list li").css('text-transform','capitalize')
   });
 
 </script>

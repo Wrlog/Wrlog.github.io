@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【R】ggplot--Scatterplot"
+title: "Scatterplots with ggplot2"
 categories: R
 description: "Building and customising scatterplots in ggplot2"
 keywords: "R, visualization, scatterplot"

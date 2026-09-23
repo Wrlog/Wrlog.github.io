@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "【Pharmacokinetic】Drug Development and Drug-Drug Interactions"
-categories: Pharmacokinetic
+title: "Drug Development and Drug-Drug Interactions"
+categories: Pharmacokinetics
 description: "FDA guidance on CYP-mediated drug-drug interactions: index substrates, inhibitors and inducers, and the AUC thresholds that classify them"
 keywords: "Pharmacokinetic, Clinical, Drug Development, Drug Interactions"
 date: 2022-07-03
