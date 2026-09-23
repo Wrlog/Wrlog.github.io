@@ -106,6 +106,18 @@ is for research and teaching, not clinical decision-making.
 
 *R, Shiny*
 
+### [metabolomics-dashboard-demo](https://github.com/Wrlog/metabolomics-dashboard-demo)
+
+A reproducible reporting pattern for omics analysis: simulate a study, run a
+curation and association pipeline over it, and render the whole result as one
+self-contained HTML file that opens offline with no server and no notebook.
+Curation counts, QC drift, PCA, and a volcano plot with effect estimates per
+outcome. All data is synthetic and generated from a seed, with the planted
+associations listed in an appendix so the output can be checked against ground
+truth. [View the example dashboard](https://wrlog.github.io/metabolomics-dashboard-demo/).
+
+*Python, numpy, pandas, scipy, matplotlib*
+
 ### [ml-portfolio](https://github.com/Wrlog/ml-portfolio)
 
 Four self-contained machine learning projects — fraud detection, demand
