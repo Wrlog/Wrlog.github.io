@@ -44,8 +44,8 @@ navs:
     label: Portfolio
 
   -
-    href: /categories/
-    label: Blog
+    href: /notes/
+    label: Notes
 
 # ---------------- #
 #       RSS        #

@@ -1,8 +1,8 @@
 ---
 layout: page
-title: Archives
-description: All posts by year
-keywords: archives, posts
+title: Archive
+description: Every note, listed by year
+keywords: archive, notes
 comments: false
 menu: Archives
 permalink: /archives/

@@ -1,13 +1,16 @@
 ---
 layout: categories
-title: Categories
-description: All posts grouped by category
-keywords: categories, posts, blog
+title: Notes
+description: Working notes on pharmacometrics, modelling and data science, grouped by topic
+keywords: notes, pharmacometrics, PK/PD, modelling, data science
 comments: false
-menu: Blog
-permalink: /categories/
+menu: Notes
+permalink: /notes/
 ---
 
+Working notes on pharmacometrics, PK/PD modelling and data science — written up
+as I go, mostly for my own reference. Grouped by topic; the
+[archive]({{ site.url }}/archives/) lists everything by date.
 
 <section class="container posts-content">
 {% assign sorted_categories = site.categories | sort %}
