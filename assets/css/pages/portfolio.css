@@ -381,6 +381,59 @@
 
 .badge-grey { color: var(--ink-3); background: var(--rule-soft); }
 
-/* Award rows: keep clear air between the year and what it was for. */
-.awards li { padding: 12px 16px; gap: 20px; }
-.awards .year { flex-basis: 92px; }
+/* Award rows. The specificity here matters: the bare `.awards li` selector
+ * loses to primer-markdown's `.markdown-body ul li`, which would drop the
+ * flex layout and run the year straight into the text. The markup also keeps
+ * real whitespace between the two spans, so the row still reads correctly
+ * with no CSS at all and copies out of the page with a space in it. */
+.portfolio-section .awards li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 20px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    background: var(--amber-bg);
+}
+
+.portfolio-section .awards .year {
+    flex: 0 0 auto;
+    min-width: 92px;
+    margin-right: 4px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--amber-ink);
+    font-variant-numeric: tabular-nums;
+}
+
+.portfolio-section .awards .what { flex: 1 1 260px; }
+
+/* --- service and mentoring --- */
+
+.service {
+    margin: 0;
+    padding: 18px 20px;
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--orange);
+    border-radius: 10px;
+    background: var(--surface);
+}
+
+.portfolio-section .service dt {
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: var(--orange-ink);
+    margin: 0 0 3px;
+}
+
+.portfolio-section .service dd {
+    margin: 0 0 14px;
+    font-size: 0.94rem;
+    line-height: 1.6;
+    color: var(--ink-2);
+}
+
+.portfolio-section .service dd:last-child { margin-bottom: 0; }

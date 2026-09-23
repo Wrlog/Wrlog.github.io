@@ -17,9 +17,9 @@ permalink: /portfolio/
 
   <ul class="tiles">
     <li class="tile tile-blue"><span class="n">3</span><span class="l">Research programs</span></li>
-    <li class="tile tile-violet"><span class="n">4</span><span class="l">Publications</span></li>
+    <li class="tile tile-violet"><span class="n">6</span><span class="l">Publications</span></li>
     <li class="tile tile-green"><span class="n">3</span><span class="l">Public repositories</span></li>
-    <li class="tile tile-amber"><span class="n">3</span><span class="l">Awards</span></li>
+    <li class="tile tile-amber"><span class="n">6</span><span class="l">Conference abstracts</span></li>
   </ul>
 </header>
 
@@ -31,7 +31,8 @@ permalink: /portfolio/
   <h3 class="thesis-title">Advancing model-informed precision dosing via hybrid
   mechanistic and data-driven algorithms: an infliximab case study</h3>
   <p class="thesis-org">University of Cincinnati College of Medicine ·
-  Department of Pharmacology, Physiology and Neurobiology</p>
+  Department of Pharmacology, Physiology and Neurobiology<br>
+  Advisor: Tomoyuki Mizuno, PhD</p>
   <p>Children on infliximab for Crohn's disease are monitored sparsely and
   irregularly — a few trough concentrations and biomarkers, at whatever
   intervals the clinic managed. The dissertation asks how far that routine
@@ -238,23 +239,43 @@ permalink: /portfolio/
 <h2 class="section-heading">Publications</h2>
 
 <ol class="refs">
-  <li><span class="me">Tan WR</span>, Irie K, McIntire C, Luna Torres J, Jones R, Gibson A, Mizuno T, Tang Girdwood S. Model-informed dose optimization for prophylactic piperacillin-tazobactam in perioperative pediatric critically ill patients. <em>Antimicrobial Agents and Chemotherapy.</em> 2025;69(3):e01227-24. <a href="https://doi.org/10.1128/aac.01227-24">doi:10.1128/aac.01227-24</a></li>
+  <li>Irie K, <span class="me">Tan WR</span>, Mizuno T. Towards reinforcement learning-enabled model-informed precision dosing: concepts, applications, and implementation. <em>Therapeutic Drug Monitoring.</em> 2026. <span class="badge badge-grey">In press</span></li>
+
+  <li>Taylor ZL, Nadai T, Irie K, <span class="me">Tan WR</span>, Parikh S, Hosawi A, van Hoogdalem MW, Morales Junior R, Tang Girdwood S, Leino AD, Mizuno K, Vinks AA, Mizuno T. Clinical model-informed precision dosing consult service for accelerating personalized medication in pediatric patients. <em>Clinical Pharmacology &amp; Therapeutics.</em> 2026. <a href="https://doi.org/10.1002/cpt.70324">doi:10.1002/cpt.70324</a></li>
 
   <li>Morales Junior R, Mizuno T, <span class="me">Tan WR</span>, Irie K, Tang Girdwood S. From PICU to NICU: extrapolating meropenem exposure from pediatric to neonatal intensive care patients. <em>The Journal of Clinical Pharmacology.</em> 2026;66(1):e70097. <a href="https://doi.org/10.1002/jcph.70097">doi:10.1002/jcph.70097</a></li>
+
+  <li><span class="me">Tan WR</span>, Irie K, McIntire C, Luna Torres J, Jones R, Gibson A, Mizuno T, Tang Girdwood S. Model-informed dose optimization for prophylactic piperacillin-tazobactam in perioperative pediatric critically ill patients. <em>Antimicrobial Agents and Chemotherapy.</em> 2025;69(3):e01227-24. <a href="https://doi.org/10.1128/aac.01227-24">doi:10.1128/aac.01227-24</a></li>
 
   <li>Yang Z, <span class="me">Tan WR</span>, Li Q, et al. Population pharmacokinetic study of the effect of polymorphisms in the ABCB1 and CES1 genes on the pharmacokinetics of dabigatran. <em>Frontiers in Pharmacology.</em> 2024;15:1454612. <a href="https://doi.org/10.3389/fphar.2024.1454612">doi:10.3389/fphar.2024.1454612</a></li>
 
   <li><span class="me">Tan WR</span>, Sheikh Ghadzi SM, Hyder Ali IA, Harun SN. Systematic review of population pharmacokinetic models of isoniazid in children and adults with tuberculosis. <em>Malaysian Journal of Pharmacy.</em> 2022;8(2):1-15. <a href="https://doi.org/10.52494/djiq7058">doi:10.52494/djiq7058</a></li>
 </ol>
 
+<h3 class="sub-heading">In preparation</h3>
+
+<ul class="refs plain">
+  <li><span class="me">Tan WR</span>, Irie K, Boyle BM, Noe JD, Hyams JS, Minar P, Mizuno T. Population pharmacokinetic-pharmacodynamic modeling of infliximab and fecal calprotectin in pediatric Crohn's disease: towards biomarker-guided precision dosing.</li>
+
+  <li><span class="me">Tan WR</span>, Mizuno T. Early identification of long-term biochemical remission in pediatric Crohn's disease using machine learning.</li>
+
+  <li><span class="me">Tan WR</span>, Mizuno T. Advancing model-informed precision dosing: a critical appraisal of emerging computational tools and point-of-care diagnostics.</li>
+</ul>
+
 <h3 class="sub-heading">Conference presentations</h3>
 
 <ul class="refs plain">
-  <li><span class="me">Tan WR</span>, Irie K, et al. PK/PD modeling of infliximab in children with Crohn's disease. <em>IATDMCT Congress</em>, 2025. <span class="badge badge-amber">Top 10 abstract</span></li>
+  <li>Minar PP, <span class="me">Tan WR</span>, Irie K, Boyle BM, Noe JD, Hyams JS, Mizuno T. Bridging drug exposure to biochemical remission: a PK/PD framework to individualize infliximab target concentrations in pediatric Crohn's disease. <em>Digestive Disease Week</em>, 2026.</li>
 
-  <li><span class="me">Tan WR</span>, Irie K, et al. Model-informed simulations to determine optimal piperacillin/tazobactam dosing regimens in pediatric perioperative care: effect of body size and renal function. <em>American Conference on Pharmacometrics (ACOP)</em>, 2024. Poster.</li>
+  <li><span class="me">Tan WR</span>, Irie K, Minar P, Mizuno T. Pharmacokinetic-pharmacodynamic modeling of infliximab in children and young adults with Crohn's disease. <em>IATDMCT Congress</em>, 2025. <span class="badge badge-amber">Top 10 abstract</span></li>
 
-  <li><span class="me">Tan WR</span>, Irie K, et al. Model-informed dose optimization for prophylactic piperacillin-tazobactam in perioperative pediatric critically ill patients. <em>ASCPT Annual Meeting</em>, 2024. Poster.</li>
+  <li>Morales Junior R, <span class="me">Tan WR</span>, Irie K, Mizuno T, Tang Girdwood S. From PICU to NICU: refining maturation factor for meropenem clearance. <em>ASCPT Annual Meeting</em>, 2025.</li>
+
+  <li><span class="me">Tan WR</span>, Irie K, McIntire C, Luna Torres J, Jones R, Gibson A, Mizuno T, Tang Girdwood S. Model-informed simulations to determine optimal piperacillin/tazobactam dosing regimens in pediatric perioperative care: effect of body size and renal function. <em>American Conference on Pharmacometrics (ACoP)</em>, 2024.</li>
+
+  <li><span class="me">Tan WR</span>, Irie K, McIntire C, Luna Torres J, Jones R, Gibson A, Mizuno T, Tang Girdwood S. Model-informed dose optimization for prophylactic piperacillin-tazobactam in perioperative pediatric critically ill patients. <em>ASCPT Annual Meeting</em>, 2024.</li>
+
+  <li><span class="me">Tan WR</span>, Tahir ARM, Daud NAA. Medical problems among Rohingya refugees and medications prescribed during IMARET clinic visits in Kelantan. <em>International Journal of Human and Health Sciences</em>, 2021;S26.</li>
 </ul>
 </section>
 
@@ -262,10 +283,40 @@ permalink: /portfolio/
 <h2 class="section-heading">Awards</h2>
 
 <ul class="awards">
-  <li><span class="year">2025</span><span class="what">Top ten abstract nomination, IATDMCT Congress</span></li>
-  <li><span class="year">2023–2026</span><span class="what">Computational Professional Development Award, University of Cincinnati</span></li>
-  <li><span class="year">2023</span><span class="what">First prize, junior category, Graduate Student Research Forum, University of Cincinnati</span></li>
+  <li>
+    <span class="year">2025</span>
+    <span class="what">Top ten abstract nomination, IATDMCT Congress</span>
+  </li>
+  <li>
+    <span class="year">2023–2026</span>
+    <span class="what">Computational Professional Development Award, University of Cincinnati</span>
+  </li>
+  <li>
+    <span class="year">2022–2026</span>
+    <span class="what">Enhancement Fund Award, Department of Pharmacology, Physiology and Neurobiology, University of Cincinnati — awarded in each of 2022, 2023, 2024, 2025 and 2026</span>
+  </li>
+  <li>
+    <span class="year">2023</span>
+    <span class="what">First prize, junior category, Graduate Student Research Forum, University of Cincinnati</span>
+  </li>
 </ul>
+</section>
+
+<section class="section accent-orange">
+<h2 class="section-heading">Service and mentoring</h2>
+
+<dl class="service">
+  <dt>Journal review</dt>
+  <dd>Reviewer, <em>Clinical Pharmacology &amp; Therapeutics</em>.</dd>
+
+  <dt>Conference review</dt>
+  <dd>Abstract reviewer, ASCPT Annual Meeting 2025 and American Conference on
+  Pharmacometrics (ACoP) 2024.</dd>
+
+  <dt>Mentoring</dt>
+  <dd>Research co-mentor to Soorya Shanmugam, October 2024 – February 2025, now
+  an undergraduate at The Ohio State University.</dd>
+</dl>
 </section>
 
 <section class="section accent-blue">
@@ -277,6 +328,7 @@ permalink: /portfolio/
     <a class="cbtn cbtn-primary" href="mailto:{{ site.email }}">Email</a>
     <a class="cbtn" href="https://www.linkedin.com/in/{{ site.linkedin }}/">LinkedIn</a>
     <a class="cbtn" href="https://github.com/{{ site.github_username }}">GitHub</a>
+    <a class="cbtn" href="https://scholar.google.com/citations?user=ZJU1efMAAAAJ">Google Scholar</a>
   </p>
 </div>
 </section>

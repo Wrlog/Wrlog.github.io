@@ -22,6 +22,8 @@ permalink: /about/
     <a href="https://www.linkedin.com/in/{{ site.linkedin }}/">LinkedIn</a>
     <span class="sep">·</span>
     <a href="https://github.com/{{ site.github_username }}">GitHub</a>
+    <span class="sep">·</span>
+    <a href="https://scholar.google.com/citations?user=ZJU1efMAAAAJ">Google Scholar</a>
   </p>
 </header>
 
@@ -36,7 +38,8 @@ permalink: /about/
     <p>Dissertation: <em>Advancing model-informed precision dosing via hybrid
     mechanistic and data-driven algorithms — an infliximab case study.</em>
     Population PK/PD, ensemble machine learning, neural ODEs and deep
-    reinforcement learning applied to dosing in pediatric Crohn's disease.</p>
+    reinforcement learning applied to dosing in pediatric Crohn's disease.
+    Advisor: Tomoyuki Mizuno, PhD.</p>
   </li>
   <li>
     <h3 class="tl-title">Bachelor of Pharmacy (Hons)</h3>
@@ -61,14 +64,21 @@ permalink: /about/
       drive exposure and using them to optimize pediatric dosing.</dd>
 
       <dt>Machine learning</dt>
-      <dd>Gradient boosting, bagging and variational autoencoders for
-      disease-response prediction, benchmarked against the pharmacometric models
-      they were meant to improve on.</dd>
+      <dd>Ensemble models — XGBoost, random forest, CatBoost — predicting
+      long-term biochemical remission from induction-phase data and individual
+      PK/PD parameters, read with SHAP, and a deep Q-network that formulates
+      dosing as a Markov decision process. All benchmarked against the
+      pharmacometric models they were meant to improve on.</dd>
 
       <dt>Tool development</dt>
       <dd>R-Shiny dashboards that let clinical teams explore PK simulations
       directly, turning model output into concentration-time profiles and target
       attainment they can read without a pharmacometrician present.</dd>
+
+      <dt>Early-onset IBD</dt>
+      <dd>Validating an existing population PK model in an early-onset IBD
+      cohort, with a dashboard covering descriptive statistics, diagnostic plots
+      and individual patient PK reports.</dd>
 
       <dt>Clinical consultation</dt>
       <dd>Assistant PK consultant to clinical teams, analyzing therapeutic drug
@@ -80,6 +90,18 @@ permalink: /about/
       dupilumab, maximizing information gain while minimizing patient burden in
       pediatric eosinophilic oesophagitis trials.</dd>
     </dl>
+  </li>
+  <li>
+    <h3 class="tl-title">Data Scientist Intern</h3>
+    <p class="tl-org">Enveda Therapeutics, Boulder, CO</p>
+    <p class="tl-when">July 2026 – September 2026</p>
+    <p>Linked untargeted metabolomics to wearable sleep, cardiovascular and
+    activity data in healthy volunteers, using linear mixed-effects models with
+    FDR control to find metabolite–wearable associations and characterize
+    diurnal variability, and built the Python pipeline and dashboard behind it.
+    Separately, used metabolomics to classify ulcerative colitis against Crohn's
+    disease and active disease against remission in a cohort previously profiled
+    by genomics, transcriptomics and proteomics.</p>
   </li>
   <li>
     <h3 class="tl-title">Research Assistant</h3>
@@ -108,10 +130,12 @@ permalink: /about/
       <li class="chip chip-blue">NONMEM</li>
       <li class="chip chip-blue">mrgsolve</li>
       <li class="chip chip-blue">PopED</li>
+      <li class="chip chip-blue">PsN</li>
       <li class="chip chip-blue">Pirana</li>
     </ul>
     <p class="sg-note">Population PK/PD, exposure–response, indirect response
-    models, optimal design, Monte Carlo simulation for dose selection.</p>
+    models, Bayesian forecasting, optimal design, and dosing simulation for
+    target attainment.</p>
   </div>
 
   <div class="skill-group sg-orange">
@@ -119,6 +143,8 @@ permalink: /about/
     <ul class="chips">
       <li class="chip chip-orange">Gradient boosting</li>
       <li class="chip chip-orange">Random forest</li>
+      <li class="chip chip-orange">CatBoost</li>
+      <li class="chip chip-orange">SHAP</li>
       <li class="chip chip-orange">Neural ODEs</li>
       <li class="chip chip-orange">Variational autoencoders</li>
       <li class="chip chip-orange">Deep Q-networks</li>
@@ -197,6 +223,7 @@ permalink: /about/
     <a class="cbtn cbtn-primary" href="mailto:{{ site.email }}">Email</a>
     <a class="cbtn" href="https://www.linkedin.com/in/{{ site.linkedin }}/">LinkedIn</a>
     <a class="cbtn" href="https://github.com/{{ site.github_username }}">GitHub</a>
+    <a class="cbtn" href="https://scholar.google.com/citations?user=ZJU1efMAAAAJ">Google Scholar</a>
     <a class="cbtn" href="{{ site.url }}/portfolio/">Portfolio</a>
   </p>
 </div>
