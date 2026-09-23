@@ -9,7 +9,7 @@ date: 2022-10-15
 
 ## Introduction
 
-Target-Mediated Drug Disposition (TMDD) represents a critical mechanism of nonlinear pharmacokinetics observed primarily with biologics, particularly monoclonal antibodies and other targeted therapeutics. Unlike traditional linear pharmacokinetics where drug elimination is concentration-independent, TMDD occurs when the pharmacological target itself contributes significantly to drug elimination, particularly at low drug concentrations.
+Target-Mediated Drug Disposition (TMDD) represents a critical mechanism of nonlinear pharmacokinetics observed primarily with biologics, particularly monoclonal antibodies and other targeted therapeutics. Unlike linear pharmacokinetics, where clearance is constant and the elimination rate is simply proportional to concentration, TMDD occurs when the pharmacological target itself contributes significantly to drug elimination, particularly at low drug concentrations.
 
 This phenomenon is of paramount importance in clinical pharmacology because it leads to dose-dependent pharmacokinetics, where clearance increases with dose and half-life may vary substantially across the therapeutic range. Understanding TMDD is essential for optimal dosing strategy design, particularly for biologics with high target affinity and limited target capacity.
 
@@ -26,7 +26,7 @@ The key characteristic of TMDD is that target binding becomes **saturable** at l
 The complete TMDD model describes the interaction between free drug ($C$), target ($R$), and drug-target complex ($RC$):
 
 $$
-\frac{dC}{dt} = -k_{on} \cdot C \cdot R + k_{off} \cdot RC - k_{int} \cdot RC - CL_{lin} \cdot C
+\frac{dC}{dt} = -k_{on} \cdot C \cdot R + k_{off} \cdot RC - \frac{CL_{lin}}{V_c} \cdot C
 $$
 
 $$
@@ -34,8 +34,12 @@ $$
 $$
 
 $$
-\frac{dRC}{dt} = k_{on} \cdot C \cdot R - k_{off} \cdot RC - k_{int} \cdot RC
+\frac{dRC}{dt} = k_{on} \cdot C \cdot R - (k_{off} + k_{int}) \cdot RC
 $$
+
+Note that $k_{int}$ appears only in the complex equation. Internalisation
+removes the *complex*, so putting a $-k_{int} \cdot RC$ term in the free-drug
+equation as well would eliminate the same material twice.
 
 where:
 - $C$ = free drug concentration
@@ -47,6 +51,7 @@ where:
 - $k_{syn}$ = zero-order target synthesis rate
 - $k_{deg}$ = first-order target degradation rate constant
 - $CL_{lin}$ = linear (non-target-mediated) clearance
+- $V_c$ = central volume of distribution
 
 ### Equilibrium and Steady-State Relationships
 
@@ -66,18 +71,32 @@ where $R_0$ represents the baseline target concentration.
 
 ### The Quasi-Steady-State Approximation (QSS)
 
-For most practical applications, the quasi-steady-state (QSS) approximation is used, assuming rapid equilibrium between drug, target, and complex relative to target turnover:
+For most practical applications the full model is reduced. Two reductions are
+commonly confused, and they use different constants:
+
+**Rapid binding (quasi-equilibrium, QE)** assumes binding equilibrates
+instantaneously, so the complex is governed by the dissociation constant:
 
 $$
-RC = \frac{R_{tot} \cdot C}{K_D + C}
+RC = \frac{R_{tot} \cdot C}{K_D + C}, \qquad K_D = \frac{k_{off}}{k_{on}}
 $$
 
-where $R_{tot} = R + RC$ is the total target concentration.
-
-The total elimination rate becomes:
+**Quasi-steady-state (QSS)** assumes only that the complex is at steady state,
+which additionally accounts for loss of complex by internalisation:
 
 $$
-CL_{total} = CL_{lin} + \frac{k_{int} \cdot R_{tot}}{K_D + C}
+RC = \frac{R_{tot} \cdot C}{K_{ss} + C}, \qquad K_{ss} = \frac{k_{off} + k_{int}}{k_{on}}
+$$
+
+where $R_{tot} = R + RC$ is the total target concentration. The two coincide
+only when internalisation is slow relative to dissociation ($k_{int} \ll k_{off}$).
+For antibodies against internalising targets that condition often fails, and
+using $K_D$ where $K_{ss}$ belongs biases the binding parameter.
+
+Under QSS the total clearance becomes:
+
+$$
+CL_{total} = CL_{lin} + \frac{k_{int} \cdot R_{tot}}{K_{ss} + C}
 $$
 
 ### Michaelis-Menten Approximation
@@ -139,11 +158,13 @@ In the intermediate concentration range ($C \approx K_M$), clearance transitions
 
 ### Dose-Dependent Pharmacokinetics
 
-TMDD leads to **inverse dose-exposure relationships** at low doses:
-- Lower doses → Higher clearance → Lower exposure
-- Higher doses → Lower clearance → Higher exposure (per unit dose)
+TMDD leads to **greater than dose-proportional** exposure:
+- Lower doses → target unsaturated → higher clearance → less exposure per mg
+- Higher doses → target saturated → lower clearance → more exposure per mg
 
-This is counterintuitive compared to linear pharmacokinetics and has critical implications for:
+Exposure still increases with dose; it increases *faster* than dose. This is
+the opposite of the saturable-metabolism case, and counterintuitive compared
+to linear pharmacokinetics and has critical implications for:
 - **Dose selection** in early-phase trials
 - **Dose escalation** strategies
 - **Therapeutic window** determination
@@ -193,19 +214,19 @@ Many monoclonal antibodies exhibit TMDD, including:
 
 ## Model Implementation in NONMEM
 
-```fortran
+```
 $PK
 CL_LIN = THETA(1) * EXP(ETA(1))
-V = THETA(2) * EXP(ETA(2))
-VMAX = THETA(3)
-KM = THETA(4)
-
-CL_TMDD = VMAX / (KM + C)
-CL_TOT = CL_LIN + CL_TMDD
-K = CL_TOT / V
+V      = THETA(2) * EXP(ETA(2))
+VMAX   = THETA(3)
+KM     = THETA(4)
+S1     = V
 
 $DES
-DADT(1) = -K*A(1)
+; Concentration has to be formed inside $DES: it changes with every
+; integration step, so it cannot be computed once in $PK.
+CONC = A(1)/V
+DADT(1) = -(CL_LIN/V)*A(1) - VMAX*CONC/(KM + CONC)
 
 $ERROR
 IPRED = A(1)/V
@@ -216,17 +237,23 @@ Y = IPRED*(1 + ERR(1)) + ERR(2)
 
 The full TMDD model contains multiple parameters that may not be identifiable from typical clinical data. Several simplified models are commonly used:
 
-### 1. Michaelis-Menten Model
-Appropriate when target binding is rapid relative to turnover.
+### 1. Rapid binding (quasi-equilibrium, QE)
+Assumes drug, target and complex equilibrate instantaneously, governed by
+$K_D$. "Rapid binding" and "quasi-equilibrium" are two names for this same
+approximation, not two different models.
 
-### 2. QSS Model
-Useful when target turnover is slow relative to drug-target binding.
+### 2. Quasi-steady-state (QSS)
+Assumes the complex is at steady state, governed by $K_{ss}$. Less restrictive
+than QE, and the appropriate choice when the complex is internalised quickly.
 
-### 3. Rapid Binding Model
-Assumes instantaneous equilibrium between drug, target, and complex.
+### 3. Michaelis-Menten
+Drops the target equations altogether and keeps only saturable elimination.
+Identifiable from routine PK data, but the parameters are no longer target
+binding constants and should not be reported as though they were.
 
-### 4. Quasi-Equilibrium Model
-Assumes target is at steady-state throughout dosing.
+### 4. Constant $R_{tot}$ approximation
+Keeps the binding terms but assumes total target does not change over the
+observation period. Reasonable for slowly turning-over targets only.
 
 Model selection depends on:
 - **Data richness** (sparse vs. rich sampling)

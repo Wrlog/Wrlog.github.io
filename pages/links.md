@@ -1,15 +1,17 @@
 ---
 layout: page
 title: Links
-description: 没有链接的博客是孤独的
-keywords: 友情链接
+description: Sites and resources worth a look
+keywords: links, resources, pharmacometrics
 comments: true
-menu: 链接
+menu: Links
 permalink: /links/
 ---
 
-> God made relatives. Thank God we can choose our friends.
-
+{% if site.data.links %}
 {% for link in site.data.links %}
 * [{{ link.name }}]({{ link.url }})
 {% endfor %}
+{% else %}
+Nothing here yet.
+{% endif %}

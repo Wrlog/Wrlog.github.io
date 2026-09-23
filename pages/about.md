@@ -1,8 +1,8 @@
 ---
 layout: about
 title: About
-description: Learn more about Wen-Rui Tan - PhD candidate, clinical pharmacologist, and pharmacometrician
-keywords: About, Wen-Rui Tan, Clinical Pharmacologist, Pharmacometrician, Biography
+description: Learn more about Wen Rui Tan - PhD candidate, clinical pharmacologist, and pharmacometrician
+keywords: About, Wen Rui Tan, Clinical Pharmacologist, Pharmacometrician, Biography
 comments: true
 menu: About
 permalink: /about/
@@ -10,7 +10,7 @@ permalink: /about/
 
 # Wen Rui Tan
 
-**Phone:** +1(513)-501-3089 | **Email:** [Wen.Tan@cchmc.org](mailto:Wen.Tan@cchmc.org) | **LinkedIn:** [wenrui97](https://www.linkedin.com/in/wenrui97/) | **Location:** Cincinnati, OH, United States
+**Email:** [Wen.Tan@cchmc.org](mailto:Wen.Tan@cchmc.org) | **LinkedIn:** [wenrui97](https://www.linkedin.com/in/wenrui97/) | **GitHub:** [@Wrlog](https://github.com/Wrlog) | **Location:** Cincinnati, OH, United States
 
 ---
 
@@ -22,7 +22,7 @@ permalink: /about/
 **Focus:** Pharmacometrics, Model-Informed Precision Dosing (MIPD), Pediatric Clinical Pharmacology
 
 ### Universiti Sains Malaysia | Penang, Malaysia
-**Bachelor of Pharmacy (Hons)** | *September 2020*
+**Bachelor of Pharmacy (Hons)** | *Awarded September 2020*
 
 ---
 
@@ -56,13 +56,13 @@ permalink: /about/
 ### Cincinnati Children's Hospital Medical Center | Cincinnati, OH
 **Graduate Research Assistant (Pharmacometrics)** | *August 2022 - Present*
 
-- **PopPK/PD Modeling:** Spearheaded the development of mechanistic Population PK/PD models for Infliximab (biologic) and Piperacillin (small molecule) using NONMEM, identifying key covariates to optimize dosing regimens for pediatric patients.
+- **PopPK/PD Modeling:** Developed mechanistic population PK/PD models for Infliximab (biologic) and Piperacillin (small molecule) using NONMEM, identifying key covariates to optimize dosing regimens for pediatric patients.
 
-- **Machine Learning Integration:** Implemented advanced ML/DL algorithms (Boosting, Bagging, Variational Autoencoders) to enhance predictive performance of disease response models.
+- **Machine Learning:** Applied gradient boosting, bagging and variational autoencoders to disease-response prediction, and benchmarked them against the pharmacometric models they were meant to improve on.
 
-- **Tool Development (R-Shiny):** Designed and deployed interactive R-Shiny dashboards to visualize PK simulation data, reducing data interpretation time for clinical teams and supporting biomarker-guided decision-making.
+- **Tool Development (R-Shiny):** Built and deployed interactive R-Shiny dashboards that let clinical teams explore PK simulations directly, turning model output into concentration-time profiles and target attainment they can read without a pharmacometrician present.
 
-- **Clinical Consultation:** Served as the assistant PK consultant for clinical teams, analyzing TDM data to recommend precise dosage adjustments for immunosuppressants (Mycophenolic acid, Tacrolimus, Sirolimus) in high-risk pediatric patients.
+- **Clinical Consultation:** Served as the assistant PK consultant for clinical teams, analyzing TDM data to recommend dose adjustments for immunosuppressants (Mycophenolic acid, Tacrolimus, Sirolimus) in high-risk pediatric patients.
 
 - **Study Design Optimization:** Executed a D-optimal design study using PopED to determine optimal sampling timepoints for Dupilumab, maximizing information gain while minimizing patient burden in pediatric EoE trials.
 
@@ -75,14 +75,6 @@ permalink: /about/
 **Research Assistant** | *May 2021 - May 2022*
 
 - Conducted a systematic review and meta-analysis of Isoniazid Population PK models, establishing a framework for tuberculosis dosing in diverse populations.
-
----
-
-## Professional Service
-- **Peer Reviewer** for:
-  - Clinical Pharmacology & Therapeutics (CPT)
-  - American Society for Clinical Pharmacology and Therapeutics (ASCPT)
-  - American Conference on Pharmacometrics (ACOP)
 
 ---
 
@@ -105,7 +97,7 @@ My research focuses on:
 
 Feel free to reach out if you'd like to collaborate on research projects, discuss pharmacometric methodologies, or connect professionally!
 
-- **Email**: [Wen.Tan@cchmc.org](mailto:Wen.Tan@cchmc.org) | **Phone**: +1(513)-501-3089 | **LinkedIn**: [wenrui97](https://www.linkedin.com/in/wenrui97/) | **GitHub**: [@Wrlog](https://github.com/Wrlog) | **Location**: Cincinnati, OH, United States
+- **Email**: [Wen.Tan@cchmc.org](mailto:Wen.Tan@cchmc.org) | **LinkedIn**: [wenrui97](https://www.linkedin.com/in/wenrui97/) | **GitHub**: [@Wrlog](https://github.com/Wrlog) | **Location**: Cincinnati, OH, United States
 
 I'm always interested in:
 - Research collaborations in PK/PD modeling

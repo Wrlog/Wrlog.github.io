@@ -2,7 +2,7 @@
 layout: post
 title: "【R】ggplot--Scatterplot"
 categories: R
-description: "ggplot作图"
+description: "Building and customising scatterplots in ggplot2"
 keywords: "R, visualization, scatterplot"
 date: 2022-08-03
 ---

@@ -4,24 +4,24 @@
 baseurl:
 url: https://wrlog.github.io/Wr.github.io/
 date_format: "ordinal"
-title: Wen-Rui Tan
+title: Wen Rui Tan
 subtitle: "PhD Candidate | Clinical Pharmacologist | Pharmacometrician"
-description: "Personal website and portfolio of Wen-Rui Tan - PhD candidate, clinical pharmacologist, and pharmacometrician. Explore my research, publications, blog posts, and professional journey in pharmacokinetics and pharmacodynamics."
-keywords: Wen-Rui Tan, PhD, Clinical Pharmacologist, Pharmacometrician, PK/PD, Pharmacokinetics, Pharmacodynamics, Research, NONMEM
-timezone: United States/Eastern Time Zone
+description: "Personal website and portfolio of Wen Rui Tan - PhD candidate, clinical pharmacologist, and pharmacometrician. Explore my research, publications, blog posts, and professional journey in pharmacokinetics and pharmacodynamics."
+keywords: Wen Rui Tan, PhD, Clinical Pharmacologist, Pharmacometrician, PK/PD, Pharmacokinetics, Pharmacodynamics, Research, NONMEM
+timezone: America/New_York
 encoding: "utf-8"
 side_bar_repo_limit: 0
 
 # ---------------- #
 #      Author      #
 # ---------------- #
-author: Wen-Rui Tan
+author: Wen Rui Tan
 organization: 
 organization_url: 
 github_username: Wrlog
 location: United States
 email: Wen.Tan@cchmc.org
-linkedin: 
+linkedin: wenrui97
 twitter: 
 website: https://wrlog.github.io/Wr.github.io/
 
@@ -83,30 +83,24 @@ repository: Wrlog/Wr.github.io
 # ---------------- #
 #      Comments    #
 # ---------------- #
-# support provider: disqus, gitment, gitalk, utterances, beaudar
-comments_provider: 
-# gitment 配置参考：https://imsun.net/posts/gitment-introduction/
+# Supported providers: disqus, gitment, gitalk, utterances, beaudar.
+# No provider is configured, so comments are disabled site-wide.
+# Do not commit OAuth client secrets here: this repository is public, and
+# anything placed in this file is served as part of the site.
+comments_provider:
 
 disqus:
-    username: 
+    username:
 
-gitment:
-    owner: Wrlog
-    repo: blog-comments
-    oauth:
-        client_id: ce2239587a9dc9830236
-        client_secret: 0eeeea7ac0249f02c36935ddfc995efea5572481
-        
-# 在使用其它评论组件时可点击显示 Disqus
-lazy_load_disqus : false
+lazy_load_disqus: false
 
 # ---------------- #
 #      Search      #
 # ---------------- #
 simple_jekyll_search:
-    # 是否支持全文搜索
+    # Whether to index full post bodies as well as titles
     fulltext: false
-    # 最多显示多少条搜索结果
+    # Maximum number of search results to show
     limit: 10
 
 # ---------------- #

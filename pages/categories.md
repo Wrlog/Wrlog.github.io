@@ -1,10 +1,10 @@
 ---
 layout: categories
 title: Categories
-description: 哈哈，你找到了我的文章基因库
-keywords: 分类
+description: All posts grouped by category
+keywords: categories, posts, blog
 comments: false
-menu: 分类
+menu: Blog
 permalink: /categories/
 ---
 

@@ -37,12 +37,6 @@ The drug does **not** directly change the water level. Instead, the drug:
 
 The water level (response) changes **slowly** as a result of this interference, creating the characteristic delay between drug concentration and effect.
 
-## Introduction
-
-Indirect Response (IDR) models represent a fundamental class of mechanism-based pharmacodynamic models that describe drug effects through modulation of endogenous substance turnover rather than direct concentration-effect relationships. These models are essential for characterizing delayed pharmacodynamic responses, explaining hysteresis phenomena, and predicting time-dependent effects in clinical pharmacology.
-
-Unlike direct response models where drug concentration immediately drives the measured effect, IDR models mechanistically describe how drugs influence the synthesis or elimination rates of endogenous mediators, with the measured response reflecting the resulting change in mediator levels.
-
 ## Mathematical Foundation
 
 The fundamental differential equation governing indirect response models describes the rate of change of the response variable $R(t)$:
@@ -116,7 +110,7 @@ $$
 R_{ss} = \frac{R_0}{1 - \frac{I_{max} \cdot C_{ss}}{IC_{50} + C_{ss}}}
 $$
 
-**Clinical Example:** Corticosteroids inhibit the degradation of anti-inflammatory mediators, leading to accumulation and delayed anti-inflammatory effects.
+**Clinical Example:** Inhibition of loss raises the mediator above baseline, as when a drug blocks the clearance of an endogenous substance it is meant to sustain. (Corticosteroids are *not* an example here: their classical description is Model I, suppression of cortisol synthesis.)
 
 ### Model IV: Stimulation of Loss ($k_{out}$)
 
@@ -142,7 +136,10 @@ $$
 t_{ss} \approx \frac{4.6}{k_{out}}
 $$
 
-where $t_{ss}$ represents the time to reach 99% of steady-state (approximately 5 half-lives of the response).
+where $t_{ss}$ is the time to reach 99% of steady state. Since the response
+half-life is $t_{1/2} = 0.693/k_{out}$, that is about 6.6 response half-lives,
+not 5 -- five half-lives only gets to 96.9%. The quantity that matters is the
+turnover of the mediator, not the half-life of the drug.
 
 The recovery time after drug discontinuation is similarly determined by $k_{out}$:
 
@@ -154,36 +151,54 @@ This critical distinction—that recovery depends on endogenous turnover rather 
 
 ## Hysteresis and Counter-Clockwise Loops
 
-Counter-clockwise hysteresis loops arise when peak drug concentration precedes peak effect, characteristic of Models I and III. The temporal disconnect occurs because:
+Hysteresis arises whenever peak drug concentration precedes peak effect, which is true of all four IDR models -- the loop direction depends on whether the response rises or falls, not on which parameter the drug acts through. The temporal disconnect occurs because:
 
 1. Drug concentration changes rapidly (governed by PK)
 2. Response changes slowly (governed by $k_{out}$)
 
-The hysteresis area quantifies the delay:
+The width of the loop reflects the delay. The enclosed area is the line
+integral around the closed curve traced in the concentration-response plane,
 
 $$
-\text{Hysteresis Area} = \int_{0}^{T} [C(t) - \bar{C}] \cdot [R(t) - \bar{R}] \, dt
+A = \tfrac{1}{2} \oint \left( C \, dR - R \, dC \right)
 $$
+
+though in practice the loop is read qualitatively rather than integrated: its
+direction tells you whether effect lags concentration, and IDR models remove
+the need to quantify it at all by modelling the turnover that causes it.
 
 IDR models mechanistically collapse this hysteresis by explicitly modeling the turnover process, eliminating the need for effect compartments or transit compartments in many applications.
 
 ## Implementation in NONMEM
 
-```fortran
+```
 $PK
-CL = THETA(1) * EXP(ETA(1))
-V = THETA(2) * EXP(ETA(2))
-K = CL/V
-S1 = V
+CL   = THETA(1) * EXP(ETA(1))
+V    = THETA(2) * EXP(ETA(2))
+KOUT = THETA(3) * EXP(ETA(3))
+R0   = THETA(4) * EXP(ETA(4))
+IMAX = THETA(5)
+IC50 = THETA(6)
+KIN  = R0 * KOUT        ; baseline constraint, so R0 is estimated directly
+S1   = V
 
 $DES
-DADT(1) = -K*A(1)
-DADT(2) = KIN*(1 - (IMAX*C)/(IC50 + C)) - KOUT*A(2)
+; Concentration must be formed here, not in $PK, because it changes at
+; every integration step.
+CONC = A(1)/V
+DADT(1) = -(CL/V)*A(1)
+DADT(2) = KIN*(1 - (IMAX*CONC)/(IC50 + CONC)) - KOUT*A(2)
 
 $ERROR
 IPRED = A(2)
 Y = IPRED*(1 + ERR(1)) + ERR(2)
 ```
+
+Two details matter here. The response compartment must be initialised at
+baseline (`A_0(2) = R0`), otherwise the model starts from zero and spends the
+first part of the profile climbing to baseline. And parameterising $k_{in}$ as
+$R_0 \cdot k_{out}$ estimates the baseline directly, which is both
+better identified and easier to interpret than estimating $k_{in}$ on its own.
 
 where `A(1)` represents drug amount, `A(2)` represents response, `KIN` and `KOUT` are turnover parameters, and `IMAX` and `IC50` characterize drug inhibition.
 

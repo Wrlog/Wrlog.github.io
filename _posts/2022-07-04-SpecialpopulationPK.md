@@ -2,7 +2,7 @@
 layout: post
 title: "【Pharmacokinetic】Pharmacokinetic Notes for Special Populations"
 categories: Pharmacokinetic
-description: "特殊人群药代动力学笔记"
+description: "Notes on pharmacokinetics in renal impairment, pregnancy and paediatrics"
 keywords: "Pharmacokinetic, Clinical"
 date: 2022-07-04
 ---

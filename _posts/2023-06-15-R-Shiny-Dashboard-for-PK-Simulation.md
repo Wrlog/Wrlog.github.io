@@ -16,7 +16,10 @@ library(dplyr)
 library(ggplot2)
 library(mrgsolve)
 
-mod <- mread("piperacillin", modlib())
+# mrgsolve ships no piperacillin model; modlib() provides generic
+# structures (pk1, pk2, irm1-irm4, emax). Swap in your own model file
+# with mread("mymodel", project = "models").
+mod <- mread("pk2", modlib())
 
 ui <- dashboardPage(
   dashboardHeader(title = "Piperacillin PK Simulation Dashboard"),

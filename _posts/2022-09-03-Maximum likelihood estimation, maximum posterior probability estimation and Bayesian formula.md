@@ -129,7 +129,7 @@ In words: MAP maximizes **Likelihood $\times$ Prior**.
 
 ### Example: The "Fair" Coin
 * **Data ($x$):** 7 Heads, 3 Tails.
-* **Prior ($P(\theta)$):** You know from experience that most coins are fair. You represent this belief with a Gaussian (Beta) prior distribution centered at $\theta=0.5$.
+* **Prior ($P(\theta)$):** You know from experience that most coins are fair. You represent this belief with a **Beta** prior centred at $\theta=0.5$ -- for example $\text{Beta}(\alpha,\beta)$ with $\alpha=\beta$. A Beta is the natural choice because $\theta$ is a probability confined to $[0,1]$, and because it is conjugate to the binomial likelihood, so the posterior is Beta too. A Gaussian prior is *not* interchangeable: it puts probability mass below 0 and above 1, where no coin can live.
 
 Now we maximize:
 $$
@@ -157,5 +157,5 @@ The likelihood term $\theta^{700}(1-\theta)^{300}$ becomes highly concentrated a
 |---------|--------------------------|-----------------------------|
 | **Formula** | $\theta_{MLE} = \operatorname*{argmax}_\theta P(x \mid \theta)$ | $\theta_{MAP} = \operatorname*{argmax}_\theta P(x \mid \theta) \times P(\theta)$ |
 | **Philosophy** | Only the data matters. | Data + Prior Knowledge matters. |
-| **Prior** | Does not incorporate prior information (equivalent to uniform prior). | Explicitly incorporates prior distribution (e.g., Gaussian, Beta). |
+| **Prior** | Does not incorporate prior information (equivalent to a uniform prior). | Explicitly incorporates a prior distribution, chosen to match the parameter's support (Beta for a probability, Gaussian for an unbounded parameter). |
 | **Best Used When** | You have large sample sizes or no prior knowledge. | You have small sample sizes or strong domain knowledge. |

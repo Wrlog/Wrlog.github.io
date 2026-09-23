@@ -7,14 +7,23 @@ keywords: "Monte Carlo Simulation, Dose Optimization, Pharmacokinetics, NONMEM, 
 date: 2023-09-22
 ---
 
+Monte Carlo simulation answers a question a point estimate cannot: not "what
+happens to the typical patient", but "what fraction of the population reaches
+the target". The pattern below is generate a virtual population, simulate each
+subject through the model, then summarise attainment across the population
+rather than for an average patient.
+
 ```r
 library(tidyverse)
 library(mrgsolve)
-library(ggplot2)
 library(viridis)
 library(patchwork)
+library(pracma)   # trapz(), used for AUC below
 
-mod <- mread("piperacillin", modlib())
+# mrgsolve's built-in library has no piperacillin model. Point mread() at a
+# model file of your own, or start from one of the shipped structural models
+# (modlib() provides pk1, pk2, irm1-irm4, emax and others).
+mod <- mread("pk2", modlib())
 
 generate_virtual_population <- function(n = 1000, age_range = c(0.5, 18)) {
   age <- runif(n, age_range[1], age_range[2])

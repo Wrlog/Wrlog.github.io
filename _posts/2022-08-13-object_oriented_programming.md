@@ -2,7 +2,7 @@
 layout: post
 title: "【Python】Object Oriented Programming"
 categories: Programming
-description: "Programming"
+description: "Classes, inheritance, encapsulation and polymorphism in Python"
 keywords: "Python, Object Oriented Programming"
 date: 2022-08-13
 ---
