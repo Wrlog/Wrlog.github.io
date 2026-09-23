@@ -18,7 +18,7 @@ permalink: /portfolio/
   <ul class="tiles">
     <li class="tile tile-blue"><span class="n">5</span><span class="l">Research projects</span></li>
     <li class="tile tile-violet"><span class="n">6</span><span class="l">Publications</span></li>
-    <li class="tile tile-green"><span class="n">3</span><span class="l">Public repositories</span></li>
+    <li class="tile tile-green"><span class="n">4</span><span class="l">Public repositories</span></li>
     <li class="tile tile-amber"><span class="n">6</span><span class="l">Conference abstracts</span></li>
   </ul>
 </header>
@@ -310,6 +310,24 @@ permalink: /portfolio/
       <li class="chip chip-blue">matplotlib</li>
     </ul>
     <p class="card-link"><a href="https://wrlog.github.io/metabolomics-dashboard-demo/">View the live dashboard →</a></p>
+  </article>
+
+  <article class="card card-violet">
+    <h3 class="card-title"><a href="https://github.com/Wrlog/nonmem-model-library">nonmem-model-library</a></h3>
+    <p>NONMEM control streams for the model families that recur in drug
+    development — two-compartment population PK, Claret tumour growth
+    inhibition, an indirect response PK/PD model, a Weibull time-to-event
+    model and a binary exposure–response — each with a simulated dataset and
+    the parameters it was generated from, so a run can be judged against the
+    answer. Static checks run on every commit: $INPUT against the data
+    columns in order, parameter references against declarations, likelihood
+    models against their $ESTIMATION record.</p>
+    <ul class="chips">
+      <li class="chip chip-blue">NONMEM</li>
+      <li class="chip chip-green">Python</li>
+      <li class="chip chip-orange">matplotlib</li>
+    </ul>
+    <p class="card-link"><a href="https://wrlog.github.io/nonmem-model-library/">Browse the model library →</a></p>
   </article>
 
   <article class="card card-orange">

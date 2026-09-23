@@ -440,3 +440,4 @@
 
 /* A card whose link is the point of the card. */
 .card .card-link a { font-weight: 600; }
+.card-violet { border-top-color: var(--violet); }
