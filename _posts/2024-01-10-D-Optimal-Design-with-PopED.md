@@ -13,16 +13,6 @@ library(ggplot2)
 library(dplyr)
 library(viridis)
 
-pkmod <- function(model_switch, xt, parameters, poped.db) {
-  with(as.list(parameters), {
-    y <- xt
-    N <- floor(xt/TAU) + 1
-    y <- (DOSE/V) * (KA/(KA - CL/V)) * 
-         (exp(-(CL/V) * (xt - (N - 1) * TAU)) - exp(-KA * (xt - (N - 1) * TAU)))
-    return(list(y = y, poped.db = poped.db))
-  })
-}
-
 sfg <- function(x, a, bpop, b, bocc) {
   parameters <- c(
     CL = bpop[1] * exp(b[1]),
@@ -34,12 +24,16 @@ sfg <- function(x, a, bpop, b, bocc) {
   return(parameters)
 }
 
+# One-compartment oral, multiple dose. The two bracketed ratios are the
+# accumulation terms. Without them this is the single-dose solution, and
+# using TAU and N without them quietly models every dose in isolation.
 ff <- function(model_switch, xt, parameters, poped.db) {
   with(as.list(parameters), {
-    y <- xt
-    N <- floor(xt/TAU) + 1
-    y <- (DOSE/V) * (KA/(KA - CL/V)) * 
-         (exp(-(CL/V) * (xt - (N - 1) * TAU)) - exp(-KA * (xt - (N - 1) * TAU)))
+    N  <- floor(xt/TAU) + 1
+    KE <- CL/V
+    y  <- (DOSE/V) * (KA/(KA - KE)) *
+      (exp(-KE * (xt - (N - 1) * TAU)) * (1 - exp(-N * TAU * KE)) / (1 - exp(-TAU * KE)) -
+       exp(-KA * (xt - (N - 1) * TAU)) * (1 - exp(-N * TAU * KA)) / (1 - exp(-TAU * KA)))
     return(list(y = y, poped.db = poped.db))
   })
 }
@@ -77,12 +71,12 @@ poped.db <- create.poped.database(
 )
 
 output <- poped_optim(poped.db, opt_xt = TRUE, opt_a = FALSE, 
-                      method = c("DOSE"), 
+                      method = c("ARS", "BFGS"), 
                       control = list(iter_max = 50))
 
 plot_model_prediction(poped.db, model_num_points = 500)
 
-evaluate_design <- function(poped.db, n_samples = c(3, 4, 5, 6)) {
+compare_designs <- function(poped.db, n_samples = c(3, 4, 5, 6)) {
   results <- data.frame(
     N_Samples = integer(),
     OFV = numeric(),
@@ -109,8 +103,10 @@ evaluate_design <- function(poped.db, n_samples = c(3, 4, 5, 6)) {
         poped.db.tmp$xt <- matrix(rep(candidate_times[[design_name]], 2), 
                                   nrow = 2, byrow = TRUE)
         
-        ofv <- evaluate_design(poped.db.tmp)$ofv
-        efficiency <- (ofv / evaluate_design(poped.db)$ofv) * 100
+        # PopED::evaluate_design, not this function -- naming the wrapper
+        # evaluate_design() shadowed it and made the call infinitely recursive.
+        ofv <- PopED::evaluate_design(poped.db.tmp)$ofv
+        efficiency <- (ofv / PopED::evaluate_design(poped.db)$ofv) * 100
         
         results <- rbind(results, data.frame(
           N_Samples = n,
@@ -125,7 +121,7 @@ evaluate_design <- function(poped.db, n_samples = c(3, 4, 5, 6)) {
   results
 }
 
-design_comparison <- evaluate_design(poped.db)
+design_comparison <- compare_designs(poped.db)
 
 p1 <- design_comparison %>%
   ggplot(aes(x = factor(N_Samples), y = Efficiency, fill = Design)) +

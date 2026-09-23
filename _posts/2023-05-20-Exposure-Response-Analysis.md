@@ -151,14 +151,14 @@ $$
 
 ### Example: Emax Model with AUC
 
-```fortran
+```
 $PROBLEM Exposure-Response Analysis
 $INPUT ID TIME AUC DV EVID MDV
 $DATA data.csv IGNORE=@
 $PRED
 E0 = THETA(1)
 EMAX = THETA(2)
-EC50 = THETA(3)
+EC50 = THETA(3) * EXP(ETA(1))   ; without this the fit is naive-pooled
 GAMMA = THETA(4)
 
 E_PRED = E0 + (EMAX * AUC**GAMMA) / (EC50**GAMMA + AUC**GAMMA)
@@ -166,13 +166,14 @@ E_PRED = E0 + (EMAX * AUC**GAMMA) / (EC50**GAMMA + AUC**GAMMA)
 Y = E_PRED + EPS(1)
 
 $THETA
-(50, 100) ; E0 baseline
-(0, 50) ; EMAX
-(0, 1000) ; EC50
-(0, 1, 5) ; GAMMA Hill coefficient
+(50, 100)   ; E0 baseline
+(0, 50)     ; EMAX
+(0, 1000)   ; EC50
+(0, 1, 5)   ; GAMMA Hill coefficient
 $OMEGA
+0.09        ; between-subject variability on EC50 (see E_PRED above)
 $SIGMA
-(0, 10) ; Residual error
+10          ; residual error variance
 $ESTIMATION METHOD=1 INTERACTION MAXEVAL=9999
 $COVARIANCE
 $TABLE ID AUC E_PRED RES
@@ -181,30 +182,39 @@ NOPRINT ONEHEADER FILE=er_model.tab
 
 ### Example: Logistic Model for Binary Endpoint
 
-```fortran
+```
 $PROBLEM Exposure-Response - Binary Endpoint
-$INPUT ID AUC RESPONSE EVID MDV
+$INPUT ID AUC DV
 $DATA data.csv IGNORE=@
 $PRED
 ALPHA = THETA(1)
-BETA = THETA(2)
+BETA  = THETA(2)
 
-LOGIT = ALPHA + BETA * LOG(AUC/100)
+LOGIT  = ALPHA + BETA * LOG(AUC/100) + ETA(1)
 P_RESP = 1 / (1 + EXP(-LOGIT))
 
-Y = P_RESP + EPS(1)
+; A binary endpoint has no residual error term. F_FLAG=1 tells NONMEM that
+; Y is a likelihood rather than a prediction, so the model returns the
+; probability of whichever outcome was actually observed.
+F_FLAG = 1
+IF (DV.EQ.1) Y = P_RESP
+IF (DV.EQ.0) Y = 1 - P_RESP
 
 $THETA
-(-5, -2, 2) ; ALPHA intercept
-(0, 1, 5) ; BETA slope
+(-5, -2, 2)  ; ALPHA intercept
+(0, 1, 5)    ; BETA slope
 $OMEGA
-$SIGMA
-1 FIX
-$ESTIMATION METHOD=1 INTERACTION MAXEVAL=9999
+0.1          ; between-subject variability on the logit
+$ESTIMATION METHOD=1 LAPLACE -2LL MAXEVAL=9999
 $COVARIANCE
 $TABLE ID AUC P_RESP
 NOPRINT ONEHEADER FILE=logistic_er.tab
 ```
+
+Two things to note. There is no `$SIGMA`: with `F_FLAG=1` the model supplies
+the likelihood itself, so an additive error on a probability would be
+meaningless. And the Laplace method is required, because the first-order
+conditional approximation does not apply to a non-continuous likelihood.
 
 ## Target Exposure Identification
 
@@ -219,8 +229,12 @@ $$
 For Emax models:
 
 $$
-Exposure_{target} = EC_{50} \cdot \left(\frac{E_{desired} - E_0}{E_{max} - E_{desired}}\right)^{1/\gamma}
+Exposure_{target} = EC_{50} \cdot
+\left(\frac{E_{desired} - E_0}{E_{max} - (E_{desired} - E_0)}\right)^{1/\gamma}
 $$
+
+Note the baseline appears in both terms. Writing the denominator as
+$E_{max} - E_{desired}$ is a common slip and is only correct when $E_0 = 0$.
 
 ### Safety Targets
 
