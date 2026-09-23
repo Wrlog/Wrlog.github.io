@@ -14,11 +14,13 @@ Indirect Response (IDR) models are a class of pharmacodynamic models used when d
 ### Key Distinction: Direct vs. Indirect Response
 
 **Direct Response Models:**
+
 - Drug concentration → Immediate effect
 - Example: Anesthetic agents where higher concentration = deeper anesthesia
 - Mathematical form: $E = f(C(t))$ where effect directly depends on concentration
 
 **Indirect Response Models:**
+
 - Drug concentration → Modulates turnover → Changes in mediator level → Measured effect
 - Example: Warfarin doesn't directly affect clotting time; it inhibits synthesis of clotting factors, and the factor levels determine clotting time
 - Mathematical form: Drug affects $k_{in}$ or $k_{out}$, which then affects response $R(t)$
@@ -28,10 +30,11 @@ Indirect Response (IDR) models are a class of pharmacodynamic models used when d
 Think of the response (e.g., biomarker level, clotting factor concentration) as water in a bathtub:
 
 - **$k_{in}$ (or $R_{syn}$):** The faucet - constant rate of production/synthesis
-- **$k_{out}$:** The drain - constant rate of elimination/degradation  
+- **$k_{out}$:** The drain - constant rate of elimination/degradation
 - **Baseline ($R_0$):** At steady-state, faucet and drain are balanced, water level is stable
 
 The drug does **not** directly change the water level. Instead, the drug:
+
 - **Turns the faucet up or down** (affects $k_{in}$), OR
 - **Clogs or opens the drain** (affects $k_{out}$)
 
@@ -46,6 +49,7 @@ $$
 $$
 
 where:
+
 - $R(t)$ is the response variable (e.g., biomarker level, physiological measure)
 - $k_{in}(t)$ is the zero-order synthesis rate (may be drug-modulated)
 - $k_{out}(t)$ is the first-order elimination rate constant (may be drug-modulated)
@@ -215,14 +219,16 @@ where `A(1)` represents drug amount, `A(2)` represents response, `KIN` and `KOUT
 ## Model Selection and Validation
 
 Selection among the four IDR models requires:
+
 - **Biological knowledge** of drug mechanism
 - **Visual inspection** of concentration-effect plots
 - **Statistical comparison** via objective function value (OFV) or information criteria (AIC, BIC)
 - **Goodness-of-fit** assessment including visual predictive checks (VPC) and prediction-corrected VPC
 
 Key diagnostic plots include:
+
 - Concentration-time profiles
-- Response-time profiles  
+- Response-time profiles
 - Concentration-response plots (hysteresis loops)
 - Individual fits and residuals
 
