@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://wrlog.github.io/Wr.github.io/sitemap.xml

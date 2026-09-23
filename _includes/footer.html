@@ -1,31 +1,31 @@
     <footer class="container">
         <div class="site-footer" role="contentinfo">
             <div class="copyright left mobile-block">
-                    © 2025 Wen-Rui Tan
-                    <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+                &copy; {{ site.time | date: '%Y' }} {{ site.author }}
+                <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
             </div>
 
             <ul class="site-footer-links right mobile-hidden">
-                <li>
-                    <a href="javascript:window.scrollTo(0,0)" >TOP</a>
-                </li>
-            </a>
-            <ul class="site-footer-links mobile-hidden">
                 {% for nav in site.navs %}
                 <li>
-                    <a href="{{ site.url }}{{ nav.href }}" title="{{ nav.label }}" target="{{ nav.target | default: _self }}">{{ nav.label }}</a>
+                    <a href="{{ site.url }}{{ nav.href }}" title="{{ nav.label }}" target="{{ nav.target | default: '_self' }}">{{ nav.label }}</a>
                 </li>
                 {% endfor %}
-                <li><a href="{{ site.url }}{{ site.subscribe_rss }}"><span class="octicon octicon-rss" style="color:orange;"></span></a></li>
+                {% if site.linkedin %}
+                <li><a href="https://www.linkedin.com/in/{{ site.linkedin }}/" title="LinkedIn" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                {% endif %}
+                {% if site.github_username %}
+                <li><a href="https://github.com/{{ site.github_username }}" title="GitHub" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                {% endif %}
+                <li><a href="{{ site.url }}{{ site.subscribe_rss }}" title="RSS feed"><span class="octicon octicon-rss" style="color:orange;"></span></a></li>
+                <li><a href="javascript:window.scrollTo(0,0)">TOP</a></li>
             </ul>
-
         </div>
     </footer>
     <div class="tools-wrapper">
       <a class="gotop" href="#" title="Back to top"><span class="octicon octicon-arrow-up"></span></a>
     </div>
     <!-- / footer -->
-    <script src="{{ site.url }}/assets/vendor/share.js/dist/js/share.min.js"></script>
     <script src="{{ site.url }}/assets/js/geopattern.js"></script>
     <script src="{{ site.url }}/assets/js/prism.js"></script>
     <link rel="stylesheet" href="{{ site.url }}/assets/css/globals/prism.css">
