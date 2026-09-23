@@ -7,6 +7,32 @@ keywords: "R, R-Shiny, Pharmacokinetics, Dashboard, Visualization, Clinical Deci
 date: 2023-06-15
 ---
 
+## Why build a dashboard at all
+
+A population model that only its author can run is worth very little
+clinically. The gap is not analytical, it is one of access: the people who make
+dosing decisions cannot install NONMEM, and should not have to. A small
+interactive application closes that gap by letting them vary the inputs they
+already think in -- weight, renal function, dose, interval -- and see the
+consequence immediately.
+
+Two design points are worth stating before the code, because they determine
+whether the thing gets used:
+
+- **Expose the inputs clinicians reason with, not the model's parameters.**
+  Nobody on a ward wants to set a clearance. They want to set a weight and a
+  creatinine clearance and see what happens to the trough.
+- **Show uncertainty, not a single line.** A median profile invites the reader
+  to believe the prediction is exact. Prediction intervals make the spread
+  visible, which is the honest representation of a population model and usually
+  the more useful one for a dosing decision.
+
+The app below is structured in the conventional Shiny way: a `ui` object
+describing the layout, a `server` function containing the simulation logic, and
+a reactive expression so the model re-runs only when an input actually changes.
+
+## The interface
+
 ```r
 library(shiny)
 library(shinydashboard)
