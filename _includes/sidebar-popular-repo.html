@@ -1,8 +1,9 @@
-<h3>My Popular Repositories</h3>
-{% if site.github.public_repositories != null %}
-{% assign repos = site.github.public_repositories | sort: "stargazers_count" | reverse%}
-{% for repo in repos | limit: site.side_bar_repo_limit %}
-<a href="{{ repo.html_url }}" target="_blank" class="card text-center">
+{% assign all_repos = site.github.public_repositories %}
+{% if all_repos.size > 0 and site.side_bar_repo_limit > 0 %}
+{% assign repos = all_repos | sort: "stargazers_count" | reverse %}
+<h3>Popular Repositories</h3>
+{% for repo in repos limit: site.side_bar_repo_limit %}
+<a href="{{ repo.html_url }}" target="_blank" rel="noopener noreferrer" class="card text-center">
     <div class="thumbnail">
         <div class="card-image geopattern" data-pattern-id="{{ repo.name }}">
             <div class="card-image-cell">
@@ -22,7 +23,7 @@
                 <span class="meta-info" title="{{ repo.forks_count }} forks">
                     <span class="octicon octicon-git-branch"></span> {{ repo.forks_count }}
                 </span>
-                <span class="meta-info" title="Last updated：{{ repo.updated_at }}">
+                <span class="meta-info" title="Last updated: {{ repo.updated_at }}">
                     <span class="octicon octicon-clock"></span>
                     <time datetime="{{ repo.updated_at }}">{{ repo.updated_at | date: '%Y-%m-%d' }}</time>
                 </span>

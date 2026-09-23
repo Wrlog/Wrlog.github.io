@@ -18,7 +18,7 @@ permalink: /open-source/
         <!-- Check here for github metadata -->
         <!-- https://help.github.com/articles/repository-metadata-on-github-pages/ -->
         {% for repo in sorted_repos %}
-        <a href="{{ repo.html_url }}" target="_blank" class="one-third-column card text-center">
+        <a href="{{ repo.html_url }}" target="_blank" rel="noopener noreferrer" class="one-third-column card text-center">
             <div class="thumbnail">
                 <div class="card-image geopattern" data-pattern-id="{{ repo.name }}">
                     <div class="card-image-cell">
@@ -38,7 +38,7 @@ permalink: /open-source/
                         <span class="meta-info" title="{{ repo.forks_count }} forks">
                             <span class="octicon octicon-git-branch"></span> {{ repo.forks_count }}
                         </span>
-                        <span class="meta-info" title="Last updated：{{ repo.updated_at }}">
+                        <span class="meta-info" title="Last updated: {{ repo.updated_at }}">
                             <span class="octicon octicon-clock"></span>
                             <time datetime="{{ repo.updated_at }}">{{ repo.updated_at | date: '%Y-%m-%d' }}</time>
                         </span>
