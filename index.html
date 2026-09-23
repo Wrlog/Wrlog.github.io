@@ -74,8 +74,8 @@ comments: false
 <!-- Recent Posts Section -->
 <section class="container content">
     <div class="section-header">
-        <h2 class="section-title">Recent Blog Posts</h2>
-        <a href="{{ site.url }}/categories/" class="view-all">View All Posts →</a>
+        <h2 class="section-title">Recent Notes</h2>
+        <a href="{{ site.url }}/notes/" class="view-all">All notes →</a>
     </div>
     <div class="columns">
         <div class="column two-thirds">
@@ -103,7 +103,7 @@ comments: false
                                 {% for cat in post.categories %}
                                 <span class="meta-info">
                                     <span class="octicon octicon-file-directory"></span>
-                                    <a href="{{ site.url }}/categories/#{{ cat }}" title="{{ cat }}">{{ cat }}</a>
+                                    <a href="{{ site.url }}/notes/#{{ cat }}" title="{{ cat }}">{{ cat }}</a>
                                 </span>
                                 {% endfor %}
                             </p>
