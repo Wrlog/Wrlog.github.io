@@ -59,9 +59,11 @@ permalink: /about/
     <p class="tl-when">August 2022 – present</p>
     <dl class="duties">
       <dt>Population PK/PD modeling</dt>
-      <dd>Mechanistic population PK/PD models for infliximab (a biologic) and
-      piperacillin (a small molecule) in NONMEM, identifying the covariates that
-      drive exposure and using them to optimize pediatric dosing.</dd>
+      <dd>A pediatric population PK/PD model linking infliximab exposure to
+      fecal calprotectin through an indirect response model in NONMEM, and
+      population PK models for piperacillin to identify suitable doses for
+      surgical populations. In both cases the point is the covariates that
+      drive exposure, and what they imply for the dose.</dd>
 
       <dt>Machine learning</dt>
       <dd>Ensemble models — XGBoost, random forest, CatBoost — predicting
@@ -71,9 +73,11 @@ permalink: /about/
       pharmacometric models they were meant to improve on.</dd>
 
       <dt>Tool development</dt>
-      <dd>R-Shiny dashboards that let clinical teams explore PK simulations
-      directly, turning model output into concentration-time profiles and target
-      attainment they can read without a pharmacometrician present.</dd>
+      <dd>Interactive dashboards and self-contained HTML reports in R and
+      Python that put PK/PD simulation and modeling results in front of
+      clinical and research teams — concentration-time profiles, diagnostics
+      and target attainment they can read without a pharmacometrician
+      present.</dd>
 
       <dt>Early-onset IBD</dt>
       <dd>Validating an existing population PK model in an early-onset IBD
@@ -88,7 +92,7 @@ permalink: /about/
       <dt>Study design</dt>
       <dd>A D-optimal design study in PopED to choose sampling timepoints for
       dupilumab, maximizing information gain while minimizing patient burden in
-      pediatric eosinophilic oesophagitis trials.</dd>
+      pediatric eosinophilic esophagitis trials.</dd>
     </dl>
   </li>
   <li>

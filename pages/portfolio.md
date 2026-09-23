@@ -315,12 +315,20 @@ permalink: /portfolio/
   <article class="card card-orange">
     <h3 class="card-title"><a href="https://github.com/Wrlog/ml-portfolio">ml-portfolio</a></h3>
     <p>Four self-contained machine learning projects — fraud detection, demand
-    forecasting, semantic similarity and an implicit-feedback recommender — each
-    covering the full path from data preparation through model evaluation.</p>
+    forecasting, semantic similarity and an implicit-feedback recommender. Each
+    runs end to end on a laptop CPU in under three minutes, has a test suite,
+    and is built around a decision someone would have to make rather than a
+    leaderboard score: pricing the two error types to choose a fraud threshold,
+    deriving every lag from the forecast horizon so nothing leaks, showing that
+    the split protocol moves the score more than the model does. All data is
+    synthetic and generated in the repository.</p>
     <ul class="chips">
       <li class="chip chip-green">Python</li>
+      <li class="chip chip-orange">LightGBM</li>
       <li class="chip chip-orange">scikit-learn</li>
+      <li class="chip chip-orange">matplotlib</li>
     </ul>
+    <p class="card-link"><a href="https://wrlog.github.io/ml-portfolio/">View the results dashboard →</a></p>
   </article>
 </div>
 </section>
