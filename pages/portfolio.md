@@ -16,7 +16,7 @@ permalink: /portfolio/
   research I work on, the software I have published, and the papers it produced.</p>
 
   <ul class="tiles">
-    <li class="tile tile-blue"><span class="n">3</span><span class="l">Research programs</span></li>
+    <li class="tile tile-blue"><span class="n">5</span><span class="l">Research projects</span></li>
     <li class="tile tile-violet"><span class="n">6</span><span class="l">Publications</span></li>
     <li class="tile tile-green"><span class="n">3</span><span class="l">Public repositories</span></li>
     <li class="tile tile-amber"><span class="n">6</span><span class="l">Conference abstracts</span></li>
@@ -226,6 +226,47 @@ permalink: /portfolio/
 
   <p class="entry-note">Analysis code and data belong to Enveda Therapeutics
   and are not public.</p>
+</article>
+
+<article class="entry">
+  <h3 class="entry-title">External validation of a published infliximab model in very early onset IBD</h3>
+  <p class="entry-meta"><span class="org">Cincinnati Children's Hospital Medical Center</span><span class="sep">·</span>2025 – 2026</p>
+
+  <p>A population PK model published in one paediatric population does not
+  automatically hold in another. This work tests an existing infliximab model
+  in a very early onset IBD cohort — children who present far younger than the
+  populations the model was built on — and reports how well it predicts them.</p>
+
+  <div class="panels">
+    <div class="panel panel-approach">
+      <h4>Approach</h4>
+      <ul>
+        <li>The published model applied with every parameter fixed and no re-estimation, so the test is of the model as published rather than of a refit.</li>
+        <li>Individual clearances as empirical Bayes estimates: Bayesian estimation of each child given the published priors.</li>
+        <li>Prediction-corrected visual predictive checks, run for Crohn's alone and for the pooled Crohn's, ulcerative colitis and indeterminate colitis cohort.</li>
+        <li>Interactive HTML dashboards reporting the cohort, the diagnostics and per-patient PK, so the study team reads the result rather than the output tables.</li>
+      </ul>
+    </div>
+    <div class="panel panel-results">
+      <h4>How it is built</h4>
+      <ul>
+        <li>Python for data preparation and reporting, NONMEM and PsN for the fitting and the VPCs, with versions pinned because a pandas change is enough to move a histogram bin edge.</li>
+        <li>The repository holds code only — no patient data, no datasets, no rendered dashboards. A synthetic-data generator reproduces the real workbook's structure and its awkward cases, so the pipeline can be run end to end without PHI.</li>
+      </ul>
+    </div>
+  </div>
+
+  <ul class="chips">
+    <li class="chip chip-blue">NONMEM</li>
+    <li class="chip chip-blue">PsN</li>
+    <li class="chip chip-blue">VPC</li>
+    <li class="chip chip-green">Python</li>
+    <li class="chip chip-violet">External validation</li>
+  </ul>
+
+  <p class="entry-note"><span class="badge badge-grey">Private</span>
+  Code: <a href="https://github.com/Wrlog/VEO_CCHMC">Wrlog/VEO_CCHMC</a>
+  — access on request.</p>
 </article>
 </section>
 
