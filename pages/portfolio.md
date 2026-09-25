@@ -19,7 +19,7 @@ permalink: /portfolio/
   <ul class="tiles">
     <li class="tile tile-blue"><span class="n">6</span><span class="l">Research projects</span></li>
     <li class="tile tile-violet"><span class="n">6</span><span class="l">Publications</span></li>
-    <li class="tile tile-green"><span class="n">4</span><span class="l">Public repositories</span></li>
+    <li class="tile tile-green"><span class="n">5</span><span class="l">Public repositories</span></li>
     <li class="tile tile-amber"><span class="n">6</span><span class="l">Conference abstracts</span></li>
   </ul>
 </header>
@@ -369,8 +369,27 @@ permalink: /portfolio/
     <p class="card-link"><a href="https://wrlog.github.io/nonmem-model-library/">Browse the model library →</a></p>
   </article>
 
+  <article class="card card-blue">
+    <h3 class="card-title"><a href="https://github.com/Wrlog/ml-clinical-pharmacology">ml-clinical-pharmacology</a></h3>
+    <p>Three R analyses on synthetic major depressive disorder cohorts from a
+    graduate course in clinical pharmacology. The first clusters
+    gene-expression profiles with PCA, k-means, hierarchical clustering and
+    Gaussian mixtures, and six of ten clusterings recover the four diagnostic
+    groups exactly. The other two predict SSRI remission with random forest,
+    SVMs and gradient boosting in tidymodels. Clinical factors alone reach a
+    test AUC of 0.90 and adding biomarkers takes it to 1.00, but at the default
+    threshold several models miss most remitters, and an external cohort with
+    lower biomarker levels shows why a fixed cutoff needs recalibrating.</p>
+    <ul class="chips">
+      <li class="chip chip-green">R</li>
+      <li class="chip chip-orange">tidymodels</li>
+      <li class="chip chip-blue">Unsupervised learning</li>
+    </ul>
+    <p class="card-link"><a href="https://wrlog.github.io/ml-clinical-pharmacology/">View the results dashboard →</a></p>
+  </article>
+
   <article class="card card-orange">
-    <h3 class="card-title"><a href="https://github.com/Wrlog/ml-portfolio">ml-portfolio</a></h3>
+    <h3 class="card-title"><a href="https://github.com/Wrlog/ml-practice">ml-practice</a></h3>
     <p>Four machine learning projects: fraud detection, demand forecasting,
     semantic similarity and an implicit-feedback recommender. Each runs on a
     laptop CPU in under three minutes, has a test suite, and is framed around a
@@ -384,7 +403,7 @@ permalink: /portfolio/
       <li class="chip chip-orange">scikit-learn</li>
       <li class="chip chip-orange">matplotlib</li>
     </ul>
-    <p class="card-link"><a href="https://wrlog.github.io/ml-portfolio/">View the results dashboard →</a></p>
+    <p class="card-link"><a href="https://wrlog.github.io/ml-practice/">View the results dashboard →</a></p>
   </article>
 </div>
 </section>
