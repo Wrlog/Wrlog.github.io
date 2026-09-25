@@ -19,7 +19,7 @@ permalink: /portfolio/
   <ul class="tiles">
     <li class="tile tile-blue"><span class="n">6</span><span class="l">Research projects</span></li>
     <li class="tile tile-violet"><span class="n">6</span><span class="l">Publications</span></li>
-    <li class="tile tile-green"><span class="n">5</span><span class="l">Public repositories</span></li>
+    <li class="tile tile-green"><span class="n">10</span><span class="l">Public repositories</span></li>
     <li class="tile tile-amber"><span class="n">6</span><span class="l">Conference abstracts</span></li>
   </ul>
 </header>
@@ -331,6 +331,95 @@ permalink: /portfolio/
       <li class="chip chip-green">WebAssembly</li>
     </ul>
     <p class="card-link"><a href="https://wrlog.github.io/dosing-simulator/">Run the simulator in your browser →</a></p>
+  </article>
+
+  <article class="card card-blue">
+    <h3 class="card-title"><a href="https://github.com/Wrlog/mipd-bayesian-forecasting">mipd-bayesian-forecasting</a></h3>
+    <p>Model-informed precision dosing for a hypothetical Drug X, whose effect
+    is followed through a biomarker. Sparse troughs and biomarker values are
+    fitted by MAP Bayesian estimation, PK first and then an indirect-response
+    PD model driven by average concentration per interval, and a recommender
+    picks the cheapest regimen predicted to keep the biomarker on target. It
+    compares exposure drivers, tests forward prediction from early visits
+    against simpler forecasts, and checks what happens when the PD model is
+    wrong. A browser app does the same for one patient.</p>
+    <ul class="chips">
+      <li class="chip chip-green">Python</li>
+      <li class="chip chip-blue">MAP estimation</li>
+      <li class="chip chip-blue">PK/PD</li>
+      <li class="chip chip-green">Shiny for Python</li>
+    </ul>
+    <p class="card-link"><a href="https://wrlog.github.io/mipd-bayesian-forecasting/">Try the dosing app →</a></p>
+  </article>
+
+  <article class="card card-orange">
+    <h3 class="card-title"><a href="https://github.com/Wrlog/rl-dosing-demo">rl-dosing-demo</a></h3>
+    <p>Deep Q-learning for dose and interval choices on a simulated PK/PD
+    patient, with the option to stop Drug X when the biomarker can't be brought
+    to target. A ceiling regimen defines which patients are reachable at all,
+    and the DQN is compared with the standard regimen and a Bayesian MAP
+    comparator on 1,500 held-out patients. The DQN gets 82% of patients to
+    target against 50% on the standard regimen, but the MAP comparator does
+    better again at 90%, and the README goes into why.</p>
+    <ul class="chips">
+      <li class="chip chip-green">Python</li>
+      <li class="chip chip-orange">PyTorch</li>
+      <li class="chip chip-orange">Deep Q-learning</li>
+      <li class="chip chip-blue">PK/PD</li>
+    </ul>
+    <p class="card-link"><a href="https://github.com/Wrlog/rl-dosing-demo">Read the results →</a></p>
+  </article>
+
+  <article class="card card-violet">
+    <h3 class="card-title"><a href="https://github.com/Wrlog/remission-prediction-shap">remission-prediction-shap</a></h3>
+    <p>Predicting whether a patient's biomarker will be on target a year into
+    treatment, from what's known in the first weeks. A simulated cohort from
+    three studies with different lab panels goes through a ladder of feature
+    groups, from baseline clinical data up to updated PK/PD estimates, with
+    repeated nested cross-validation, leave-one-study-out validation and SHAP
+    checked against the known mechanism. Updated PK/PD information helps most,
+    but raw values carry nearly as much as the model-based estimates.</p>
+    <ul class="chips">
+      <li class="chip chip-green">Python</li>
+      <li class="chip chip-orange">XGBoost</li>
+      <li class="chip chip-orange">CatBoost</li>
+      <li class="chip chip-orange">SHAP</li>
+    </ul>
+    <p class="card-link"><a href="https://github.com/Wrlog/remission-prediction-shap">Read the results →</a></p>
+  </article>
+
+  <article class="card card-green">
+    <h3 class="card-title"><a href="https://github.com/Wrlog/latent-ode">latent-ode</a></h3>
+    <p>A latent neural ODE that learns Drug X pharmacokinetics from simulated
+    data where the true model is known. Doses enter as jumps in latent space,
+    covariates condition the dynamics, and a recurrent encoder over the first
+    few measured levels plays the part of Bayesian updating. Scored against the
+    exact solution and a popPK MAP comparator: it matches popPK with no levels,
+    falls behind once levels are given, and handles a mid-treatment rise in
+    clearance better than a constant-clearance popPK model.</p>
+    <ul class="chips">
+      <li class="chip chip-green">Python</li>
+      <li class="chip chip-orange">PyTorch</li>
+      <li class="chip chip-orange">Neural ODE</li>
+      <li class="chip chip-blue">Population PK</li>
+    </ul>
+    <p class="card-link"><a href="https://github.com/Wrlog/latent-ode">Read the results →</a></p>
+  </article>
+
+  <article class="card card-violet">
+    <h3 class="card-title"><a href="https://github.com/Wrlog/litsearch">litsearch</a></h3>
+    <p>A small tool for making a literature screen reproducible. One YAML file
+    sets the search blocks and screening rules; it queries Europe PMC, removes
+    duplicates, applies the rules, and writes included and excluded records
+    with reasons, the exact search strategy, a PRISMA flow diagram and a
+    BibTeX file. The example searches population PK models of vancomycin in
+    neonates.</p>
+    <ul class="chips">
+      <li class="chip chip-green">Python</li>
+      <li class="chip chip-blue">Europe PMC</li>
+      <li class="chip chip-blue">PRISMA</li>
+    </ul>
+    <p class="card-link"><a href="https://github.com/Wrlog/litsearch">View the tool →</a></p>
   </article>
 
   <article class="card card-blue">
