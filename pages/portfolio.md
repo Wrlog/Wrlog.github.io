@@ -349,7 +349,7 @@ permalink: /portfolio/
       <li class="chip chip-blue">PK/PD</li>
       <li class="chip chip-green">Shiny for Python</li>
     </ul>
-    <p class="card-link"><a href="https://wrlog.github.io/mipd-bayesian-forecasting/">Try the dosing app →</a></p>
+    <p class="card-link"><a href="https://wrlog.github.io/mipd-bayesian-forecasting/">View the results dashboard →</a> · <a href="https://wrlog.github.io/mipd-bayesian-forecasting/app/">Try the dosing app →</a></p>
   </article>
 
   <article class="card card-orange">
@@ -367,7 +367,7 @@ permalink: /portfolio/
       <li class="chip chip-orange">Deep Q-learning</li>
       <li class="chip chip-blue">PK/PD</li>
     </ul>
-    <p class="card-link"><a href="https://github.com/Wrlog/rl-dosing-demo">Read the results →</a></p>
+    <p class="card-link"><a href="https://wrlog.github.io/rl-dosing-demo/">View the results dashboard →</a></p>
   </article>
 
   <article class="card card-violet">
@@ -385,7 +385,7 @@ permalink: /portfolio/
       <li class="chip chip-orange">CatBoost</li>
       <li class="chip chip-orange">SHAP</li>
     </ul>
-    <p class="card-link"><a href="https://github.com/Wrlog/remission-prediction-shap">Read the results →</a></p>
+    <p class="card-link"><a href="https://wrlog.github.io/remission-prediction-shap/">View the results dashboard →</a></p>
   </article>
 
   <article class="card card-green">
@@ -403,7 +403,7 @@ permalink: /portfolio/
       <li class="chip chip-orange">Neural ODE</li>
       <li class="chip chip-blue">Population PK</li>
     </ul>
-    <p class="card-link"><a href="https://github.com/Wrlog/latent-ode">Read the results →</a></p>
+    <p class="card-link"><a href="https://wrlog.github.io/latent-ode/">View the results dashboard →</a></p>
   </article>
 
   <article class="card card-violet">
