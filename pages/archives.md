@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Archive
-description: Every note, listed by year
+description: All notes, by year
 keywords: archive, notes
 comments: false
 menu: Archives

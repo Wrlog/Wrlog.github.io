@@ -7,26 +7,26 @@ keywords: "Monte Carlo Simulation, Dose Optimization, Pharmacokinetics, NONMEM, 
 date: 2023-09-22
 ---
 
-## The question this answers
+## Why simulate
 
-A population PK model gives you a typical patient and a description of how much
-individuals vary around them. Dosing decisions are not made for the typical
-patient. They are made for a population, and the question is what *fraction* of
-that population reaches the target on a given regimen.
+A population PK model gives you a typical patient and a description of how
+much individuals vary around them. But doses are chosen for a population, so
+what you want to know is what fraction of that population reaches the target
+on a given regimen.
 
-That is what Monte Carlo simulation is for. The pattern is always the same:
+Monte Carlo simulation answers that. The steps are always roughly:
 
-1. Draw a virtual population, with covariates spanning the range you actually
+1. Draw a virtual population with covariates covering the range you actually
    treat.
-2. Draw individual PK parameters for each subject, from the model's
+2. Draw individual PK parameters for each subject from the model's
    between-subject variability.
-3. Simulate every subject through the candidate regimens.
-4. Summarise **across** the population: probability of target attainment, not
-   the profile of the average patient.
+3. Simulate every subject through each candidate regimen.
+4. Summarise across the population as probability of target attainment (PTA),
+   rather than looking at the profile of the average patient.
 
-Step 4 is the one that gets skipped. Simulating the typical patient and
-checking that *their* trough clears the target answers a different, much easier
-question, and will recommend a dose that fails in half the population.
+Step 4 is the one people skip. Checking that the typical patient's trough
+clears the target is a much easier question, and it will recommend a dose that
+fails in about half the population.
 
 ## Setting up
 
@@ -141,12 +141,11 @@ evaluate_dosing_regimens <- function(model, population, regimens) {
 
 ## Choosing the regimens to compare
 
-Candidate regimens should bracket the current standard of care rather than
-wander freely: the output of this analysis has to be a recommendation someone
-can act on, which usually means a small deviation from what is already done.
-Note that the highest regimen here is included to show where the curve
-saturates, not as a serious proposal -- check any candidate against the
-licensed maximum daily dose before quoting it.
+I keep the candidate regimens close to the current standard of care. The
+result has to be a recommendation someone can act on, which usually means a
+small change from what's already done. The highest regimen here is only there
+to show where the curve levels off. Check any candidate against the licensed
+maximum daily dose before quoting it.
 
 ```r
 population <- generate_virtual_population(n = 2000, age_range = c(1, 12))
@@ -178,19 +177,19 @@ pta_summary <- map_dfr(names(simulation_results), function(regimen_name) {
 
 ## Reading the output
 
-Three things are worth looking at, and only the first is usually reported:
+I look at three things, though usually only the first gets reported:
 
-- **PTA against the target.** The conventional acceptance threshold is 90% of
-  the population, which is a convention rather than a law -- it should be
-  argued from the consequence of missing the target, which differs between a
-  prophylactic indication and a life-threatening infection.
-- **The shape of the dose-PTA curve.** If attainment is still climbing steeply
-  at the chosen dose, the regimen is fragile: small errors in the assumed PK
-  translate into large swings in attainment.
-- **Who fails.** The overall percentage hides which subgroup misses. Plotting
-  trough against weight and renal function, as in `p2` below, is what turns
-  "88% attainment" into "attainment is fine except in the augmented-clearance
-  subgroup", which is a different recommendation.
+- PTA against the target. The usual acceptance threshold is 90% of the
+  population, but that's a convention. The threshold should depend on what
+  missing the target costs, which is different for a prophylactic indication
+  and a life-threatening infection.
+- The shape of the dose-PTA curve. If attainment is still rising steeply at
+  the chosen dose, the regimen is fragile, and small errors in the assumed PK
+  cause large swings in attainment.
+- Who fails. The overall percentage hides which subgroup misses. Plotting
+  trough against weight and renal function (`p2` below) can turn "88%
+  attainment" into "attainment is fine except in the augmented-clearance
+  subgroup", and that leads to a different recommendation.
 
 ```r
 p1 <- pta_summary %>%

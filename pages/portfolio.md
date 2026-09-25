@@ -12,9 +12,9 @@ permalink: /portfolio/
   <p class="eyebrow">Portfolio</p>
   <h1>Pharmacometrics, omics and sensor data</h1>
   <p class="page-lede">Population PK/PD modeling and model-informed precision
-  dosing in pediatric clinical pharmacology, alongside untargeted metabolomics
-  and wearable sensor data. Below: the research I work on, the software I have
-  published, and the papers it produced.</p>
+  dosing in pediatric clinical pharmacology, plus untargeted metabolomics and
+  wearable sensor data. My research projects, published software and papers
+  are below.</p>
 
   <ul class="tiles">
     <li class="tile tile-blue"><span class="n">6</span><span class="l">Research projects</span></li>
@@ -34,17 +34,15 @@ permalink: /portfolio/
   <p class="thesis-org">University of Cincinnati College of Medicine ·
   Department of Pharmacology, Physiology and Neurobiology<br>
   Advisor: Tomoyuki Mizuno, PhD</p>
-  <p>Children on infliximab for Crohn's disease are monitored sparsely and
-  irregularly — a few trough concentrations and biomarkers, at whatever
-  intervals the clinic managed. The dissertation asks how far that routine
-  therapeutic drug monitoring can be pushed toward choosing a better next dose,
-  and where a mechanistic model, a learned model, or the combination of the two
-  does the work.</p>
-  <p>It builds a population PK/PD model of infliximab exposure and response,
-  then tests data-driven methods against it: ensemble machine learning and
-  neural ODEs for predicting biochemical remission, and deep reinforcement
-  learning for the dosing policy itself. Two supplementary chapters extend it
-  to adult observational cohorts.</p>
+  <p>Children on infliximab for Crohn's disease get sparse, irregular
+  monitoring: a few trough concentrations and biomarkers, taken when the clinic
+  could. My dissertation asks how far that routine therapeutic drug monitoring
+  can go toward choosing a better next dose, and whether a mechanistic model, a
+  learned model or both together work best.</p>
+  <p>I build a population PK/PD model of infliximab exposure and response, then
+  test ensemble machine learning and neural ODEs against it for predicting
+  biochemical remission, and deep reinforcement learning for the dosing policy.
+  Two supplementary chapters extend this to adult observational cohorts.</p>
   <ul class="chips">
     <li class="chip chip-blue">Population PK/PD</li>
     <li class="chip chip-blue">Model-informed precision dosing</li>
@@ -52,7 +50,7 @@ permalink: /portfolio/
     <li class="chip chip-orange">Neural ODEs</li>
     <li class="chip chip-orange">Deep reinforcement learning</li>
   </ul>
-  <p class="thesis-note">Results are not public before the defence.</p>
+  <p class="thesis-note">Results stay private until the defence.</p>
 </div>
 
 <h2 class="section-heading" style="margin-top:38px">Projects</h2>
@@ -61,28 +59,28 @@ permalink: /portfolio/
   <h3 class="entry-title">PK/PD modeling and machine learning for infliximab in pediatric Crohn's disease</h3>
   <p class="entry-meta"><span class="org">Cincinnati Children's Hospital Medical Center</span><span class="sep">·</span>August 2022 – present</p>
 
-  <p>Mechanistic population PK/PD models for infliximab, a monoclonal antibody, in
-  children with Crohn's disease, combined with machine learning to improve response
-  prediction and guide dosing. Infliximab exposure varies widely between pediatric
-  patients, and standard dosing leaves many of them under-exposed.</p>
+  <p>Mechanistic population PK/PD models for infliximab (a monoclonal antibody)
+  in children with Crohn's disease, combined with machine learning to improve
+  response prediction and guide dosing. Exposure varies widely between
+  children, and standard dosing leaves many of them under-exposed.</p>
 
   <div class="panels">
     <div class="panel panel-approach">
       <h4>Approach</h4>
       <ul>
-        <li>Population PK/PD models in NONMEM, carrying covariates for body size, disease status and immunogenicity.</li>
+        <li>Population PK/PD models in NONMEM with covariates for body size, disease status and immunogenicity.</li>
         <li>Indirect response models for the delayed effect on disease biomarkers and clinical endpoints.</li>
         <li>Exposure–response analysis linking AUC and trough concentrations to disease activity scores.</li>
-        <li>XGBoost and random forest for disease response, benchmarked against the pharmacometric models to test what the PK/PD features add.</li>
+        <li>XGBoost and random forest for disease response, benchmarked against the pharmacometric models to see what the PK/PD features add.</li>
       </ul>
     </div>
     <div class="panel panel-results">
       <h4>What it gives you</h4>
       <ul>
-        <li>A quantitative account of how much infliximab exposure and response vary between children, and how much of that variability the model can explain rather than leave unexplained.</li>
-        <li>Explaining that variability is what makes individual prediction possible: once between-subject variability is attributed to measurable characteristics and to the patient's own monitoring data, the remaining uncertainty is small enough for a model-based dose to mean something.</li>
-        <li>A profile of who reaches and holds biochemical remission, from induction-phase data — which is the question a clinician has at the point where the dose can still be changed.</li>
-        <li>Together these are the pieces model-informed precision dosing needs: a model that explains variability, an exposure target tied to a clinical endpoint, and a way to tell early who is on track.</li>
+        <li>How much infliximab exposure and response vary between children, and how much of that the model explains.</li>
+        <li>Once between-subject variability is attributed to measurable characteristics and the patient's own monitoring data, the remaining uncertainty is small enough for a model-based dose to be useful.</li>
+        <li>A profile of who reaches and stays in biochemical remission, from induction-phase data, while the dose can still be changed.</li>
+        <li>Together that's what model-informed precision dosing needs: a model of the variability, an exposure target tied to a clinical endpoint, and an early read on who is on track.</li>
       </ul>
     </div>
   </div>
@@ -104,9 +102,9 @@ permalink: /portfolio/
   <h3 class="entry-title">Model-informed dose optimization for prophylactic piperacillin–tazobactam in critically ill children</h3>
   <p class="entry-meta"><span class="org">Cincinnati Children's Hospital Medical Center</span><span class="sep">·</span>August 2022 – present</p>
 
-  <p>Prophylactic antibiotic dosing in critically ill children is usually
-  extrapolated from adults and rarely validated. This work builds the population PK
-  to put that dosing on an evidence base, for children in perioperative care.</p>
+  <p>Prophylactic antibiotic doses for critically ill children are usually
+  extrapolated from adults and rarely validated. This work gives that dosing a
+  population PK evidence base for children in perioperative care.</p>
 
   <div class="panels">
     <div class="panel panel-approach">
@@ -114,8 +112,8 @@ permalink: /portfolio/
       <ul>
         <li>Population PK models in NONMEM for piperacillin in critically ill pediatric patients.</li>
         <li>Covariate analysis of body size, renal function and critical illness on clearance and volume of distribution.</li>
-        <li>Monte Carlo simulation across candidate regimens, assessed by probability of target attainment.</li>
-        <li>An R-Shiny dashboard letting clinical teams vary weight, renal function and regimen and read the profile and target attainment directly.</li>
+        <li>Monte Carlo simulation of candidate regimens, scored by probability of target attainment.</li>
+        <li>An R-Shiny dashboard where clinical teams can change weight, renal function and regimen and see the profile and target attainment.</li>
       </ul>
     </div>
     <div class="panel panel-results">
@@ -123,7 +121,7 @@ permalink: /portfolio/
       <ul>
         <li>Body size and renal function are the covariates that matter for piperacillin exposure.</li>
         <li>Standard regimens are suboptimal for parts of the pediatric population.</li>
-        <li>Dosing recommendations that account for patient-specific factors, supporting antibiotic stewardship.</li>
+        <li>Dosing recommendations that account for patient-specific factors, to support antibiotic stewardship.</li>
       </ul>
     </div>
   </div>
@@ -146,26 +144,25 @@ permalink: /portfolio/
   <h3 class="entry-title">Ensemble learning and deep reinforcement learning for infliximab dose selection</h3>
   <p class="entry-meta"><span class="org">Cincinnati Children's Hospital Medical Center</span><span class="sep">·</span>Dissertation work, ongoing</p>
 
-  <p>The data-driven half of the dissertation. A mechanistic population PK/PD
-  model gives the reference; the question is what machine learning adds on top
-  of it when the only inputs are the sparse, irregular measurements routine care
-  produces.</p>
+  <p>The data-driven half of the dissertation: what machine learning adds on
+  top of a mechanistic population PK/PD model when all you have is the sparse,
+  irregular data from routine care.</p>
 
   <div class="panels">
     <div class="panel panel-approach">
       <h4>Approach</h4>
       <ul>
-        <li>Ensemble models — gradient boosting and bagging — predicting biochemical remission from treatment-course features.</li>
-        <li>Neural ODEs for the biomarker trajectory, which handle irregular sampling in continuous time rather than forcing it onto a grid.</li>
-        <li>A deep Q-network learning a dosing policy against a reward defined on target attainment and remission.</li>
-        <li>The learned policy compared with standard dosing and with maximum a posteriori Bayesian dosing to a concentration target, so the comparison is against a real alternative rather than a straw man.</li>
+        <li>Ensemble models (gradient boosting and bagging) predicting biochemical remission from treatment-course features.</li>
+        <li>Neural ODEs for the biomarker trajectory, which handle irregular sampling in continuous time without forcing it onto a grid.</li>
+        <li>A deep Q-network learning a dosing policy, rewarded on target attainment and remission.</li>
+        <li>The learned policy compared with standard dosing and with maximum a posteriori Bayesian dosing to a concentration target.</li>
       </ul>
     </div>
     <div class="panel panel-results">
       <h4>Status</h4>
       <ul>
-        <li>Analyses are being finalised for the dissertation; results are held back until the defence.</li>
-        <li>Aggregate result tables and figures are collected in a private repository, opened as the work is published.</li>
+        <li>Analyses are being finalised, and results are held back until the defence.</li>
+        <li>Aggregate result tables and figures are in a private repository that I'll open as the work is published.</li>
       </ul>
     </div>
   </div>
@@ -183,35 +180,34 @@ permalink: /portfolio/
   <p class="entry-note"><span class="badge badge-grey">Private</span>
   Results repository:
   <a href="https://github.com/Wrlog/mipd-ensemble-rl">Wrlog/mipd-ensemble-rl</a>
-  — access on request until the work is published.</p>
+  (access on request until the work is published).</p>
 </article>
 
 <article class="entry">
   <h3 class="entry-title">Metabolite–wearable associations in healthy volunteers</h3>
   <p class="entry-meta"><span class="org">Enveda Therapeutics</span><span class="sep">·</span>July – September 2026</p>
 
-  <p>Healthy volunteers wearing sleep, cardiovascular and activity trackers,
-  sampled for untargeted plasma metabolomics. The question is what the
-  continuous sensor record explains about the metabolome — and, running the
-  other way, how much of a metabolite's apparent association with behaviour is
-  just the time of day the blood was drawn.</p>
+  <p>Healthy volunteers wore sleep, cardiovascular and activity trackers and
+  were sampled for untargeted plasma metabolomics. I looked at what the sensor
+  record explains about the metabolome, and how much of a metabolite's apparent
+  association with behaviour is just the time of day the blood was drawn.</p>
 
   <div class="panels">
     <div class="panel panel-approach">
       <h4>Approach</h4>
       <ul>
-        <li>Sensor streams aggregated into one pre-specified exposure per sample — window, summary and reference fixed before outcomes were looked at, with the alternatives reported as sensitivity analyses rather than searched over.</li>
-        <li>Wear-time rules declared in advance, with the participant-days each rule removed reported alongside the result.</li>
-        <li>Linear mixed-effects models with a participant intercept, splitting within-person from between-person variation so the coefficient of interest is a change from a participant's own baseline.</li>
-        <li>Harmonic terms on sampling clock time, since both the metabolome and every wearable metric vary within the day and collection time is otherwise a confounder that looks like an effect.</li>
-        <li>Benjamini–Hochberg control within each wearable metric, with discoveries collapsed to compounds before they are counted.</li>
+        <li>One pre-specified exposure per sample from the sensor streams. Window, summary and reference were fixed before looking at outcomes, and alternatives are reported as sensitivity analyses instead of searched over.</li>
+        <li>Wear-time rules set in advance, reporting how many participant-days each rule removed.</li>
+        <li>Linear mixed-effects models with a participant intercept, splitting within- from between-person variation so the coefficient is a change from the participant's own baseline.</li>
+        <li>Harmonic terms on sampling clock time, because the metabolome and every wearable metric vary within the day and collection time would otherwise show up as a spurious effect.</li>
+        <li>Benjamini–Hochberg control within each wearable metric, collapsing discoveries to compounds before counting.</li>
       </ul>
     </div>
     <div class="panel panel-results">
-      <h4>How it is built</h4>
+      <h4>How it's built</h4>
       <ul>
-        <li>A Python pipeline from raw device exports and metabolomics deliveries through to the association tables, with the filtering counts carried into the output rather than left in a notebook.</li>
-        <li>A dashboard putting the diurnal profiles, QC and association results in front of the study team, so the analysis is read rather than described.</li>
+        <li>A Python pipeline from raw device exports and metabolomics deliveries to the association tables, carrying the filtering counts into the output.</li>
+        <li>A dashboard of the diurnal profiles, QC and association results for the study team.</li>
       </ul>
     </div>
   </div>
@@ -233,29 +229,28 @@ permalink: /portfolio/
   <h3 class="entry-title">Untargeted metabolomics of inflammatory bowel disease</h3>
   <p class="entry-meta"><span class="org">Enveda Therapeutics</span><span class="sep">·</span>July – September 2026<span class="sep">·</span>feeds a supplementary dissertation chapter</p>
 
-  <p>Plasma metabolomics on an adult IBD cohort that had already been profiled
-  by genomics, transcriptomics and proteomics — but not metabolomics. Two
-  questions: can the metabolome separate ulcerative colitis from Crohn's
-  disease, and active disease from remission, and could it predict treatment
-  response <em>before</em> the first dose, which is the question the dosing work
-  elsewhere in the dissertation has to assume away.</p>
+  <p>Plasma metabolomics on an adult IBD cohort already profiled by genomics,
+  transcriptomics and proteomics, but not metabolomics. Can the metabolome
+  separate ulcerative colitis from Crohn's disease, and active disease from
+  remission? And could it predict treatment response <em>before</em> the first
+  dose, which the dosing work in the dissertation has to assume away?</p>
 
   <div class="panels">
     <div class="panel panel-approach">
       <h4>Approach</h4>
       <ul>
         <li>A reproducible notebook sequence per delivery: load and hash the exports, filter and normalize, QC and missingness, PCA, differential analysis, candidate review.</li>
-        <li>Annotation and prevalence filters chosen against their alternatives and reported with the cost of the choice, rather than asserted.</li>
+        <li>Annotation and prevalence filters compared with alternatives, with the cost of each choice reported.</li>
         <li>Patient-intercept mixed models for repeated visits, with ordinary least squares and a run-order-adjusted model as sensitivity comparisons, and Benjamini–Hochberg control within each contrast.</li>
-        <li>Non-detects treated as missing rather than imputed, plus a separate presence/absence test, because a model of detected intensity cannot see a feature that is simply absent in one group.</li>
-        <li>Cross-batch comparability and low-signal exclusion run as diagnostics that report and stop when they do not apply.</li>
+        <li>Non-detects left as missing rather than imputed, plus a separate presence/absence test, since a model of detected intensity can't see a feature that's absent in one group.</li>
+        <li>Cross-batch comparability and low-signal exclusion run as diagnostics that report and stop when they don't apply.</li>
       </ul>
     </div>
     <div class="panel panel-results">
       <h4>What came of it</h4>
       <ul>
-        <li>A feasibility assessment rather than a classifier: in this cohort only a handful of patients have a plasma sample preceding a documented treatment start, because medication is recorded without start dates.</li>
-        <li>That result sets the design and size a study would need to answer the pre-treatment question properly, which is what the supplementary chapter reports.</li>
+        <li>A feasibility assessment instead of a classifier. Medication is recorded without start dates, so only a handful of patients in this cohort have a plasma sample from before a documented treatment start.</li>
+        <li>That sets the design and size a study would need to answer the pre-treatment question, which is what the supplementary chapter reports.</li>
       </ul>
     </div>
   </div>
@@ -277,26 +272,26 @@ permalink: /portfolio/
   <h3 class="entry-title">External validation of a published infliximab model in very early onset IBD</h3>
   <p class="entry-meta"><span class="org">Cincinnati Children's Hospital Medical Center</span><span class="sep">·</span>2025 – 2026</p>
 
-  <p>A population PK model published in one paediatric population does not
-  automatically hold in another. This work tests an existing infliximab model
-  in a very early onset IBD cohort — children who present far younger than the
-  populations the model was built on — and reports how well it predicts them.</p>
+  <p>A population PK model published in one paediatric population doesn't
+  automatically hold in another. This tests an existing infliximab model in a
+  very early onset IBD cohort, children much younger than the populations it
+  was built on, and reports how well it predicts them.</p>
 
   <div class="panels">
     <div class="panel panel-approach">
       <h4>Approach</h4>
       <ul>
-        <li>The published model applied with every parameter fixed and no re-estimation, so the test is of the model as published rather than of a refit.</li>
-        <li>Individual clearances as empirical Bayes estimates: Bayesian estimation of each child given the published priors.</li>
-        <li>Prediction-corrected visual predictive checks, run for Crohn's alone and for the pooled Crohn's, ulcerative colitis and indeterminate colitis cohort.</li>
-        <li>Interactive HTML dashboards reporting the cohort, the diagnostics and per-patient PK, so the study team reads the result rather than the output tables.</li>
+        <li>The published model with every parameter fixed and nothing re-estimated, so it's tested as published.</li>
+        <li>Individual clearances as empirical Bayes estimates for each child, given the published priors.</li>
+        <li>Prediction-corrected visual predictive checks for Crohn's alone and for the pooled Crohn's, ulcerative colitis and indeterminate colitis cohort.</li>
+        <li>Interactive HTML dashboards of the cohort, diagnostics and per-patient PK for the study team.</li>
       </ul>
     </div>
     <div class="panel panel-results">
-      <h4>How it is built</h4>
+      <h4>How it's built</h4>
       <ul>
-        <li>Python for data preparation and reporting, NONMEM and PsN for the fitting and the VPCs, with versions pinned because a pandas change is enough to move a histogram bin edge.</li>
-        <li>The repository holds code only — no patient data, no datasets, no rendered dashboards. A synthetic-data generator reproduces the real workbook's structure and its awkward cases, so the pipeline can be run end to end without PHI.</li>
+        <li>Python for data preparation and reporting, NONMEM and PsN for fitting and VPCs. Versions are pinned, since a pandas change can move a histogram bin edge.</li>
+        <li>The repository has code only: no patient data, datasets or rendered dashboards. A synthetic-data generator mimics the real workbook's structure and awkward cases, so the pipeline runs without PHI.</li>
       </ul>
     </div>
   </div>
@@ -311,7 +306,7 @@ permalink: /portfolio/
 
   <p class="entry-note"><span class="badge badge-grey">Private</span>
   Code: <a href="https://github.com/Wrlog/VEO_CCHMC">Wrlog/VEO_CCHMC</a>
-  — access on request.</p>
+  (access on request).</p>
 </article>
 </section>
 
@@ -322,15 +317,14 @@ permalink: /portfolio/
 <div class="cards">
   <article class="card card-green">
     <h3 class="card-title"><a href="https://github.com/Wrlog/dosing-simulator">dosing-simulator</a></h3>
-    <p>An R-Shiny application that simulates intravenous dosing regimens for a
-    simulated population, on a two-compartment model with first-order elimination,
-    allometric scaling on weight, a power function on renal function, and log-normal
-    between-subject variability on clearance and central volume. Returns
-    concentration-time profiles with prediction intervals, target attainment, time
-    above target and trough statistics. No patient data; for research and
-    teaching. It runs entirely in the browser — the PK solver is a closed-form
-    solution of the two-compartment model, so there is no server to keep
-    alive.</p>
+    <p>An R-Shiny app that simulates intravenous dosing regimens in a simulated
+    population, using a two-compartment model with first-order elimination,
+    allometric scaling on weight, a power function on renal function, and
+    log-normal between-subject variability on clearance and central volume. It
+    reports concentration-time profiles with prediction intervals, target
+    attainment, time above target and trough statistics. No patient data; it's
+    for research and teaching. The PK solver is a closed-form solution of the
+    two-compartment model, so it all runs in the browser with no server.</p>
     <ul class="chips">
       <li class="chip chip-green">R</li>
       <li class="chip chip-green">Shiny</li>
@@ -341,11 +335,11 @@ permalink: /portfolio/
 
   <article class="card card-blue">
     <h3 class="card-title"><a href="https://github.com/Wrlog/metabolomics-dashboard-demo">metabolomics-dashboard-demo</a></h3>
-    <p>A reporting pattern for omics analysis: simulate a study, run curation and
-    association over it, and render the result as one self-contained HTML file that
-    opens offline with no server and no notebook. QC drift, PCA and volcano plots,
-    with a filter bar that searches and sorts the results. All data is synthetic and
-    seeded, and the planted associations are listed so the output can be checked
+    <p>A reporting pattern for omics analysis: simulate a study, run curation
+    and association, and render the result as one HTML file that opens offline
+    without a server or notebook. It has QC drift, PCA and volcano plots and a
+    filter bar to search and sort results. The data is synthetic and seeded,
+    and the planted associations are listed so you can check the output
     against ground truth.</p>
     <ul class="chips">
       <li class="chip chip-green">Python</li>
@@ -359,14 +353,14 @@ permalink: /portfolio/
 
   <article class="card card-violet">
     <h3 class="card-title"><a href="https://github.com/Wrlog/nonmem-model-library">nonmem-model-library</a></h3>
-    <p>NONMEM control streams for the model families that recur in drug
-    development — two-compartment population PK, Claret tumour growth
-    inhibition, an indirect response PK/PD model, a Weibull time-to-event
-    model and a binary exposure–response — each with a simulated dataset and
-    the parameters it was generated from, so a run can be judged against the
-    answer. Static checks run on every commit: $INPUT against the data
-    columns in order, parameter references against declarations, likelihood
-    models against their $ESTIMATION record.</p>
+    <p>NONMEM control streams for model families that come up often in drug
+    development: two-compartment population PK, Claret tumour growth
+    inhibition, an indirect response PK/PD model, a Weibull time-to-event model
+    and a binary exposure–response model. Each has a simulated dataset and the
+    parameters that generated it, so you can check a run against the known
+    answer. Static checks on every commit compare $INPUT with the data columns
+    in order, parameter references with declarations, and likelihood models
+    with their $ESTIMATION record.</p>
     <ul class="chips">
       <li class="chip chip-blue">NONMEM</li>
       <li class="chip chip-green">Python</li>
@@ -377,14 +371,13 @@ permalink: /portfolio/
 
   <article class="card card-orange">
     <h3 class="card-title"><a href="https://github.com/Wrlog/ml-portfolio">ml-portfolio</a></h3>
-    <p>Four self-contained machine learning projects — fraud detection, demand
-    forecasting, semantic similarity and an implicit-feedback recommender. Each
-    runs end to end on a laptop CPU in under three minutes, has a test suite,
-    and is built around a decision someone would have to make rather than a
-    leaderboard score: pricing the two error types to choose a fraud threshold,
-    deriving every lag from the forecast horizon so nothing leaks, showing that
-    the split protocol moves the score more than the model does. All data is
-    synthetic and generated in the repository.</p>
+    <p>Four machine learning projects: fraud detection, demand forecasting,
+    semantic similarity and an implicit-feedback recommender. Each runs on a
+    laptop CPU in under three minutes, has a test suite, and is framed around a
+    practical decision, like pricing the two error types to pick a fraud
+    threshold, deriving every lag from the forecast horizon so nothing leaks, or
+    showing that the split protocol moves the score more than the model does.
+    All data is synthetic and generated in the repository.</p>
     <ul class="chips">
       <li class="chip chip-green">Python</li>
       <li class="chip chip-orange">LightGBM</li>
@@ -450,7 +443,7 @@ permalink: /portfolio/
   </li>
   <li>
     <span class="year">2022–2026</span>
-    <span class="what">Enhancement Fund Award, Department of Pharmacology, Physiology and Neurobiology, University of Cincinnati — awarded in each of 2022, 2023, 2024, 2025 and 2026</span>
+    <span class="what">Enhancement Fund Award, Department of Pharmacology, Physiology and Neurobiology, University of Cincinnati, awarded in each of 2022, 2023, 2024, 2025 and 2026</span>
   </li>
   <li>
     <span class="year">2023</span>
@@ -479,7 +472,7 @@ permalink: /portfolio/
 <section class="section accent-blue">
 <h2 class="section-heading">Get in touch</h2>
 <div class="contact-card">
-  <p>Open to collaborations in PK/PD modeling, methodological discussion, and
+  <p>I'm open to collaborations in PK/PD modeling, methods discussions, and
   internship or job opportunities.</p>
   <p class="contact-links">
     <a class="cbtn cbtn-primary" href="mailto:{{ site.email }}">Email</a>

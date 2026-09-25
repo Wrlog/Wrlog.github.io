@@ -1,129 +1,123 @@
 ---
 layout: post
-title: "Untargeted Metabolomics: From Feature Table to a Defensible Association List"
+title: "Untargeted Metabolomics: From Feature Table to Association List"
 categories: Omics
-description: "What has to happen between an untargeted metabolomics export and a list of associations worth acting on — normalization, non-detects, batch structure, repeated visits and error control"
+description: "Steps between an untargeted metabolomics export and a list of associations: filtering, normalization, non-detects, batch structure, repeated visits and error control"
 keywords: "Untargeted metabolomics, LC-MS, feature table, normalization, missing not at random, batch effects, mixed-effects models, Benjamini-Hochberg, FDR, annotation"
 date: 2026-09-14
 ---
 
 ## Introduction
 
-An untargeted metabolomics delivery arrives as a feature table: rows of samples,
-columns of mass-spectrometry features, intensities in the cells. It looks like a
-matrix ready for statistics. It is not. Almost every methodological decision
-that determines whether the eventual association list is real happens between
-that export and the first model fit, and most of those decisions are made
-silently.
+Untargeted metabolomics data usually arrives as a feature table: samples in
+rows, mass-spectrometry features in columns, intensities in the cells. It looks
+ready for statistics, but most of the choices that decide whether the final
+association list means anything are made between that export and the first
+model fit, and they often get made without anyone writing them down.
 
-These notes are about the decisions worth making explicitly, in the order they
-come up. The running example is plasma metabolomics from a cohort with repeated
-visits per patient — the structure that makes several of the usual shortcuts
-wrong.
+These notes go through those choices in the order they come up. The example I
+have in mind is plasma metabolomics from a cohort with repeated visits per
+patient, which breaks a few of the usual shortcuts.
 
-## The Feature Table Is Not a Measurement
+## What a feature table is
 
-Three properties separate a feature table from the tidy assay data most
-statistical training assumes.
+A few things make a feature table different from the tidy assay data most
+statistics courses assume.
 
-**A feature is not a metabolite.** A feature is a mass-to-charge ratio at a
-retention time. It may be a metabolite, an adduct of one, an in-source fragment,
-an isotopologue, or contamination. Annotation maps some features to compounds
-with varying confidence, and the confidence levels are not decoration: a level-1
-identification matched to an authentic standard and a level-3 putative class
-assignment do not support the same claims. Correlated features often reflect one
-compound appearing several times, not several findings.
+A feature is not a metabolite. It is a mass-to-charge ratio at a retention
+time, and it could be a metabolite, an adduct of one, an in-source fragment, an
+isotopologue or contamination. Annotation maps some features to compounds with
+varying confidence, and the confidence level matters: a level-1 identification
+matched to an authentic standard and a level-3 putative class assignment don't
+support the same claims. Several correlated features are often one compound
+showing up more than once.
 
-**Intensity is relative, not concentration.** Ionization efficiency differs by
-orders of magnitude between compounds, so intensities are comparable *across
-samples within a feature*, and not across features. Any statement of the form
-"metabolite A is more abundant than metabolite B" is unsupported by an
-untargeted run. Fold changes within a feature are fine; that is the whole point.
+Intensity is relative. Ionization efficiency differs by orders of magnitude
+between compounds, so intensities can be compared across samples within a
+feature but not across features. An untargeted run can't tell you that
+metabolite A is more abundant than metabolite B. Fold changes within a feature
+are fine, and that's what the analysis is for anyway.
 
-**Zeros are not zeros.** A blank cell means the feature was not detected in that
-sample. That may be because it is absent, because it fell below the limit of
-detection, or because the peak picker missed it. These are different mechanisms
-with different implications, and the choice of how to handle them does more to
-shape the result than the choice of test.
+Blank cells mean the feature wasn't detected in that sample. It might be
+absent, below the limit of detection, or missed by the peak picker. These are
+different mechanisms, and how you handle them shapes the result more than which
+test you pick.
 
-## Filtering Before Anything Else
+## Filtering
 
-Two filters apply before normalization, and both should be reported with the
-cost of the choice rather than asserted.
+Two filters come before normalization. For both, report what the choice cost.
 
-*Prevalence.* Drop features detected in fewer than some fraction of samples — a
-common default is 50%, or 50% within at least one group. The second form matters
-when a compound is genuinely present in one arm and absent in another; a global
-prevalence filter throws that away precisely when it is interesting.
+Prevalence: drop features detected in fewer than some fraction of samples. A
+common default is 50%, or 50% within at least one group. The within-group
+version matters when a compound is present in one arm and absent in the other,
+because a global prevalence filter throws away exactly that case.
 
-*Annotation.* Restricting to annotated features makes downstream interpretation
-possible and discards real signal. Whether that trade is acceptable depends on
-whether the deliverable is a mechanism or a classifier.
+Annotation: keeping only annotated features makes interpretation possible but
+discards real signal. Whether that's acceptable depends on whether you want a
+mechanism or a classifier.
 
-The habit worth forming: every filter reports what it dropped and why, and the
-counts appear in the write-up. A pipeline that silently removes 60% of the
-features is not reproducible in any useful sense, even if the code is versioned.
+Every filter should log what it dropped and why, and the counts should go in
+the write-up. If a pipeline silently removes 60% of the features, versioning
+the code doesn't make it reproducible in any useful sense.
 
-## Normalization and Transformation
+## Normalization and transformation
 
-Total ion current normalization divides each sample by its own summed intensity,
-correcting for injection volume and gross sensitivity drift:
+Total ion current (TIC) normalization divides each sample by its own summed
+intensity, which corrects for injection volume and gross sensitivity drift:
 
 $$
 \tilde{x}_{ij} = \frac{x_{ij}}{\sum_{k} x_{ik}} \cdot \bar{s}
 $$
 
 where $x_{ij}$ is the intensity of feature $j$ in sample $i$ and $\bar{s}$ is
-the mean sample sum. This carries an assumption that is easy to miss: it treats
-total signal as constant biology. If a group genuinely has more total metabolite
-content, TIC normalization removes exactly that effect. Probabilistic quotient
-normalization is the usual alternative, and median or quantile scaling the
-simpler ones.
+the mean sample sum. The catch is that it assumes total signal is constant. If
+one group really has more total metabolite content, TIC normalization removes
+that effect. Probabilistic quotient normalization is the usual alternative;
+median or quantile scaling are simpler options.
 
-Log transformation follows, because intensities are right-skewed over several
-orders of magnitude and because it converts multiplicative effects into additive
-ones, which is what a linear model can express:
+Then log-transform. Intensities are right-skewed over several orders of
+magnitude, and the log turns multiplicative effects into additive ones, which
+is what a linear model can express:
 
 $$
 y_{ij} = \log_2(\tilde{x}_{ij} + c)
 $$
 
-The pseudo-count $c$ exists only to handle zeros, and its value quietly sets how
-far below the detected range a non-detect sits. If non-detects are treated as
-missing — see below — $c$ is not needed at all, which is one more reason to
-prefer that route.
+The pseudo-count $c$ is only there to handle zeros, and its value decides how
+far below the detected range a non-detect ends up. If non-detects are treated
+as missing (next section), you don't need $c$ at all, which is another point in
+favour of doing that.
 
-## Non-Detects: Missing, Not Imputed
+## Non-detects: treat as missing, don't impute
 
-The common move is to impute non-detects at half the minimum observed intensity,
-or by $k$-nearest neighbours, and proceed. Both are defensible under
-missing-at-random, and metabolomics non-detects are rarely missing at random:
-they are missing *because the value was low*, which is the definition of
-missing-not-at-random.
+The usual approach is to impute non-detects at half the minimum observed
+intensity, or by $k$-nearest neighbours, and carry on. Both are fine under
+missing-at-random. Metabolomics non-detects are rarely missing at random,
+though. They're missing because the value was low, which is
+missing-not-at-random by definition.
 
-Imputing at a fixed low value creates a spike in the left tail of the
-distribution. If one group has more non-detects — which is exactly the case when
-a compound differs between groups — that spike lands asymmetrically and
-manufactures a difference in the mean. The test then has something to find.
+Imputing at a fixed low value puts a spike in the left tail of the
+distribution. If one group has more non-detects (which is what happens when a
+compound differs between groups), the spike lands unevenly and creates a
+difference in the mean for the test to find.
 
-The alternative worth defaulting to is a pair of analyses answering different
-questions:
+What I'd default to instead is two analyses that answer different questions:
 
-1. **Model detected intensity only**, treating non-detects as missing. This
-   asks: among samples where the feature is present, does its abundance differ?
-2. **Test presence/absence separately**, as a binomial contrast on detection
-   status. This asks: is the feature detected at different rates between groups?
+1. Model detected intensity only, with non-detects as missing. Among samples
+   where the feature is present, does its abundance differ?
+2. Test presence/absence separately, as a binomial contrast on detection
+   status. Is the feature detected at different rates between groups?
 
-A model of detected intensity cannot see a feature that is simply absent in one
-group, and a detection-rate test cannot see a graded difference. Reporting both
-avoids attributing one to the other. Where the number of detected samples in a
-group is small, the intensity model is not run at all rather than run on four
-points.
+The intensity model can't see a feature that's simply absent in one group, and
+the detection-rate test can't see a graded difference, so reporting both keeps
+one from being mistaken for the other. If only a handful of samples in a group
+have the feature detected, skip the intensity model for that feature instead of
+fitting it to four points.
 
-## Repeated Visits and Batch Structure
+## Repeated visits and batch structure
 
-With multiple samples per patient, independence fails. A patient-intercept mixed
-model is the minimum:
+With several samples per patient the observations aren't independent. A
+patient random intercept is the minimum:
 
 $$
 y_{ij} = \beta_0 + \beta_1 \, \mathrm{group}_i + \mathbf{z}_i^\top \boldsymbol{\gamma} + u_{p(i)} + \varepsilon_{ij},
@@ -131,76 +125,70 @@ y_{ij} = \beta_0 + \beta_1 \, \mathrm{group}_i + \mathbf{z}_i^\top \boldsymbol{\
 $$
 
 where $u_{p(i)}$ is the random intercept for the patient contributing sample
-$i$, and $\mathbf{z}_i$ holds covariates. Fitting ordinary least squares instead
-treats repeat visits as independent patients and understates the standard error
-on $\beta_1$ — the effect is largest exactly where patients contribute unequal
-numbers of visits.
+$i$ and $\mathbf{z}_i$ holds covariates. Ordinary least squares treats repeat
+visits as independent patients and understates the standard error on
+$\beta_1$, and the problem is worst when patients contribute unequal numbers of
+visits.
 
-Run order and batch deserve the same treatment. LC-MS sensitivity drifts within
-a run and shifts between batches, and if group assignment correlates with run
-order — which happens whenever samples are processed as they arrive — the drift
-*is* the group effect. Two things help: a run-order-adjusted model as a
-sensitivity comparison, and a cross-batch comparability diagnostic that reports
-whether pooled QC samples behave consistently and **stops** when they do not. A
-diagnostic that cannot fail is not a diagnostic.
+Run order and batch need the same attention. LC-MS sensitivity drifts within a
+run and shifts between batches. If group correlates with run order, which
+happens whenever samples are run as they come in, the drift becomes the group
+effect. Two things help: a run-order-adjusted model as a sensitivity check, and
+a cross-batch check on whether pooled QC samples behave consistently that halts
+the analysis when they don't.
 
-Fitting OLS and the run-order-adjusted model alongside the primary mixed model
-costs little and shows whether the finding depends on the specification. If the
-three disagree, that is the result.
+Fitting OLS and the run-order-adjusted model next to the primary mixed model is
+cheap and shows whether a finding depends on the model specification. If the
+three disagree, report that.
 
-## Error Control Across Thousands of Features
+## Multiple testing
 
-A few thousand features tested at $\alpha = 0.05$ yields a few hundred false
-positives before any biology. Benjamini–Hochberg control of the false discovery
-rate is the standard choice, ordering the $p$-values
-$p_{(1)} \le \dots \le p_{(m)}$ and rejecting up to the largest $k$ with
+A few thousand features at $\alpha = 0.05$ gives a few hundred false positives
+before any biology. The standard fix is Benjamini–Hochberg control of the false
+discovery rate: order the $p$-values $p_{(1)} \le \dots \le p_{(m)}$ and reject
+up to the largest $k$ with
 
 $$
 p_{(k)} \le \frac{k}{m} q
 $$
 
-Two practical points. Apply it **within each contrast**, not pooled across every
-comparison in the analysis — pooling makes the threshold depend on how many
-unrelated questions happen to share a script. And note that FDR control is a
-statement about the expected proportion of false rejections in the list, not
-about any individual feature: a $q$-value of 0.05 does not mean that feature has
-a 5% chance of being wrong.
+Two practical points. Apply it within each contrast rather than pooling every
+comparison in the analysis, otherwise the threshold depends on how many
+unrelated questions happen to be in the same script. And FDR control is about
+the expected proportion of false rejections in the list. A $q$-value of 0.05
+doesn't mean that particular feature has a 5% chance of being wrong.
 
-Dependence between features — the adducts and fragments of one compound — means
-the tests are correlated. Benjamini–Hochberg is valid under positive regression
-dependence, which is the usual justification, but correlated features still make
-the *list* look longer than the number of distinct findings it contains.
-Collapsing to compounds before counting discoveries is more honest than
-reporting 40 features that are 11 molecules.
+Adducts and fragments of the same compound make the tests correlated.
+Benjamini–Hochberg is valid under positive regression dependence, which is the
+usual justification, but correlated features still make the list look longer
+than the number of distinct findings. Collapse to compounds before counting
+discoveries, so you're not reporting 40 features that are really 11 molecules.
 
-## What the Output Should Be
+## What to report
 
-The deliverable that survives review is not a ranked table. It is:
+Along with the ranked table, I'd want:
 
-- the counts at every filter, with what was dropped;
-- the primary model and its sensitivity comparisons, reported together;
-- presence/absence tested separately from intensity;
-- $q$-values within contrast, with discoveries collapsed to compounds;
-- and an explicit statement of what the design cannot answer.
+- counts at every filter, with what was dropped
+- the primary model and its sensitivity comparisons, side by side
+- presence/absence tested separately from intensity
+- $q$-values within contrast, with discoveries collapsed to compounds
+- a statement of what the design can't answer
 
-That last one carries more weight than it appears to. A cohort can be well
-powered for the question of whether the metabolome separates one disease from
-another and simply unable to speak to whether it predicts treatment response
-*before* the first dose — if, say, medication is recorded without start dates,
-so only a handful of patients have a plasma sample that provably precedes
-treatment. No amount of modelling recovers that. The useful output in that case
-is a feasibility assessment that sets the design and sample size a study would
-need to answer the question properly, which is a real result even though it
-contains no $p$-values.
+The last point matters more than it looks. A cohort can have plenty of power to
+ask whether the metabolome separates one disease from another and still be
+unable to say whether it predicts treatment response before the first dose. For
+example, if medication is recorded without start dates, only a handful of
+patients may have a plasma sample that provably comes before treatment, and no
+modelling fixes that. In that situation the useful output is a feasibility
+assessment giving the design and sample size a proper study would need. That
+still counts as a result, even without any $p$-values.
 
 ## Summary
 
-Untargeted metabolomics rewards care in the pre-statistical steps far more than
-sophistication in the statistical ones. Filters chosen against their
-alternatives, non-detects treated as missing rather than imputed, patient
-structure in the model, run order checked rather than assumed away, and error
-control applied within contrast will do more for the credibility of an
-association list than any change of test. The earlier notes on
-[transcriptomics]({{ site.url }}/2022/07/09/Transcription/) and
-[chromatin accessibility]({{ site.url }}/2022/07/12/ATACseq/) cover the same
-pre-processing discipline for other assays.
+With untargeted metabolomics, care in the steps before the statistics matters
+more than a clever test. Choose filters against their alternatives, treat
+non-detects as missing instead of imputing them, put patient structure in the
+model, check run order, and control error within each contrast. The earlier
+notes on [transcriptomics]({{ site.url }}/2022/07/09/Transcription/) and
+[chromatin accessibility]({{ site.url }}/2022/07/12/ATACseq/) cover similar
+pre-processing for other assays.

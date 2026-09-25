@@ -7,31 +7,28 @@ keywords: "R, R-Shiny, Pharmacokinetics, Dashboard, Visualization, Clinical Deci
 date: 2023-06-15
 ---
 
-## Why build a dashboard at all
+## Why a dashboard
 
-A population model that only its author can run is worth very little
-clinically. The gap is not analytical, it is one of access: the people who make
-dosing decisions cannot install NONMEM, and should not have to. A small
-interactive application closes that gap by letting them vary the inputs they
-already think in -- weight, renal function, dose, interval -- and see the
-consequence immediately.
+If only the modeller can run a population model, it doesn't do much for
+patients. The people making dosing decisions can't install NONMEM and
+shouldn't have to. A small interactive app lets them change the inputs they
+already think in (weight, renal function, dose, interval) and see the result
+straight away.
 
-Two design points are worth stating before the code, because they determine
-whether the thing gets used:
+Two things decide whether an app like this gets used:
 
-- **Expose the inputs clinicians reason with, not the model's parameters.**
-  Nobody on a ward wants to set a clearance. They want to set a weight and a
-  creatinine clearance and see what happens to the trough.
-- **Show uncertainty, not a single line.** A median profile invites the reader
-  to believe the prediction is exact. Prediction intervals make the spread
-  visible, which is the honest representation of a population model and usually
-  the more useful one for a dosing decision.
+- Use the inputs clinicians think in, not the model's parameters. Nobody on a
+  ward wants to set a clearance. They want to enter a weight and a creatinine
+  clearance and see what happens to the trough.
+- Show the spread. A single median profile makes the prediction look exact.
+  Showing variability across simulated patients is a fairer picture of what a
+  population model says, and usually more useful for a dosing decision.
 
-The app below is structured in the conventional Shiny way: a `ui` object
-describing the layout, a `server` function containing the simulation logic, and
-a reactive expression so the model re-runs only when an input actually changes.
+The app follows the usual Shiny layout: a `ui` object for the layout, a
+`server` function with the simulation logic, and a reactive expression so the
+model only re-runs when an input changes.
 
-## The interface
+## The code
 
 ```r
 library(shiny)

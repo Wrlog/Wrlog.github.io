@@ -1,7 +1,7 @@
 ---
 layout: about
 title: About
-description: Wen Rui Tan - PhD candidate, pharmacometrician and data scientist in pediatric clinical pharmacology
+description: Wen Rui Tan, PhD candidate, pharmacometrician and data scientist in pediatric clinical pharmacology
 keywords: About, Wen Rui Tan, Pharmacometrician, Data Scientist, Biography
 comments: true
 menu: About
@@ -11,10 +11,10 @@ permalink: /about/
 <header class="page-intro">
   <p class="eyebrow">About</p>
   <h1>Wen Rui Tan</h1>
-  <p class="page-lede">PhD candidate in pharmacology, working on population PK/PD
-  modeling and model-informed precision dosing for children — and on what
-  untargeted metabolomics and wearable sensor data add to the picture of a
-  patient that concentrations alone give.</p>
+  <p class="page-lede">I'm a PhD candidate in pharmacology working on population
+  PK/PD modeling and model-informed precision dosing for children, and on what
+  untargeted metabolomics and wearable sensor data add beyond drug
+  concentrations.</p>
   <p class="id-line">
     <span class="id-item">Cincinnati, OH, United States</span>
     <span class="sep">·</span>
@@ -60,29 +60,28 @@ permalink: /about/
     <p class="tl-when">August 2022 – present</p>
     <dl class="duties">
       <dt>Population PK/PD modeling</dt>
-      <dd>A pediatric population PK/PD model linking infliximab exposure to
-      fecal calprotectin through an indirect response model in NONMEM, and
+      <dd>A pediatric population PK/PD model in NONMEM linking infliximab
+      exposure to fecal calprotectin through an indirect response model, and
       population PK models for piperacillin to identify suitable doses for
-      surgical populations. In both cases the point is the covariates that
-      drive exposure, and what they imply for the dose.</dd>
+      surgical populations. Both focus on the covariates that drive exposure
+      and what they mean for dosing.</dd>
 
       <dt>Machine learning</dt>
-      <dd>Ensemble models — XGBoost, random forest, CatBoost — predicting
+      <dd>Ensemble models (XGBoost, random forest, CatBoost) that predict
       long-term biochemical remission from induction-phase data and individual
-      PK/PD parameters, read with SHAP, and a deep Q-network that formulates
-      dosing as a Markov decision process. All benchmarked against the
-      pharmacometric models they were meant to improve on.</dd>
+      PK/PD parameters, interpreted with SHAP, and a deep Q-network that treats
+      dosing as a Markov decision process. All of it is benchmarked against the
+      pharmacometric models.</dd>
 
       <dt>Tool development</dt>
-      <dd>Interactive dashboards and self-contained HTML reports in R and
-      Python that put PK/PD simulation and modeling results in front of
-      clinical and research teams — concentration-time profiles, diagnostics
-      and target attainment they can read without a pharmacometrician
-      present.</dd>
+      <dd>Interactive dashboards and standalone HTML reports in R and Python
+      showing PK/PD simulation and modeling results (concentration-time
+      profiles, diagnostics, target attainment) in a form clinical and research
+      teams can read without a pharmacometrician in the room.</dd>
 
       <dt>Early-onset IBD</dt>
       <dd>Validating an existing population PK model in an early-onset IBD
-      cohort, with a dashboard covering descriptive statistics, diagnostic plots
+      cohort, with a dashboard of descriptive statistics, diagnostic plots
       and individual patient PK reports.</dd>
 
       <dt>Clinical consultation</dt>
@@ -91,9 +90,9 @@ permalink: /about/
       (mycophenolic acid, tacrolimus, sirolimus) in high-risk pediatric patients.</dd>
 
       <dt>Study design</dt>
-      <dd>A D-optimal design study in PopED to choose sampling timepoints for
-      dupilumab, maximizing information gain while minimizing patient burden in
-      pediatric eosinophilic esophagitis trials.</dd>
+      <dd>A D-optimal design study in PopED to choose dupilumab sampling
+      timepoints for pediatric eosinophilic esophagitis trials, maximizing
+      information gain while minimizing patient burden.</dd>
     </dl>
   </li>
   <li>
@@ -103,17 +102,17 @@ permalink: /about/
     <p>Linked untargeted metabolomics to wearable sleep, cardiovascular and
     activity data in healthy volunteers, using linear mixed-effects models with
     FDR control to find metabolite–wearable associations and characterize
-    diurnal variability, and built the Python pipeline and dashboard behind it.
-    Separately, used metabolomics to classify ulcerative colitis against Crohn's
-    disease and active disease against remission in a cohort previously profiled
-    by genomics, transcriptomics and proteomics.</p>
+    diurnal variability. Built the Python pipeline and dashboard. Also used
+    metabolomics to classify ulcerative colitis vs Crohn's disease, and active
+    disease vs remission, in a cohort already profiled by genomics,
+    transcriptomics and proteomics.</p>
   </li>
   <li>
     <h3 class="tl-title">Research Assistant</h3>
     <p class="tl-org">University of Malaya, Kuala Lumpur, Malaysia</p>
     <p class="tl-when">March 2022 – May 2022</p>
-    <p>Data cleaning and exploratory analysis on large-scale patient datasets,
-    supporting a model-informed precision dosing initiative for vancomycin.</p>
+    <p>Data cleaning and exploratory analysis of large patient datasets for a
+    model-informed precision dosing initiative for vancomycin.</p>
   </li>
   <li>
     <h3 class="tl-title">Research Assistant</h3>
@@ -154,9 +153,8 @@ permalink: /about/
       <li class="chip chip-orange">Variational autoencoders</li>
       <li class="chip chip-orange">Deep Q-networks</li>
     </ul>
-    <p class="sg-note">Applied to remission prediction and dosing policy in the
-    dissertation, always benchmarked against the mechanistic model rather than
-    reported on their own.</p>
+    <p class="sg-note">Used in my dissertation for remission prediction and
+    dosing policy, always benchmarked against the mechanistic model.</p>
   </div>
 
   <div class="skill-group sg-green">
@@ -168,7 +166,7 @@ permalink: /about/
       <li class="chip chip-green">Git</li>
     </ul>
     <p class="sg-note">Shiny dashboards, reproducible analysis pipelines and
-    self-contained HTML reporting — see the
+    standalone HTML reports. Examples are in the
     <a href="{{ site.url }}/portfolio/">portfolio</a>.</p>
   </div>
 
@@ -181,7 +179,7 @@ permalink: /about/
       <li class="chip chip-violet">Rare disease</li>
     </ul>
     <p class="sg-note">Biologics and antibiotics in critically ill and
-    chronically treated children; therapeutic drug monitoring.</p>
+    chronically treated children, and therapeutic drug monitoring.</p>
   </div>
 </div>
 </section>
@@ -192,13 +190,13 @@ permalink: /about/
 <div class="interests">
   <div class="interest">
     <h3>Population PK/PD</h3>
-    <p>Characterizing how drug exposure and response vary across a population,
-    and what explains that variability.</p>
+    <p>How drug exposure and response vary across a population, and what
+    explains the variability.</p>
   </div>
   <div class="interest">
     <h3>Model-informed precision dosing</h3>
-    <p>Turning those models into individual dose recommendations, particularly
-    for children, where dosing is too often extrapolated from adults.</p>
+    <p>Turning those models into dose recommendations for individual patients,
+    especially children, whose doses are too often extrapolated from adults.</p>
   </div>
   <div class="interest">
     <h3>Modeling and simulation</h3>
@@ -207,26 +205,26 @@ permalink: /about/
   </div>
   <div class="interest">
     <h3>Clinical trial design</h3>
-    <p>Optimal design methods that choose sampling schemes to maximize
-    information while keeping patient burden low.</p>
+    <p>Optimal design methods for picking sampling schemes that get the most
+    information with the least burden on patients.</p>
   </div>
   <div class="interest">
     <h3>Omics in clinical pharmacology</h3>
     <p>Untargeted metabolomics as a readout of disease state and treatment
-    response, and what a feature table has to survive — filtering, non-detects,
-    batch structure, repeated visits — before an association list is worth
+    response, and the processing (filtering, non-detects, batch structure,
+    repeated visits) a feature table needs before its associations are worth
     acting on.</p>
   </div>
   <div class="interest">
     <h3>Wearable and sensor data</h3>
     <p>Turning continuous sleep, cardiovascular and activity streams into
-    exposures that can be joined to sparse biological sampling, and separating
-    genuine within-person signal from diurnal structure and non-wear.</p>
+    exposures that can be joined to sparse biological samples, and separating
+    within-person signal from diurnal patterns and non-wear.</p>
   </div>
   <div class="interest">
     <h3>Machine learning in pharmacometrics</h3>
-    <p>Where ML genuinely improves on a mechanistic model, and where it only
-    looks like it does.</p>
+    <p>Testing when ML actually does better than a mechanistic model, and
+    when it only appears to.</p>
   </div>
 </div>
 </section>
@@ -234,8 +232,8 @@ permalink: /about/
 <section class="section accent-blue">
 <h2 class="section-heading">Get in touch</h2>
 <div class="contact-card">
-  <p>Happy to hear about research collaborations in PK/PD modeling,
-  methodological discussion in pharmacometrics, and internship or job
+  <p>I'm happy to hear about research collaborations in PK/PD modeling,
+  methods questions in pharmacometrics, and internship or job
   opportunities.</p>
   <p class="contact-links">
     <a class="cbtn cbtn-primary" href="mailto:{{ site.email }}">Email</a>

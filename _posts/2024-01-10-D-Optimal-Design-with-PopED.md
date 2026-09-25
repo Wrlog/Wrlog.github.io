@@ -7,32 +7,31 @@ keywords: "PopED, Optimal Design, Clinical Trial Design, Sampling Times, D-optim
 date: 2024-01-10
 ---
 
-## Why optimise a design at all
+## Why optimise the design
 
-In paediatrics the binding constraint is rarely the model. It is blood volume.
-A neonate cannot give twelve samples, and a parent will not consent to a study
-that asks for them. So the design question is not "how many samples would be
-ideal" but "given that we may take four, which four".
+In paediatrics the limit is usually blood volume rather than the model. A
+neonate can't give twelve samples, and parents won't consent to a study that
+asks for them. So the question becomes: if we can take four samples, which
+four?
 
-That is an optimisation problem with a well-defined objective. The Fisher
-information matrix describes how much the data will tell you about the
-parameters; a **D-optimal** design maximises its determinant, which is
-equivalent to minimising the volume of the joint confidence region around the
-parameter estimates. PopED evaluates that criterion for a population model and
-searches over sampling times, doses and group sizes.
+That's an optimisation problem with a clear objective. The Fisher information
+matrix describes how much the data will tell you about the parameters. A
+D-optimal design maximises its determinant, which is the same as minimising
+the volume of the joint confidence region around the parameter estimates.
+PopED evaluates that criterion for a population model and searches over
+sampling times, doses and group sizes.
 
-The important caveat up front: **the optimal design depends on the model and
-the parameter values you assume**. You are optimising for the model you think
-you have. If the prior estimates are badly wrong, the design is optimal for the
-wrong thing, which is why the robustness of a design to parameter
+One caveat first: the optimal design depends on the model and the parameter
+values you assume. If the prior estimates are badly off, the design is optimal
+for the wrong model, so how well a design holds up under parameter
 misspecification matters as much as its nominal efficiency.
 
-## Setting up the model
+## Model
 
-A one-compartment oral model with first-order absorption, dosed to steady
-state. Clearance and volume carry between-subject variability; absorption does
-not, which is a common simplification when absorption is poorly identified
-from sparse data.
+One-compartment oral model with first-order absorption, dosed to steady state.
+Clearance and volume have between-subject variability and absorption doesn't,
+which is a common simplification when absorption is poorly identified from
+sparse data.
 
 ```r
 library(PopED)
@@ -75,13 +74,12 @@ feps <- function(model_switch, xt, parameters, epsi, poped.db) {
 }
 ```
 
-The residual error is combined proportional and additive. That choice matters
-more than it looks: with a purely proportional error the optimiser will happily
-place samples in the terminal tail where concentrations are near zero, because
-the *relative* error there is unchanged. The additive component is what stops
-it doing that.
+The residual error is combined proportional and additive. This matters: with a
+purely proportional error the optimiser will put samples in the terminal tail
+where concentrations are near zero, because the *relative* error there is the
+same. The additive part stops that.
 
-## Defining the design space
+## Design space
 
 ```r
 poped.db <- create.poped.database(
@@ -112,10 +110,9 @@ poped.db <- create.poped.database(
 )
 ```
 
-`discrete_xt` restricts sampling to the half hour. This is worth doing: an
-optimiser left on a continuous scale will return times like 3.47 h, which no
-ward will hit, and a design that is optimal only if executed perfectly is not
-optimal in practice.
+`discrete_xt` restricts sampling to the half hour. On a continuous scale the
+optimiser returns times like 3.47 h, which no ward is going to hit, and a
+design that only works if it's executed perfectly isn't much use in practice.
 
 ## Running the optimisation
 
@@ -127,17 +124,17 @@ output <- poped_optim(poped.db, opt_xt = TRUE, opt_a = FALSE,
 plot_model_prediction(poped.db, model_num_points = 500)
 ```
 
-`ARS` (adaptive random search) explores globally and `BFGS` refines locally;
-running them in sequence is the usual pattern, because the D-criterion surface
-has local optima and a gradient method alone will sit in whichever one it
-started nearest. Doses are held fixed here (`opt_a = FALSE`) since the dose was
-set by the clinical protocol, not by us.
+`ARS` (adaptive random search) explores globally and `BFGS` refines locally.
+Running them in sequence is the usual pattern because the D-criterion surface
+has local optima, and a gradient method on its own stays in whichever one it
+started closest to. Doses are fixed here (`opt_a = FALSE`) because the clinical
+protocol set the dose.
 
 ## Comparing candidate designs
 
-The number that matters to a protocol team is not the D-criterion, which is on
-an uninterpretable scale, but **efficiency relative to a reference design** —
-how much information a cheaper design retains.
+The D-criterion itself is on a scale nobody can interpret. For a protocol team
+the useful number is efficiency relative to a reference design, i.e. how much
+information a cheaper design keeps.
 
 ```r
 compare_designs <- function(poped.db, n_samples = c(3, 4, 5, 6)) {
@@ -200,26 +197,22 @@ print(design_comparison[, c("Design", "N_Samples", "Efficiency")], row.names = F
 
 ## Reading the result
 
-The useful output is the shape of the efficiency curve, not any single number.
-Typically it is steep at the low end and flat at the top: going from three
-samples to five buys a great deal, and going from six to eight buys very
-little. That flat region is the argument to take to a protocol team, because it
-says the extra draws cost patient tolerance and purchase almost no precision.
+I look at the shape of the efficiency curve more than any single number. It's
+usually steep at the low end and flat at the top: going from three samples to
+five gains a lot, and going from six to eight gains very little. The flat part
+is what to show a protocol team, since those extra draws cost the patient
+something and add almost no precision.
 
-Two caveats worth stating whenever these results are presented:
+Two caveats to mention whenever these results are presented:
 
-- **The design is conditional on the assumed parameters.** Before committing,
+- The design is conditional on the assumed parameters. Before committing,
   re-evaluate the chosen design across a plausible range of CL and V. If its
-  efficiency falls away sharply, the design is fragile and a more robust
-  criterion (ED-optimality, which averages over a prior on the parameters) is
-  the better choice.
-- **D-optimality optimises parameter precision, not the quantity you care
-  about.** If the decision rests on a predicted exposure or a probability of
-  target attainment, the relevant criterion is the precision of *that*, which
-  is not the same design.
+  efficiency drops off sharply, the design is fragile, and ED-optimality (which
+  averages over a prior on the parameters) is a better criterion.
+- D-optimality optimises parameter precision. If the decision depends on a
+  predicted exposure or a probability of target attainment, the criterion
+  should be the precision of that quantity, which gives a different design.
 
-## What this does not cover
-
-Cost functions over sampling windows, ED-optimal designs under parameter
-uncertainty, and designs optimised for model discrimination rather than
-parameter precision. PopED supports all three; none are shown here.
+Not covered here: cost functions over sampling windows, ED-optimal designs
+under parameter uncertainty, and designs optimised for model discrimination
+instead of parameter precision. PopED supports all three.

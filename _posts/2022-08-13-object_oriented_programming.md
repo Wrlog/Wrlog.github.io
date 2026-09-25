@@ -67,7 +67,7 @@ This example illustrates the basic concepts of OOP in Python: encapsulation of d
 **1. Encapsulation**
 
 
-Encapsulation is the practice of bundling data (attributes) and the methods that operate on that data into a single unit—the class.
+Encapsulation is the practice of bundling data (attributes) and the methods that operate on that data into a single unit: the class.
 
 It also includes the idea of data hiding, which means restricting direct access to an object's attributes. This prevents data from being changed in unexpected ways. In Python, we don't have true "private" variables, but we use conventions:
 
@@ -200,7 +200,7 @@ This animal makes a sound.
 
 Abstraction is the concept of hiding complex, low-level implementation details and only showing the essential features (the "interface") to the user.
 
-When you drive a car, you use the steering wheel, pedals, and gear stick. You don't need to know how the engine's internal combustion works—that complexity is abstracted away.
+When you drive a car, you use the steering wheel, pedals, and gear stick. You don't need to know how the engine's internal combustion works. That complexity is abstracted away.
 
 In Python, this is often formally achieved using Abstract Base Classes (ABCs). An ABC defines what methods a child class must have, without dictating how they work.
 
@@ -249,6 +249,6 @@ whiskers.speak()
 ```
 
 
-This ensures that any object you create that is-an Animal is guaranteed to have the speak() functionality, which is very useful for reliable code.
+This means any object you create that is-an Animal is guaranteed to have the speak() functionality, which is very useful for reliable code.
 
 

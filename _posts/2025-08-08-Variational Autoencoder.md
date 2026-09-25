@@ -9,18 +9,20 @@ date: 2025-08-08
 
 ## Introduction
 
-Variational Autoencoders (VAEs) represent a powerful deep learning approach for addressing two critical challenges in pharmacometric modeling: (1) enabling model-informed precision dosing (MIPD) through patient-specific profile characterization, and (2) describing complex pharmacokinetic profiles that cannot be adequately captured by traditional ordinary differential equation (ODE)-based compartmental models.
+These are notes on using variational autoencoders (VAEs) for two things in
+pharmacometrics: model-informed precision dosing (MIPD) based on
+patient-specific profiles, and describing PK profiles that conventional
+ODE-based compartmental models struggle with.
 
-Conventional PK models require a structure to be chosen up front. That structure
-is a feature, not merely a constraint: it is what gives the parameters
-physiological meaning and what supports extrapolation. A VAE relaxes it, trading
-interpretability and extrapolation for flexibility. Whether that trade is worth
-making depends on the problem, and this post tries to be explicit about when it
-is not.
+A conventional PK model makes you pick a structure up front. That structure is
+what gives the parameters physiological meaning and what lets the model
+extrapolate. A VAE relaxes it and gives up interpretability and extrapolation
+in exchange for flexibility. Whether that's worth it depends on the problem,
+and I've tried to say below where I think it isn't.
 
-## What ODE Models Do and Do Not Constrain
+## What ODE models do and do not constrain
 
-Traditional compartmental models assume specific functional relationships:
+Compartmental models assume specific functional relationships:
 
 $$
 \frac{dC}{dt} = -k \cdot C
@@ -32,35 +34,35 @@ $$
 \frac{dC}{dt} = \frac{Dose \cdot k_a}{V} \cdot e^{-k_a \cdot t} - k_{el} \cdot C
 $$
 
-It is worth being precise about what this does *not* mean, because the case for
-flexible models is often overstated:
+The case for flexible models often gets overstated, so a few things this does
+not imply:
 
-- **Multi-exponential decay is not a limitation.** A linear compartmental system
-  produces sums of exponentials by construction; that is what the compartments
-  *are*.
-- **Enterohepatic recirculation and target-mediated disposition are not
-  "non-compartmental".** Both have well-established ODE formulations -- the TMDD
-  system is written out explicitly in an earlier post on this site.
-- **Irregular sampling is not a problem for ODE models.** Nonlinear mixed-effects
-  estimation was built for sparse, unbalanced clinical data. If anything the
-  difficulty runs the other way: a network that emits a fixed grid of time points
-  is the thing that dislikes irregular sampling.
+- Multi-exponential decay isn't a limitation. A linear compartmental system
+  produces sums of exponentials by construction; that's what the compartments
+  are.
+- Enterohepatic recirculation and target-mediated disposition aren't
+  "non-compartmental". Both have well-established ODE formulations, and the
+  TMDD system is written out in an earlier post on this site.
+- Irregular sampling isn't a problem for ODE models. Nonlinear mixed-effects
+  estimation was built for sparse, unbalanced clinical data. If anything it's
+  the other way round: a network that outputs a fixed grid of time points is
+  what has trouble with irregular sampling.
 
-The honest motivation is narrower. ODE models require you to *commit to a
-structure* before fitting, and that commitment does real work: it is what lets
-the model extrapolate to doses and populations it has not seen. A flexible model
-is worth considering when the structure is genuinely unknown, when the profile
-shape itself carries information worth exploiting (clustering patients by
-morphology, say), or when there is enough data that structure can be learned
-rather than assumed. Those are real situations, but they are the exception, and
-the baseline to beat is a properly specified population PK model, not a
-strawman.
+The actual motivation is narrower. ODE models make you commit to a structure
+before fitting, and that commitment is what lets the model extrapolate to
+doses and populations it hasn't seen. A flexible model is worth considering
+when the structure really is unknown, when the profile shape itself carries
+useful information (clustering patients by profile shape, say), or when
+there's enough data to learn the structure instead of assuming it. Those
+situations exist but they're the exception, and the baseline to beat is a
+properly specified population PK model.
 
-## VAE Architecture for Pharmacokinetics
+## VAE architecture for PK
 
-### Encoder Network
+### Encoder
 
-The encoder maps observed concentration-time data to a latent representation of patient physiology:
+The encoder maps observed concentration-time data to a latent representation
+of patient physiology:
 
 $$
 q_\phi(z \mid x) = \mathcal{N}(\mu_\phi(x), \sigma_\phi^2(x))
@@ -71,75 +73,71 @@ where:
 - $z$ is the latent vector encoding patient-specific PK characteristics
 - $\mu_\phi(x)$ and $\sigma_\phi(x)$ are neural network outputs parameterizing the latent distribution
 
-The encoder learns to extract:
-- **Patient-specific clearance patterns**
-- **Volume of distribution characteristics**
-- **Absorption rate profiles**
-- **Inter-individual variability** in PK behavior
+The idea is that the latent vector picks up patient-specific clearance,
+volume of distribution and absorption characteristics, and inter-individual
+variability in PK behavior generally.
 
-### Decoder Network
+### Decoder
 
-The decoder reconstructs concentration-time profiles from latent representations:
+The decoder reconstructs concentration-time profiles from the latent
+representation:
 
 $$
 p_\theta(C(t) \mid z, \text{Dose}) = \mathcal{N}(\mu_\theta(z, \text{Dose}), \sigma_\theta^2)
 $$
 
-The decoder function $\mu_\theta(z, \text{Dose})$ can represent complex, non-ODE profiles:
+and $\mu_\theta(z, \text{Dose})$ can represent profiles that don't come from
+an ODE:
 
 $$
 C_{pred}(t) = \text{Decoder}(z, \text{Dose}, t)
 $$
 
-Note the gap between this expression and the implementation below. Writing
-$\text{Decoder}(z, \text{Dose}, t)$ implies a function of continuous time, but
-the network in the code emits a **fixed vector of `time_points` values**. It can
-only speak about the grid it was trained on, and it has no notion that
-concentration at $t + \Delta t$ is related to concentration at $t$. Closing that
-gap is exactly what neural ODEs are for.
+There's a gap between this expression and the code below, though. Writing
+$\text{Decoder}(z, \text{Dose}, t)$ suggests a function of continuous time,
+but the network in the code outputs a fixed vector of `time_points` values. It
+only knows about the grid it was trained on, and it has no idea that
+concentration at $t + \Delta t$ is related to concentration at $t$. Neural
+ODEs are meant to close that gap (see below).
 
-Unlike ODE models constrained to exponential or polynomial forms, the decoder can learn:
-- **Arbitrary concentration-time curves**
-- **Multi-modal distributions**
-- **Non-standard absorption patterns**
-- **Complex elimination phases**
+Within that grid, the decoder isn't limited to exponential or polynomial
+forms. It can learn arbitrary concentration-time curves, multi-modal shapes,
+non-standard absorption and complicated elimination phases.
 
-### Variational Inference
+### Variational inference
 
-The latent vector is sampled using the reparameterization trick:
+The latent vector is sampled with the reparameterization trick:
 
 $$
 z = \mu_\phi(x) + \sigma_\phi(x) \odot \epsilon, \quad \epsilon \sim \mathcal{N}(0, I)
 $$
 
-This enables gradient-based optimization while maintaining probabilistic interpretation.
+which allows gradient-based optimization while keeping the probabilistic
+interpretation.
 
-## Application 1: Model-Informed Precision Dosing (MIPD)
+## Application 1: precision dosing
 
-### Patient-Specific Profile Learning
+For MIPD the VAE learns individual PK characteristics from sparse
+observational data.
 
-For MIPD applications, the VAE learns individual patient pharmacokinetic characteristics from sparse observational data:
-
-**Training Phase:**
+Training:
 1. Encoder processes observed concentrations: $z_i = \text{Encoder}(C_{obs,i}, \text{covariates}_i)$
-2. Each patient's latent vector $z_i$ captures their unique PK profile shape
+2. Each patient's latent vector $z_i$ captures the shape of their PK profile
 3. Decoder learns to predict full profiles: $C_{pred,i} = \text{Decoder}(z_i, \text{Dose}_i)$
 
-**Dosing Optimization:**
-Given a target exposure (e.g., AUC target or trough concentration), the optimal dose for patient $i$ is:
+Dose optimization: given a target exposure (e.g. an AUC target or trough
+concentration), the dose for patient $i$ is
 
 $$
 \text{Dose}_{optimal,i} = \arg\min_{\text{Dose}} |\text{Target} - \text{Decoder}(z_i, \text{Dose})|
 $$
 
-### Advantages for MIPD
+What this offers for MIPD: full profiles inferred from a few observations,
+individual variability held in the latent space, dose individualization done
+directly in that patient-specific space, and prediction intervals from the
+probabilistic framework.
 
-1. **Sparse Data Handling:** VAE can infer full profiles from limited observations
-2. **Patient-Specific Predictions:** Latent space captures individual variability
-3. **Dose Individualization:** Direct optimization in patient-specific latent space
-4. **Uncertainty Quantification:** Probabilistic framework provides prediction intervals
-
-### Implementation Example
+### Implementation example
 
 ```python
 import torch
@@ -197,21 +195,18 @@ def precision_dosing_loss(recon, target, mu, logvar, beta=0.1):
     return recon_loss + beta * kl_loss
 ```
 
-## Application 2: Modeling Complex Non-ODE Profiles
+## Application 2: profiles that are hard to write as ODEs
 
-### Profiles Resistant to ODE Description
+Some PK profiles are awkward for standard ODE models.
 
-Many pharmacokinetic profiles exhibit characteristics that challenge traditional ODE modeling:
+Multi-phase elimination with non-standard exponents. The traditional form is
+$C(t) = A_1 e^{-\lambda_1 t} + A_2 e^{-\lambda_2 t}$; the VAE version is
+$C(t) = \text{Decoder}(z, \text{Dose}, t)$, where the decoder learns the
+functional form.
 
-**1. Multi-Phase Elimination with Non-Standard Exponents:**
-
-Traditional: $C(t) = A_1 e^{-\lambda_1 t} + A_2 e^{-\lambda_2 t}$
-
-VAE-learned: $C(t) = \text{Decoder}(z, \text{Dose}, t)$ where the decoder learns arbitrary functional forms.
-
-**2. Irregular Absorption Patterns:**
-
-Complex lag-times, multiple absorption sites, or food effects create profiles that don't follow standard $k_a$ models. VAE decoders can learn these patterns directly:
+Irregular absorption. Complicated lag times, multiple absorption sites or food
+effects give profiles that don't follow a standard $k_a$ model. A decoder can
+learn these directly:
 
 $$
 C_{abs}(t) = \text{Decoder}_{abs}(z_{abs}, t)
@@ -219,82 +214,74 @@ $$
 
 where $z_{abs}$ encodes patient-specific absorption characteristics.
 
-**3. Target-Mediated or Saturable Processes:**
-
-When TMDD or other saturable processes create non-exponential decay, VAE models can capture the profile shape without explicit Michaelis-Menten equations:
+Target-mediated or saturable processes. When TMDD or another saturable process
+causes non-exponential decay, the VAE can capture the profile shape without
+explicit Michaelis-Menten equations:
 
 $$
 C(t) = \text{Decoder}(z, \text{Dose}, t, \text{Target}_{level})
 $$
 
-### Mathematical Framework
+### Objective
 
-The VAE objective function balances reconstruction accuracy with latent space regularization:
+The VAE objective trades off reconstruction accuracy against regularization
+of the latent space:
 
 $$
 \mathcal{L}_{VAE} = \mathbb{E}_{q_\phi(z|x)}[\log p_\theta(C \mid z, \text{Dose})] - \beta \cdot D_{KL}(q_\phi(z \mid x) \parallel p(z))
 $$
 
-where:
-- First term: Reconstruction loss (fidelity to observed data)
-- Second term: KL divergence (regularization toward prior distribution $p(z) = \mathcal{N}(0, I)$)
-- $\beta$: Weighting factor balancing the two objectives
+The first term is the reconstruction term (fit to the observed data), the
+second is the KL divergence pulling toward the prior $p(z) = \mathcal{N}(0, I)$,
+and $\beta$ weights the two.
 
-### Comparing Fits
+### Comparing fits
 
 $$
 \text{Reconstruction error} = \frac{1}{N} \sum_{i=1}^{N} ||C_{obs,i} - C_{pred,i}||^2
 $$
 
-This is reconstruction error, not a measure of profile complexity: a flexible
-model with enough capacity drives it toward zero on the training set however
-simple the underlying profile is. It is informative only on held-out patients,
-and even then a lower value has to be weighed against the parameters spent
-getting there.
+This says nothing about how complex a profile is. A model with enough capacity
+pushes it toward zero on the training set however simple the underlying
+profile. It's only informative on held-out patients, and even then a lower
+value has to be weighed against how many parameters it took to get there.
 
-## Where Neural ODEs Fit
+## Neural ODEs
 
-A decoder that emits a fixed grid discards the one thing known for certain about
-a concentration-time profile: that it is the solution of a differential equation
-in time. A **neural ODE** keeps that structure and learns only the right-hand
-side,
+A decoder that outputs a fixed grid throws away the one thing we know for sure
+about a concentration-time profile: it's the solution of a differential
+equation in time. A neural ODE keeps that structure and only learns the
+right-hand side,
 
 $$
 \frac{d\mathbf{h}}{dt} = f_\theta(\mathbf{h}, t, z), \qquad C(t) = g(\mathbf{h}(t))
 $$
 
-where $f_\theta$ is a neural network and the profile is recovered by integrating
-it with an ordinary solver. That buys back the properties the plain decoder
-gives up:
+where $f_\theta$ is a neural network and the profile comes from integrating it
+with an ordinary solver. That gets back what the plain decoder loses:
 
-- **Continuous time.** The profile can be evaluated at any $t$, so irregular and
-  patient-specific sampling is handled natively, as in a conventional PK model.
-- **Dosing events.** Integration restarts at each dose, so multiple doses and
-  infusions are expressed the way they physically occur rather than being baked
+- Continuous time. The profile can be evaluated at any $t$, so irregular and
+  patient-specific sampling works the same way as in a conventional PK model.
+- Dosing events. Integration restarts at each dose, so multiple doses and
+  infusions are handled the way they actually happen instead of being baked
   into a fixed output grid.
-- **Partial mechanism.** The known part of the system can be written down and
-  only the unknown part learned. This hybrid is the one worth reaching for
-  first: a one-compartment model with a learned clearance term is far more
-  defensible, and far more identifiable, than a black box over the whole
-  profile.
+- Partial mechanism. You can write down the known part of the system and learn
+  only the unknown part. This hybrid is where I'd start: a one-compartment
+  model with a learned clearance term is much easier to justify, and much more
+  identifiable, than a black box over the whole profile.
 
-The costs are real. Neural ODEs train slowly, inherit whatever stiffness the
-solver struggles with, and overfit easily on sparse clinical data. They are not
-a default. But when the argument for abandoning ODEs is "this profile shape is
-unusual", a neural ODE is a more honest answer than discarding the time
-structure altogether.
+The downsides: neural ODEs train slowly, suffer from whatever stiffness the
+solver has trouble with, and overfit easily on sparse clinical data, so they
+shouldn't be the default. But if the reason for dropping ODEs is that the
+profile shape is unusual, a neural ODE makes more sense than throwing away the
+time structure entirely.
 
-## Integration with Traditional Pharmacometrics
+## Combining with conventional pharmacometrics
 
-### Hybrid Approaches
-
-VAE models can complement traditional ODE models:
-
-1. **Profile Classification:** Use VAE to identify which patients require complex vs. simple models
-2. **Residual Modeling:** VAE captures deviations from ODE predictions
-3. **Covariate Discovery:** Latent space analysis reveals non-linear covariate relationships
-
-### Comparison with ODE Models
+VAEs can also sit alongside ODE models: to classify which patients need a
+complex model and which a simple one, to model the residual deviations from
+ODE predictions, or to look for nonlinear covariate relationships in the
+latent space.
 
 | Aspect | ODE Models | VAE Models |
 |--------|-----------|-----------|
@@ -305,52 +292,43 @@ VAE models can complement traditional ODE models:
 | **Extrapolation** | Good (mechanistic) | Poor outside the training distribution |
 | **Unusual profile shapes** | Needs the right structure chosen | Learned from data, given enough of it |
 
-## Clinical Applications
+## Possible uses
 
-### Precision Dosing Scenarios
+On the precision dosing side: inferring full profiles from sparse therapeutic
+drug monitoring samples, pediatric dosing with complicated age-dependent PK
+changes, and organ impairment without assuming the standard clearance
+relationships.
 
-1. **Sparse TDM Data:** Infer full profiles from limited therapeutic drug monitoring samples
-2. **Pediatric Dosing:** Account for complex age-dependent PK changes
-3. **Special Populations:** Model profiles in organ impairment without assuming standard clearance relationships
+On the profile side: biologics with TMDD (saturable elimination without
+explicit Michaelis-Menten terms), enterohepatic recirculation (secondary peaks
+without adding compartments), and patient-specific absorption patterns learned
+from data.
 
-### Complex Profile Examples
+## Validation
 
-1. **Biologics with TMDD:** Capture saturable elimination without explicit Michaelis-Menten terms
-2. **Enterohepatic Recirculation:** Model secondary peaks without additional compartments
-3. **Variable Absorption:** Learn patient-specific absorption patterns from data
+For dosing: cross-validate dose prediction accuracy on held-out patients,
+compare VAE-predicted doses with clinical outcomes prospectively, and check
+that the prediction intervals are calibrated against observed variability.
 
-## Model Validation
+For profile modeling: visual predictive checks of observed vs VAE-generated
+profiles, reconstruction error on independent datasets, and a check that the
+learned profiles are consistent with known PK principles.
 
-### Precision Dosing Validation
+## Pros and cons
 
-1. **Cross-Validation:** Evaluate dose prediction accuracy on held-out patients
-2. **Prospective Validation:** Compare VAE-predicted doses with clinical outcomes
-3. **Uncertainty Calibration:** Ensure prediction intervals match observed variability
+In favor: it can fit profiles that are hard to describe with ODEs, it holds
+individual variability in the latent space, it handles limited observations
+through the learned population structure, and it can pick up nonlinear
+covariate relationships.
 
-### Profile Modeling Validation
+Against: it needs a lot of training data, the latent space is harder to
+interpret than PK parameters, it extrapolates poorly beyond the training
+distribution, and it costs more compute than an ODE model.
 
-1. **Visual Predictive Checks:** Compare observed vs. VAE-generated profiles
-2. **Goodness-of-Fit:** Assess reconstruction error on independent datasets
-3. **Biological Plausibility:** Verify learned profiles align with known PK principles
+## Summary
 
-## Advantages and Limitations
-
-### Advantages
-
-1. **Flexibility:** Can model profiles that defy ODE description
-2. **Patient-Specific:** Captures individual variability in latent space
-3. **Sparse Data:** Handles limited observations through learned population structure
-4. **Non-Linear Covariates:** Discovers complex covariate relationships
-
-### Limitations
-
-1. **Data Requirements:** Requires substantial training data
-2. **Interpretability:** Latent space less interpretable than PK parameters
-3. **Extrapolation:** Limited ability to extrapolate beyond training distribution
-4. **Computational Cost:** More computationally intensive than ODE models
-
-## Conclusion
-
-Variational Autoencoders provide a powerful framework for model-informed precision dosing and modeling complex pharmacokinetic profiles that cannot be adequately described by traditional ODE-based compartmental models. By learning flexible, patient-specific representations in a latent space, VAE models enable individualized dosing optimization while capturing non-standard profile shapes that challenge conventional pharmacometric approaches.
-
-The integration of VAE methodology with traditional pharmacometrics represents an emerging frontier in quantitative pharmacology, offering enhanced capabilities for precision medicine applications where patient-specific profile characterization is critical for optimal therapeutic outcomes.
+VAEs give a flexible, patient-specific latent representation that can be used
+for dose individualization and for profile shapes that standard compartmental
+models handle badly. For most problems a well-specified population PK model is
+still the thing to beat, and when the time structure matters a neural ODE or a
+hybrid model is usually a better fit than a grid-output decoder.

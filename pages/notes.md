@@ -8,8 +8,8 @@ menu: Notes
 permalink: /notes/
 ---
 
-Working notes on pharmacometrics, PK/PD modelling and data science — written up
-as I go, mostly for my own reference. Grouped by topic; the
+Notes on pharmacometrics, PK/PD modelling and data science that I write up as I
+go, mostly for my own reference. They're grouped by topic here, and the
 [archive]({{ site.url }}/archives/) lists everything by date.
 
 <section class="container posts-content">
