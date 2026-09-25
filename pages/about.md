@@ -33,7 +33,7 @@ permalink: /about/
 
 <ul class="timeline">
   <li>
-    <h3 class="tl-title">PhD, Pharmacology and Systems Physiology</h3>
+    <h3 class="tl-title">PhD, Pharmacology, Physiology and Neurobiology</h3>
     <p class="tl-org">University of Cincinnati College of Medicine, Cincinnati, OH</p>
     <p class="tl-when">Expected May 2027</p>
     <p>Dissertation: <em>Advancing model-informed precision dosing via
